@@ -14,25 +14,26 @@ public class PlayerControlsOverworld : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.A) && transform.position == pos)   // Left
+        if (Input.GetAxisRaw("Horizontal") < 0 && transform.position == pos)   // Left
         {        
             pos += 2 * Vector3.left;
         }
-        if (Input.GetKey(KeyCode.D) && transform.position == pos)   // Right
+        if (Input.GetAxisRaw("Horizontal") > 0 && transform.position == pos)   // Right
         {        
             pos += 2 * Vector3.right;
         }
-        if (Input.GetKey(KeyCode.W) && transform.position == pos)   // Up
+        if (Input.GetAxisRaw("Vertical") > 0 && transform.position == pos)   // Up
         {       
             pos += 2 * Vector3.up;
         }
-        if (Input.GetKey(KeyCode.S) && transform.position == pos)   // Down
+        if (Input.GetAxisRaw("Vertical") < 0 && transform.position == pos)   // Down
         {        
             pos += 2 * Vector3.down;
         }
 
         transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed);    // Moving to new pos
 
-        //if (Input.GetKey(KeyCode.Z) //user interaction
+        //if (Input.GetAxisRaw("Interact") > 0) //user interaction
+        //if (Input.GetAxisRaw("Back") > 0) //abort! abort! you know, dialogue
     }
 }

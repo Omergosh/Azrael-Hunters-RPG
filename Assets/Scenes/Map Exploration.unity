@@ -246,6 +246,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 156464, guid: 6c2070c0dbc111144a0ea70466bddb61, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6c2070c0dbc111144a0ea70466bddb61, type: 2}
   m_IsPrefabParent: 0
@@ -337,6 +341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8
+  direction: right
 --- !u!1 &2004372137
 GameObject:
   m_ObjectHideFlags: 0

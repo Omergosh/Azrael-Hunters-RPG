@@ -284,6 +284,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   message: I am you from the future.
+  moveable: 1
+  directionV: {x: 0, y: 0}
+  speed: 4
+  layerMaskCollisions: 256
+  layerMaskInteracts: 256
 --- !u!1001 &1286616503
 Prefab:
   m_ObjectHideFlags: 0
@@ -339,6 +344,10 @@ Prefab:
     - target: {fileID: 156464, guid: 6c2070c0dbc111144a0ea70466bddb61, type: 2}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 430686, guid: 6c2070c0dbc111144a0ea70466bddb61, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6c2070c0dbc111144a0ea70466bddb61, type: 2}
@@ -525,6 +534,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   message: Get away from me.
+  moveable: 0
+  directionV: {x: 0, y: 0}
+  speed: 4
+  layerMaskCollisions: 256
+  layerMaskInteracts: 512
 --- !u!1 &2004372137
 GameObject:
   m_ObjectHideFlags: 0

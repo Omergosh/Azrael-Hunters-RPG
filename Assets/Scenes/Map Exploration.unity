@@ -484,6 +484,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   message: I am you from the future.
+<<<<<<< HEAD
 --- !u!1 &776486579
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,6 +580,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+  moveable: 1
+  directionV: {x: 0, y: 0}
+  speed: 4
+  layerMaskCollisions: 256
+  layerMaskInteracts: 256
+>>>>>>> origin/master
 --- !u!1001 &1286616503
 Prefab:
   m_ObjectHideFlags: 0
@@ -634,6 +642,10 @@ Prefab:
     - target: {fileID: 156464, guid: 6c2070c0dbc111144a0ea70466bddb61, type: 2}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 430686, guid: 6c2070c0dbc111144a0ea70466bddb61, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6c2070c0dbc111144a0ea70466bddb61, type: 2}
@@ -824,6 +836,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   message: Get away from me.
+<<<<<<< HEAD
 --- !u!1 &1711671105
 GameObject:
   m_ObjectHideFlags: 0
@@ -1078,6 +1091,13 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1858129339}
+=======
+  moveable: 0
+  directionV: {x: 0, y: 0}
+  speed: 4
+  layerMaskCollisions: 256
+  layerMaskInteracts: 512
+>>>>>>> origin/master
 --- !u!1 &2004372137
 GameObject:
   m_ObjectHideFlags: 0

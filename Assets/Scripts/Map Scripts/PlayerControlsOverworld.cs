@@ -26,6 +26,8 @@ public class PlayerControlsOverworld : MonoBehaviour {
                 directionV = Vector2.left;
                 if (CollisionCheck(directionV))
                 {
+                    GameObject objectHit = InteractCheck(directionV);
+                    pushing(objectHit);
                     //Walk into wall sound effect
                 }
                 else
@@ -38,7 +40,11 @@ public class PlayerControlsOverworld : MonoBehaviour {
                 directionV = Vector2.right;
                 if (CollisionCheck(directionV))
                 {
-
+                    {
+                        GameObject objectHit = InteractCheck(directionV);
+                        pushing(objectHit);
+                        //Walk into wall sound effect
+                    }
                 }
                 else
                 {
@@ -50,7 +56,11 @@ public class PlayerControlsOverworld : MonoBehaviour {
                 directionV = Vector2.up;
                 if (CollisionCheck(directionV))
                 {
-
+                    {
+                        GameObject objectHit = InteractCheck(directionV);
+                        pushing(objectHit);
+                        //Walk into wall sound effect
+                    }
                 }
                 else
                 {
@@ -62,7 +72,11 @@ public class PlayerControlsOverworld : MonoBehaviour {
                 directionV = Vector2.down;
                 if (CollisionCheck(directionV))
                 {
-
+                    {
+                        GameObject objectHit = InteractCheck(directionV);
+                        pushing(objectHit);
+                        //Walk into wall sound effect
+                    }
                 }
                 else
                 {
@@ -78,9 +92,9 @@ public class PlayerControlsOverworld : MonoBehaviour {
             GameObject objectHit = InteractCheck(directionV);
             if (objectHit != null)
             {
-                if (objectHit.GetComponent<NPC_Dialogue>())
+                if (objectHit.GetComponent<NPC_Behavior>())
                 {
-                    NPC_Dialogue NPC = objectHit.GetComponent<NPC_Dialogue>();
+                    NPC_Behavior NPC = objectHit.GetComponent<NPC_Behavior>();
                     NPC.Interact(); 
                 }
             }
@@ -108,5 +122,18 @@ public class PlayerControlsOverworld : MonoBehaviour {
             return raycastHit2D.collider.gameObject;
         }
         return null;
+    }
+
+    void pushing(GameObject objectHit)
+    {
+
+        if (objectHit != null)
+        {
+            if (objectHit.GetComponent<NPC_Behavior>())
+            {
+                NPC_Behavior NPC = objectHit.GetComponent<NPC_Behavior>();
+                NPC.Push(directionV);   //pushing things
+            }
+        }
     }
 }

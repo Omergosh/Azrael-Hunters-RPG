@@ -12,6 +12,7 @@ public class MainCamera : MonoBehaviour {
     void Start()
     {
         //Calculate and store the offset value by getting the distance between the player's position and camera's position.
+        transform.position = player.transform.position;
         offset = transform.position - player.transform.position;
     }
 

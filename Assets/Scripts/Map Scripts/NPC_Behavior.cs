@@ -7,7 +7,7 @@ public class NPC_Behavior : MonoBehaviour {
     public bool moveable = false;
     public Vector2 directionV;
     Vector2 pos;                    // For movement
-    public float speed = 1.0f;      // Speed of movement
+    public float speed = 20.0f;      // Speed of movement
     public int layerMaskCollisions = 1 << 8;
     public int layerMaskInteracts = 1 << 9;
     private Vector3 displacement;   //So the moving object doesn't raycast into itself
@@ -33,7 +33,7 @@ public class NPC_Behavior : MonoBehaviour {
             else
             {
                 Debug.Log("Pushing me around I see!");
-                pos += (2 * directionV);
+                pos += (directionV);
                 Debug.Log(pos);
             }
             transform.position = Vector3.MoveTowards(transform.position, pos, speed);    // Moving to new pos
@@ -42,8 +42,8 @@ public class NPC_Behavior : MonoBehaviour {
 
     bool CollisionCheck(Vector2 direction)
 {
-        displacement = 2 * (Vector3)direction;
-        if (Physics2D.Raycast(transform.position + displacement, direction, 0.5f, layerMaskCollisions))
+        displacement = 1.5f * (Vector3)direction;
+        if (Physics2D.Raycast(transform.position + displacement, direction, 0.25f, layerMaskCollisions))
         {
             return true;
         }

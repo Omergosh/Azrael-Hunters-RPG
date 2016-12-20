@@ -10,6 +10,8 @@ public class PlayerControlsOverworld : MonoBehaviour {
     public Vector2 directionV;
     public int layerMaskCollisions = 1 << 8;
     public int layerMaskInteracts = 1 << 9;
+    GameObject canvas;
+    GameObject UI_DialogueSystem;
 
     void Start()
     {
@@ -95,6 +97,9 @@ public class PlayerControlsOverworld : MonoBehaviour {
                 if (objectHit.GetComponent<NPC_Behavior>())
                 {
                     NPC_Behavior NPC = objectHit.GetComponent<NPC_Behavior>();
+                    canvas = GameObject.Find("Canvas");   //finding the Canvas gameObject
+                    UI_DialogueSystem = canvas.transform.Find("UI_DialogueSystem").gameObject;
+                    UI_DialogueSystem.SetActive(true);
                     NPC.Interact(); 
                 }
             }

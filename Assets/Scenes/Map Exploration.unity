@@ -184,10 +184,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   message: I'm you from the future!
   moveable: 1
-  directionV: {x: 0, y: 0}
-  speed: 1
   layerMaskCollisions: 256
   layerMaskInteracts: 512
+  myText: {fileID: 0}
+  myStrings:
+  - Hello.
+  - I am you from the future.
+  - Can I help you?
 --- !u!1 &98387614
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,10 +488,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   message: Get away from me.
   moveable: 0
-  directionV: {x: 0, y: 0}
-  speed: 1
   layerMaskCollisions: 256
   layerMaskInteracts: 512
+  myText: {fileID: 0}
+  myStrings: []
 --- !u!1 &928920563
 GameObject:
   m_ObjectHideFlags: 0

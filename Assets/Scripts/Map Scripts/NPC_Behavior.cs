@@ -17,7 +17,7 @@ public class NPC_Behavior : MonoBehaviour {
     private GameObject UI_DialogueSystem;
     private GameObject UI_DialogueText;
     private Text myText;
-    public List<string> myStrings = new List<string>(); //using lists for strings
+    public List<string> Dialogue = new List<string>(); //using lists for strings
 
     void Start()
     {
@@ -25,18 +25,34 @@ public class NPC_Behavior : MonoBehaviour {
     }
 
     //interacting with objects/people
-    public void Interact()
+    public IEnumerator Interact()
     {
         UI_DialogueSystem = GameObject.Find("UI_DialogueSystem");
         UI_DialogueText = GameObject.Find("UI_DialogueText");   //finding the UI_DialogueText gameObject
         myText = UI_DialogueText.GetComponent<Text>();          //references the text object in UI_DialogueText
-        foreach(string myString in myStrings)
+        foreach(string myString in Dialogue)
         {
             myText.text = myString;
             Debug.Log(myString);
+            yield return StartCoroutine(WaitForKeyDown(KeyCode.X));
             //yield return new WaitForSecondsRealtime(1);
         }
-        //UI_DialogueSystem.SetActive(false);
+        //yield return null;
+        UI_DialogueSystem.SetActive(false);
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        PlayerControlsOverworld playerScript = player.GetComponent<PlayerControlsOverworld>();
+        playerScript.talking = false;
+        playerScript.canMove = true;
+        //yield return new WaitForSecondsRealtime(1);
+    }
+
+    IEnumerator WaitForKeyDown(KeyCode keyCode)
+    {
+        do
+        {
+            yield return null;
+        } while (!Input.GetKeyDown(keyCode));
+
     }
 
     public void Push(Vector2 directionV)

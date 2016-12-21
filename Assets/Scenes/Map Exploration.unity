@@ -185,9 +185,9 @@ MonoBehaviour:
   moveable: 1
   layerMaskCollisions: 256
   layerMaskInteracts: 512
-  myStrings:
+  Dialogue:
+  - I'm you from the future.
   - Hello.
-  - I am you from the future.
   - Can I help you?
 --- !u!1 &98387614
 GameObject:
@@ -758,7 +758,7 @@ MonoBehaviour:
   moveable: 0
   layerMaskCollisions: 256
   layerMaskInteracts: 512
-  myStrings:
+  Dialogue:
   - '...'
 --- !u!1 &766258995
 GameObject:
@@ -1995,7 +1995,7 @@ GameObject:
   - component: {fileID: 1731385807}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2062,9 +2062,12 @@ MonoBehaviour:
   speed: 16
   paused: 0
   canMove: 1
+  talking: 0
   directionV: {x: 0, y: 0}
   layerMaskCollisions: 256
   layerMaskInteracts: 256
+  pauseButtonDown: 0
+  pauseButtonPrevious: 0
 --- !u!1 &1751199768
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,8 +6,11 @@ public class PlayerControlsOverworld : MonoBehaviour {
 
     Vector3 pos;                    // For movement
     public float speed = 4.0f;      // Speed of movement
+    public float interactDelay = 1.0f;  //delay after talking
+    private float timestamp;    //for keeping time
 	public bool paused = false;
     public bool canMove = true;
+    public bool talking = false;
     public Vector2 directionV;
     public int layerMaskCollisions = 1 << 8;
     public int layerMaskInteracts = 1 << 9;
@@ -84,16 +87,19 @@ public class PlayerControlsOverworld : MonoBehaviour {
 	        transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed);    // Moving to new pos
 		}
 
-        if (Input.GetAxisRaw("Interact") > 0) //user interaction
+        if (Input.GetAxisRaw("Interact") > 0 & Time.time >= timestamp) //user interaction
         {
+            timestamp = Time.time + interactDelay;
             GameObject objectHit = InteractCheck(directionV);
             if (objectHit != null)
             {
-                if (objectHit.GetComponent<NPC_Behavior>())
+                if (objectHit.GetComponent<NPC_Behavior>() && talking == false)
                 {
                     NPC_Behavior NPC = objectHit.GetComponent<NPC_Behavior>();
                     UI_DialogueSystem.SetActive(true);
-                    NPC.Interact(); 
+                    talking = true;
+                    canMove = false;
+                    StartCoroutine(NPC.Interact());
                 }
             }
 		}
@@ -124,6 +130,7 @@ public class PlayerControlsOverworld : MonoBehaviour {
 			}
 			if (UI_DialogueSystem.activeSelf) {
 				UI_DialogueSystem.SetActive (false);
+                canMove = true;
 			}
         }
 

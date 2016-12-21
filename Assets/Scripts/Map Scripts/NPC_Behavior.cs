@@ -33,9 +33,7 @@ public class NPC_Behavior : MonoBehaviour {
         foreach(string myString in Dialogue)
         {
             myText.text = myString;
-            Debug.Log(myString);
             yield return StartCoroutine(WaitForKeyDown(KeyCode.X));
-            //yield return new WaitForSecondsRealtime(1);
         }
         //yield return null;
         UI_DialogueSystem.SetActive(false);
@@ -43,7 +41,6 @@ public class NPC_Behavior : MonoBehaviour {
         PlayerControlsOverworld playerScript = player.GetComponent<PlayerControlsOverworld>();
         playerScript.talking = false;
         playerScript.canMove = true;
-        //yield return new WaitForSecondsRealtime(1);
     }
 
     IEnumerator WaitForKeyDown(KeyCode keyCode)

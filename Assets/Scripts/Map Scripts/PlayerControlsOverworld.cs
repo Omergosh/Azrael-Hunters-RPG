@@ -131,6 +131,7 @@ public class PlayerControlsOverworld : MonoBehaviour {
 			if (UI_DialogueSystem.activeSelf) {
 				UI_DialogueSystem.SetActive (false);
                 canMove = true;
+                talking = false;
 			}
         }
 

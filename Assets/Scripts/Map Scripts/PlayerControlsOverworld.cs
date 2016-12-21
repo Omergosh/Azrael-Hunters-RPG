@@ -16,7 +16,9 @@ public class PlayerControlsOverworld : MonoBehaviour {
     void Start()
     {
         pos = transform.position;          // Take the initial position
-        directionV = Vector2.down;
+		directionV = Vector2.down;
+		canvas = GameObject.Find("Canvas");   //finding the Canvas gameObject
+		UI_DialogueSystem = canvas.transform.Find("UI_DialogueSystem").gameObject;
     }
 
     void Update()
@@ -97,8 +99,6 @@ public class PlayerControlsOverworld : MonoBehaviour {
                 if (objectHit.GetComponent<NPC_Behavior>())
                 {
                     NPC_Behavior NPC = objectHit.GetComponent<NPC_Behavior>();
-                    canvas = GameObject.Find("Canvas");   //finding the Canvas gameObject
-                    UI_DialogueSystem = canvas.transform.Find("UI_DialogueSystem").gameObject;
                     UI_DialogueSystem.SetActive(true);
                     NPC.Interact(); 
                 }
@@ -106,7 +106,7 @@ public class PlayerControlsOverworld : MonoBehaviour {
         }
         if (Input.GetAxisRaw("Back") > 0) //abort! abort! you know, dialogue
         {
-
+			UI_DialogueSystem.SetActive(false);
         }
     }
 

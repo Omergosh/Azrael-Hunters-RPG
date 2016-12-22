@@ -16,8 +16,10 @@ public class NPC_Behavior : MonoBehaviour {
     //Dialogue stuff
     private GameObject UI_DialogueSystem;
     private GameObject UI_DialogueText;
+    private GameObject UI_PortraitImage;
     private Text myText;
     public List<string> Dialogue = new List<string>(); //using lists for strings
+    public Sprite portrait;
 
     void Start()
     {
@@ -29,6 +31,8 @@ public class NPC_Behavior : MonoBehaviour {
     {
         UI_DialogueSystem = GameObject.Find("UI_DialogueSystem");
         UI_DialogueText = GameObject.Find("UI_DialogueText");   //finding the UI_DialogueText gameObject
+        UI_PortraitImage = GameObject.Find("UI_PortraitImage");
+        UI_PortraitImage.GetComponent<Image>().sprite = portrait;   // setting the sprite to be the portrait
         myText = UI_DialogueText.GetComponent<Text>();          //references the text object in UI_DialogueText
         foreach(string myString in Dialogue)
         {
@@ -47,9 +51,12 @@ public class NPC_Behavior : MonoBehaviour {
     {
         do
         {
+            if (Input.GetAxisRaw("Back") > 0)   //checking for the back condition, breaking the loop incredibly quickly and solving the "continued dialogue bug"
+            {
+                break;
+            }
             yield return null;
         } while (!Input.GetKeyDown(keyCode));
-
     }
 
     public void Push(Vector2 directionV)

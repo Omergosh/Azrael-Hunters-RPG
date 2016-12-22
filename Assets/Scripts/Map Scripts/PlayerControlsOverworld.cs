@@ -87,7 +87,7 @@ public class PlayerControlsOverworld : MonoBehaviour {
 	        transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed);    // Moving to new pos
 		}
 
-        if (Input.GetAxisRaw("Interact") > 0 & Time.time >= timestamp) //user interaction
+        if (Input.GetAxisRaw("Interact") > 0 & Time.time >= timestamp) //user interaction with a delay of how quickly it can be done equal to interactDelay
         {
             timestamp = Time.time + interactDelay;
             GameObject objectHit = InteractCheck(directionV);

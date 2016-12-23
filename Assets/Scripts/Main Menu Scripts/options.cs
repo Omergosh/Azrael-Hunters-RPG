@@ -6,8 +6,8 @@ public class options : MonoBehaviour {
     private GameObject MenuRoot;
     public void onClick()
     {
-        MenuRoot = GameObject.Find("Menu Root");
+        MenuRoot = GameObject.Find("Canvas");
         MenuRoot menuScript = MenuRoot.GetComponent<MenuRoot>();
-        menuScript.hideMenu("Canvas/Menu Root/Options Root");
+        menuScript.showMenu("Options Root");
     }
 }

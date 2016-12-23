@@ -1,13 +1,14 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class credits : MonoBehaviour {
+public class Back : MonoBehaviour {
 
     private GameObject canvasGameObject;
     public void onClick()
     {
         canvasGameObject = GameObject.Find("Canvas");
         MenuRoot menuScript = canvasGameObject.GetComponent<MenuRoot>();
-        menuScript.showMenu("Credits Root");
+        menuScript.showMainMenu();
     }
 }

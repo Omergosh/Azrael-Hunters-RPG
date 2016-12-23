@@ -3,31 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MenuRoot : MonoBehaviour {
-    public GameObject Title;
-    private GameObject NewGame;
-    private GameObject LoadGame;
-    private GameObject Options;
-    private GameObject Credits_Button;
-    private GameObject Exit;
     private GameObject childObject;
-    private GameObject Back;
+    private Transform Back;
 
     public void Start()
     {
-        Title = GameObject.Find("Canvas/Menu Root/Title");
-        NewGame = GameObject.Find("Canvas/Menu Root/New Game");
-        LoadGame = GameObject.Find("Canvas/Menu Root/Load Game");
-        Options = GameObject.Find("Canvas/Menu Root/Options");
-        Credits_Button = GameObject.Find("Canvas/Menu Root/Credits_Button");
-        Exit = GameObject.Find("Canvas/Menu Root/Exit");
-        Back = GameObject.Find("Canvas/Menu Root/Back");
+        Back = transform.Find("Back");
     }
-    public void showMenu()  //hides the previous menu and shows the main menu
+    public void showMainMenu()  //hides the previous menu and shows the main menu
     {
         
         foreach (Transform child in transform)
         {
-            if (child.gameObject == Title || child.gameObject == NewGame || child.gameObject == LoadGame || child.gameObject == Options || child.gameObject == Credits_Button || child.gameObject == Exit)    //yes I know its sloppy
+            if(child.gameObject == transform.Find("Menu Root").gameObject)
             {
                 child.gameObject.SetActive(true);
             }
@@ -37,23 +25,24 @@ public class MenuRoot : MonoBehaviour {
             }
         }
 
-        if (childObject != null)
+        if (childObject != null)    //closing the previous submenu
         {
             childObject.SetActive(false);
-            Back.SetActive(false);
+            Back.gameObject.SetActive(false);
         }
     }
 
-    public void hideMenu(string nameOfGameObject)   //goes into a submenu
+    public void showMenu(string nameOfGameObject)   //goes into a submenu by the name of the string passed
     {
-        foreach(Transform child in transform)
+
+        foreach (Transform child in transform)
         {
             child.gameObject.SetActive(false);
         }
-        childObject = GameObject.Find(nameOfGameObject);
-        childObject.SetActive(true);
+        Transform childObject = transform.Find(nameOfGameObject);
+        childObject.gameObject.SetActive(true);
         
-        Back.SetActive(true);
+        Back.gameObject.SetActive(true);
     }
 
     public void hide(string nameOfGameObject)   //hides one object

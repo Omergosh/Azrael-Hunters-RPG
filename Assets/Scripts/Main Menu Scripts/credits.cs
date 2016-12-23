@@ -9,6 +9,5 @@ public class credits : MonoBehaviour {
         MenuRoot = GameObject.Find("Menu Root");
         MenuRoot menuScript = MenuRoot.GetComponent<MenuRoot>();
         menuScript.hideMenu("Canvas/Menu Root/Credits Root");
-        menuScript.show("Canvas/Menu Root/Credits Root/Credits");
     }
 }

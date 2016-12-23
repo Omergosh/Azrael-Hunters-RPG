@@ -2,14 +2,11 @@
 using System.Collections;
 
 public class credits : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    private GameObject MenuRoot;
+    public void onClick()
+    {
+        MenuRoot = GameObject.Find("Menu Root");
+        MenuRoot menuScript = MenuRoot.GetComponent<MenuRoot>();
+        menuScript.hideMenu("Canvas/Menu Root/Credits");
+    }
 }

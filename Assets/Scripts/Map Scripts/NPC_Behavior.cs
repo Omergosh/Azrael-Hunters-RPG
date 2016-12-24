@@ -43,7 +43,7 @@ public class NPC_Behavior : MonoBehaviour {
         UI_DialogueSystem.SetActive(false);
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         PlayerControlsOverworld playerScript = player.GetComponent<PlayerControlsOverworld>();
-        playerScript.talking = false;
+        playerScript.interacting = false;
         playerScript.canMove = true;
     }
 

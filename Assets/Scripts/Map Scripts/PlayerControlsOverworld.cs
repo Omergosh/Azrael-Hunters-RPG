@@ -4,32 +4,53 @@ using UnityEngine.EventSystems;
 
 public class PlayerControlsOverworld : MonoBehaviour {
 
-    Vector3 pos;                    // For movement
+    public Vector3 pos;                    // For movement
     public float speed = 4.0f;      // Speed of movement
     public float interactDelay = 1.0f;  //delay after talking
     private float timestamp;    //for keeping time
 	public bool paused = false;
     public bool canMove = true;
-    public bool talking = false;
-    public Vector2 directionV;
+    public bool interacting = false;
+    public Vector2 directionV;  //direction of player
     public int layerMaskCollisions = 1 << 8;
     public int layerMaskInteracts = 1 << 9;
     GameObject canvas;
 	GameObject UI_DialogueSystem;
 	GameObject UI_PauseMenu;
 	GameObject UI_PauseMenuRoot;
+    GameObject UI_SaveCrystal;
 
 	public bool pauseButtonDown = false;
 	public bool pauseButtonPrevious = false;
 
     void Start()
     {
-        pos = transform.position;          // Take the initial position
-		directionV = Vector2.down;
-		canvas = GameObject.Find("Canvas");   //finding the Canvas gameObject
+
+        if(GameManager.control != null) {
+            if(GameManager.control.pos != Vector2.zero && GameManager.control.dir != Vector2.zero)
+            {
+                pos = GameManager.control.pos;          // Take the gameManager position
+		        directionV = GameManager.control.dir;   // Take the gameManager direction
+                Debug.Log("Gamemanager position obtained");
+            }
+            else
+            {
+                pos = transform.position;          // Take the starting pos
+                directionV = Vector2.down;   // Take the starting pos
+            }
+        }
+        else
+        {
+            pos = transform.position;          // Take the starting pos
+            directionV = Vector2.down;   // Take the starting pos
+        }
+        transform.position = Vector3.MoveTowards(transform.position, pos, speed);   //moving immediately
+
+        canvas = GameObject.Find("Canvas");   //finding the Canvas gameObject
 		UI_DialogueSystem = canvas.transform.Find("UI_DialogueSystem").gameObject;
 		UI_PauseMenu = canvas.transform.Find("UI_PauseMenu").gameObject;
 		UI_PauseMenuRoot = UI_PauseMenu.transform.Find("UI_PauseMenuRoot").gameObject;
+        UI_SaveCrystal = canvas.transform.Find("UI_SaveCrystal").gameObject;
     }
 
     void Update()
@@ -93,13 +114,21 @@ public class PlayerControlsOverworld : MonoBehaviour {
             GameObject objectHit = InteractCheck(directionV);
             if (objectHit != null)
             {
-                if (objectHit.GetComponent<NPC_Behavior>() && talking == false)
+                if (objectHit.GetComponent<NPC_Behavior>() && interacting == false) //interacting with person or object
                 {
                     NPC_Behavior NPC = objectHit.GetComponent<NPC_Behavior>();
                     UI_DialogueSystem.SetActive(true);
-                    talking = true;
+                    interacting = true;
                     canMove = false;
                     StartCoroutine(NPC.Interact());
+                }
+                if (objectHit.GetComponent<SaveCrystal>() && interacting == false)  //interacting with savepoint
+                {
+                    //SaveCrystal saveCrystal = objectHit.GetComponent<SaveCrystal>();
+                    UI_SaveCrystal.SetActive(true);
+                    interacting = true;
+                    canMove = false;
+                    //saveCrystal.save();
                 }
             }
 		}
@@ -131,7 +160,7 @@ public class PlayerControlsOverworld : MonoBehaviour {
 			if (UI_DialogueSystem.activeSelf) {
 				UI_DialogueSystem.SetActive (false);
                 canMove = true;
-                talking = false;
+                interacting = false;
 			}
         }
 
@@ -163,8 +192,11 @@ public class PlayerControlsOverworld : MonoBehaviour {
 			case "resume":
 				UI_PauseMenuRoot.SetActive (false);
 				UI_PauseMenu.SetActive (false);
-				paused = false;
-				break;
+                UI_SaveCrystal.SetActive(false);    //added to avoid making a second resume for save menus, technically doesn't belong here
+				paused = false; // see above comment
+                interacting = false;    // see above comment
+                canMove = true; // see above comment
+                break;
 			case "party":
 				//UI_PauseMenuRoot.SetActive (false);
 				//UI_PauseMenu.SetActive (false);

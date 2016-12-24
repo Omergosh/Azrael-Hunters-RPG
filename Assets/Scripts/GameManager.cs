@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour {
     public float health;
     public float exp;
     public string scene;
+    public Vector2 pos;
+    public Vector2 dir;
+    GameObject player;
 
 	void Awake ()
     {
@@ -37,6 +40,14 @@ public class GameManager : MonoBehaviour {
         data.exp = exp;
         data.scene = scene;
 
+        player = GameObject.FindGameObjectWithTag("Player");
+        pos = player.GetComponent<PlayerControlsOverworld>().pos;
+        data.posx = (int)pos.x;
+        data.posy = (int)pos.y;
+        dir = player.GetComponent<PlayerControlsOverworld>().directionV;
+        data.dirx = dir.x;
+        data.diry = dir.y;
+
         bf.Serialize(file, data);
         file.Close();
         Debug.Log("Data saved");
@@ -54,6 +65,8 @@ public class GameManager : MonoBehaviour {
 
             health = data.health;
             exp = data.exp;
+            pos = new Vector2(data.posx, data.posy);
+            dir = new Vector2(data.dirx, data.diry);
             SceneManager.LoadScene(data.scene);
         }
         else
@@ -69,4 +82,9 @@ class PlayerData
     public float health;
     public float exp;
     public string scene;
+    public int posx;
+    public int posy;
+    public float dirx;
+    public float diry;
+
 }

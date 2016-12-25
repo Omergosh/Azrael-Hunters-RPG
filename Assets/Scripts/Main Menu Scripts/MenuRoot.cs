@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MenuRoot : MonoBehaviour {
+
     private GameObject childObject;
     private Transform Back;
 
@@ -10,6 +11,7 @@ public class MenuRoot : MonoBehaviour {
     {
         Back = transform.Find("Back");
     }
+
     public void showMainMenu()  //hides the previous menu and shows the main menu
     {
         

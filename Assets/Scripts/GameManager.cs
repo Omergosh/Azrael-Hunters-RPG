@@ -30,6 +30,13 @@ public class GameManager : MonoBehaviour {
         }
 	}
 
+    public void Reset()
+    {
+        scene = "";
+        pos = Vector2.zero;
+        dir = Vector2.zero;
+    }
+
     public void Save(int saveNumber)    //saves file number "saveNumber"
     {
         BinaryFormatter bf = new BinaryFormatter();
@@ -38,7 +45,7 @@ public class GameManager : MonoBehaviour {
         PlayerData data = new PlayerData();
         data.health = health;
         data.exp = exp;
-        data.scene = scene;
+        data.scene = SceneManager.GetActiveScene().name;
 
         player = GameObject.FindGameObjectWithTag("Player");
         pos = player.GetComponent<PlayerControlsOverworld>().pos;
@@ -47,6 +54,7 @@ public class GameManager : MonoBehaviour {
         dir = player.GetComponent<PlayerControlsOverworld>().directionV;
         data.dirx = dir.x;
         data.diry = dir.y;
+        scene = data.scene;
 
         bf.Serialize(file, data);
         file.Close();

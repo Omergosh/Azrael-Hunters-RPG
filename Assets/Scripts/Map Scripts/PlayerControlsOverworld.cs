@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class PlayerControlsOverworld : MonoBehaviour {
 
@@ -18,6 +19,7 @@ public class PlayerControlsOverworld : MonoBehaviour {
 	GameObject UI_DialogueSystem;
 	GameObject UI_PauseMenu;
 	GameObject UI_PauseMenuRoot;
+    GameObject UI_PauseMenuQuit;
     GameObject UI_SaveCrystal;
 
 	public bool pauseButtonDown = false;
@@ -50,6 +52,7 @@ public class PlayerControlsOverworld : MonoBehaviour {
 		UI_DialogueSystem = canvas.transform.Find("UI_DialogueSystem").gameObject;
 		UI_PauseMenu = canvas.transform.Find("UI_PauseMenu").gameObject;
 		UI_PauseMenuRoot = UI_PauseMenu.transform.Find("UI_PauseMenuRoot").gameObject;
+        UI_PauseMenuQuit = UI_PauseMenu.transform.Find("UI_PauseMenuQuit").gameObject;
         UI_SaveCrystal = canvas.transform.Find("UI_SaveCrystal").gameObject;
     }
 
@@ -213,9 +216,17 @@ public class PlayerControlsOverworld : MonoBehaviour {
 				//paused = false;
 				break;
 			case "quit":
-				Application.Quit ();
+                UI_PauseMenuRoot.SetActive (false);
+                UI_PauseMenuQuit.SetActive (true);
 				break;
-		}
+            case "yes": //PauseMenuQuit yes button
+                SceneManager.LoadScene("mainMenu");
+                break;
+            case "no":  //PauseMenuQuit no button
+                UI_PauseMenuRoot.SetActive(true);
+                UI_PauseMenuQuit.SetActive(false);
+                break;
+        }
 	}
 
     void pushing(GameObject objectHit)

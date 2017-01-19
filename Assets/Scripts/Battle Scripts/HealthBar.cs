@@ -14,7 +14,7 @@ public class HealthBar : MonoBehaviour
     {
         //pos = transform.position;
     }
-
+        
     void OnGUI()
     {
         //pos = transform.position;

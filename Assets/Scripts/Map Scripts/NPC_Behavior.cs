@@ -4,6 +4,8 @@ using System.Collections;
 using System.Collections.Generic;   //allows lists (used in dialogue)
 
 public class NPC_Behavior : MonoBehaviour {
+    //This class is used for managing NPC interactions like pushing and talking on the overworld.
+
 
     public bool moveable = false;
     private Vector2 directionV;

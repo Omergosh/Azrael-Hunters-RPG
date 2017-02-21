@@ -9,3 +9,5 @@ EditorBuildSettings:
     path: Assets/Scenes/mainMenu.unity
   - enabled: 1
     path: Assets/Scenes/Maps/Map Exploration.unity
+  - enabled: 1
+    path: Assets/Scenes/Battle Screen.unity

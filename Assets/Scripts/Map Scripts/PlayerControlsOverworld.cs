@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 public class PlayerControlsOverworld : MonoBehaviour {
 
     public Vector3 pos;                    // For movement
+
+    public float health;                //battle stats
+    public float exp;
+
     public float speed = 4.0f;      // Speed of movement
     public float interactDelay = 1.0f;  //delay after talking
     private float timestamp;    //for keeping time
@@ -29,8 +33,14 @@ public class PlayerControlsOverworld : MonoBehaviour {
     {
 
         if(GameManager.control != null) {
-            if(GameManager.control.pos != Vector2.zero && GameManager.control.dir != Vector2.zero)
+            health = GameManager.control.health;    // setting stats on loading into level
+            exp = GameManager.control.exp;
+            pos = GameManager.control.pos;          // Take the gameManager position
+
+
+            if (GameManager.control.pos != Vector2.zero && GameManager.control.dir != Vector2.zero)
             {
+
                 pos = GameManager.control.pos;          // Take the gameManager position
 		        directionV = GameManager.control.dir;   // Take the gameManager direction
                 Debug.Log("Gamemanager position obtained");
@@ -46,7 +56,7 @@ public class PlayerControlsOverworld : MonoBehaviour {
             pos = transform.position;          // Take the starting pos
             directionV = Vector2.down;   // Take the starting pos
         }
-        transform.position = Vector3.MoveTowards(transform.position, pos, speed);   //moving immediately
+        transform.position = Vector3.MoveTowards(transform.position, pos, 1000);   //moving to new pos instantly thanks to HIGH SPEEDS
 
         canvas = GameObject.Find("Canvas");   //finding the Canvas gameObject
 		UI_DialogueSystem = canvas.transform.Find("UI_DialogueSystem").gameObject;
@@ -132,6 +142,16 @@ public class PlayerControlsOverworld : MonoBehaviour {
                     interacting = true;
                     canMove = false;
                     //saveCrystal.save();
+                }
+                if (objectHit.GetComponent<TransferPoint>() && interacting == false)  //interacting with door, teleporter or something similar
+                {
+                    TransferPoint transferPoint = objectHit.GetComponent<TransferPoint>();
+
+                    //interacting = true;
+                    //canMove = false;
+                    gameManagerUpdate();
+                    transferPoint.transfer();   // set to HYPERSPEED, WE'RE GOING PLACES
+                    updatePos();
                 }
             }
 		}
@@ -240,5 +260,17 @@ public class PlayerControlsOverworld : MonoBehaviour {
                 NPC.Push(directionV);   //pushing things
             }
         }
+    }
+
+    public void gameManagerUpdate()     // updating the gameManager before loading a new scene or loading into battle
+    {
+        GameManager.control.health = health;
+        GameManager.control.exp = exp;
+    }
+
+    public void updatePos()
+    {
+        pos = GameManager.control.pos;
+        directionV = GameManager.control.dir;
     }
 }

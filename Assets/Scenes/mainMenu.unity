@@ -2068,7 +2068,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89561d04f4146b442ad9a6e6d9c8e9d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
+  health: 100
   exp: 0
   scene: 
   pos: {x: 0, y: 0}

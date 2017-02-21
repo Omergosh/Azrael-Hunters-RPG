@@ -39,7 +39,7 @@ public class NPC_Behavior : MonoBehaviour {
         foreach(string myString in Dialogue)
         {
             myText.text = myString;
-            yield return StartCoroutine(WaitForKeyDown(KeyCode.X));
+            yield return StartCoroutine(WaitForKeyDown(KeyCode.Z));
         }
         //yield return null;
         UI_DialogueSystem.SetActive(false);

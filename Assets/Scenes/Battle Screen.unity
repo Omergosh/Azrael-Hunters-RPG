@@ -569,6 +569,8 @@ GameObject:
   m_Component:
   - component: {fileID: 136311574}
   - component: {fileID: 136311575}
+  - component: {fileID: 136311577}
+  - component: {fileID: 136311576}
   m_Layer: 0
   m_Name: Chipx64 (2)
   m_TagString: Untagged
@@ -624,6 +626,36 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!114 &136311576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 136311573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 279ce8a1086601f47a050ba0f41c670a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 728
+  maxHealth: 1525
+  isPlayerCharacter: 1
+  healthBar: {fileID: 0}
+  healthText: {fileID: 0}
+--- !u!61 &136311577
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 136311573}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: -0.11375366, y: -0.42034057}
+  serializedVersion: 2
+  m_Size: {x: 1.8100822, y: 3.1593258}
 --- !u!1 &199060029
 GameObject:
   m_ObjectHideFlags: 0
@@ -707,6 +739,8 @@ GameObject:
   m_Component:
   - component: {fileID: 202244442}
   - component: {fileID: 202244443}
+  - component: {fileID: 202244445}
+  - component: {fileID: 202244444}
   m_Layer: 0
   m_Name: Chipx64 (8)
   m_TagString: Untagged
@@ -762,6 +796,36 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!114 &202244444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 202244441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 279ce8a1086601f47a050ba0f41c670a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 728
+  maxHealth: 1525
+  isPlayerCharacter: 1
+  healthBar: {fileID: 0}
+  healthText: {fileID: 0}
+--- !u!61 &202244445
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 202244441}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: -0.11375366, y: -0.42034057}
+  serializedVersion: 2
+  m_Size: {x: 1.8100822, y: 3.1593258}
 --- !u!1 &229372937
 GameObject:
   m_ObjectHideFlags: 0
@@ -882,6 +946,8 @@ GameObject:
   m_Component:
   - component: {fileID: 274217907}
   - component: {fileID: 274217908}
+  - component: {fileID: 274217910}
+  - component: {fileID: 274217909}
   m_Layer: 0
   m_Name: Chipx64 (4)
   m_TagString: Untagged
@@ -937,6 +1003,36 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
+--- !u!114 &274217909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 274217906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dc5fc62319a10748bf319e7a24dd2de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 728
+  maxHealth: 1525
+  isPlayerCharacter: 0
+  healthBar: {fileID: 0}
+  healthText: {fileID: 0}
+--- !u!61 &274217910
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 274217906}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: -0.11375366, y: -0.42034057}
+  serializedVersion: 2
+  m_Size: {x: 1.8100822, y: 3.1593258}
 --- !u!1 &284564029
 GameObject:
   m_ObjectHideFlags: 0
@@ -1162,6 +1258,8 @@ GameObject:
   m_Component:
   - component: {fileID: 340679912}
   - component: {fileID: 340679913}
+  - component: {fileID: 340679915}
+  - component: {fileID: 340679914}
   m_Layer: 0
   m_Name: Chipx64 (10)
   m_TagString: Untagged
@@ -1217,6 +1315,36 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!114 &340679914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 340679911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 279ce8a1086601f47a050ba0f41c670a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 728
+  maxHealth: 1525
+  isPlayerCharacter: 1
+  healthBar: {fileID: 0}
+  healthText: {fileID: 0}
+--- !u!61 &340679915
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 340679911}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: -0.11375366, y: -0.42034057}
+  serializedVersion: 2
+  m_Size: {x: 1.8100822, y: 3.1593258}
 --- !u!1 &355609636
 GameObject:
   m_ObjectHideFlags: 0
@@ -1435,6 +1563,8 @@ GameObject:
   m_Component:
   - component: {fileID: 446521675}
   - component: {fileID: 446521676}
+  - component: {fileID: 446521678}
+  - component: {fileID: 446521677}
   m_Layer: 0
   m_Name: Chipx64 (6)
   m_TagString: Untagged
@@ -1490,6 +1620,36 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
+--- !u!114 &446521677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 446521674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dc5fc62319a10748bf319e7a24dd2de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 728
+  maxHealth: 1525
+  isPlayerCharacter: 0
+  healthBar: {fileID: 0}
+  healthText: {fileID: 0}
+--- !u!61 &446521678
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 446521674}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: -0.11375366, y: -0.42034057}
+  serializedVersion: 2
+  m_Size: {x: 1.8100822, y: 3.1593258}
 --- !u!1 &538147926
 GameObject:
   m_ObjectHideFlags: 0
@@ -1825,6 +1985,8 @@ GameObject:
   m_Component:
   - component: {fileID: 705293920}
   - component: {fileID: 705293921}
+  - component: {fileID: 705293923}
+  - component: {fileID: 705293922}
   m_Layer: 0
   m_Name: Chipx64 (14)
   m_TagString: Untagged
@@ -1880,6 +2042,36 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
+--- !u!114 &705293922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 705293919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dc5fc62319a10748bf319e7a24dd2de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 728
+  maxHealth: 1525
+  isPlayerCharacter: 0
+  healthBar: {fileID: 0}
+  healthText: {fileID: 0}
+--- !u!61 &705293923
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 705293919}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: -0.11375366, y: -0.42034057}
+  serializedVersion: 2
+  m_Size: {x: 1.8100822, y: 3.1593258}
 --- !u!1 &716796866
 GameObject:
   m_ObjectHideFlags: 0
@@ -2286,9 +2478,11 @@ GameObject:
   m_Component:
   - component: {fileID: 853403156}
   - component: {fileID: 853403157}
+  - component: {fileID: 853403159}
+  - component: {fileID: 853403158}
   m_Layer: 0
   m_Name: Chipx64
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2341,6 +2535,36 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!114 &853403158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 853403155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 279ce8a1086601f47a050ba0f41c670a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 728
+  maxHealth: 1525
+  isPlayerCharacter: 1
+  healthBar: {fileID: 0}
+  healthText: {fileID: 0}
+--- !u!61 &853403159
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 853403155}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: -0.11375366, y: -0.42034057}
+  serializedVersion: 2
+  m_Size: {x: 1.8100822, y: 3.1593258}
 --- !u!1 &881023479
 GameObject:
   m_ObjectHideFlags: 0
@@ -2426,6 +2650,8 @@ GameObject:
   m_Component:
   - component: {fileID: 924330622}
   - component: {fileID: 924330623}
+  - component: {fileID: 924330625}
+  - component: {fileID: 924330624}
   m_Layer: 0
   m_Name: Chipx64 (9)
   m_TagString: Untagged
@@ -2481,6 +2707,36 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!114 &924330624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 924330621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 279ce8a1086601f47a050ba0f41c670a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 728
+  maxHealth: 1525
+  isPlayerCharacter: 1
+  healthBar: {fileID: 0}
+  healthText: {fileID: 0}
+--- !u!61 &924330625
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 924330621}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: -0.11375366, y: -0.42034057}
+  serializedVersion: 2
+  m_Size: {x: 1.8100822, y: 3.1593258}
 --- !u!1 &931241069
 GameObject:
   m_ObjectHideFlags: 0
@@ -2681,7 +2937,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 728
   maxHealth: 1250
-  HealthBar: {fileID: 0}
+  isPlayerCharacter: 1
+  healthBar: {fileID: 0}
   healthText: {fileID: 314854917}
 --- !u!1 &1034027809
 GameObject:
@@ -2881,7 +3138,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbde1338b0e3fc9499eed263e881cdc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combatantsList: []
+  playerCharacterList: []
+  enemyList: []
+  selectedCharacter: {fileID: 0}
   currentState: 0
 --- !u!1 &1310945684
 GameObject:
@@ -2966,6 +3225,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1342017811}
   - component: {fileID: 1342017812}
+  - component: {fileID: 1342017814}
+  - component: {fileID: 1342017813}
   m_Layer: 0
   m_Name: Chipx64 (13)
   m_TagString: Untagged
@@ -3021,6 +3282,36 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
+--- !u!114 &1342017813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1342017810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dc5fc62319a10748bf319e7a24dd2de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 728
+  maxHealth: 1525
+  isPlayerCharacter: 0
+  healthBar: {fileID: 0}
+  healthText: {fileID: 0}
+--- !u!61 &1342017814
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1342017810}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: -0.11375366, y: -0.42034057}
+  serializedVersion: 2
+  m_Size: {x: 1.8100822, y: 3.1593258}
 --- !u!1 &1370566429
 GameObject:
   m_ObjectHideFlags: 0
@@ -3247,6 +3538,8 @@ GameObject:
   - component: {fileID: 1490076427}
   - component: {fileID: 1490076429}
   - component: {fileID: 1490076428}
+  - component: {fileID: 1490076431}
+  - component: {fileID: 1490076430}
   m_Layer: 0
   m_Name: Chipx64 (15)
   m_TagString: Untagged
@@ -3314,6 +3607,36 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!114 &1490076430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1490076426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 279ce8a1086601f47a050ba0f41c670a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 728
+  maxHealth: 1525
+  isPlayerCharacter: 1
+  healthBar: {fileID: 0}
+  healthText: {fileID: 0}
+--- !u!61 &1490076431
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1490076426}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: -0.11375366, y: -0.42034057}
+  serializedVersion: 2
+  m_Size: {x: 1.8100822, y: 3.1593258}
 --- !u!1 &1632377331
 GameObject:
   m_ObjectHideFlags: 0
@@ -3471,6 +3794,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1659582664}
   - component: {fileID: 1659582665}
+  - component: {fileID: 1659582667}
+  - component: {fileID: 1659582666}
   m_Layer: 0
   m_Name: Chipx64 (12)
   m_TagString: Untagged
@@ -3526,6 +3851,36 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
+--- !u!114 &1659582666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1659582663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dc5fc62319a10748bf319e7a24dd2de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 728
+  maxHealth: 1525
+  isPlayerCharacter: 0
+  healthBar: {fileID: 0}
+  healthText: {fileID: 0}
+--- !u!61 &1659582667
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1659582663}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: -0.11375366, y: -0.42034057}
+  serializedVersion: 2
+  m_Size: {x: 1.8100822, y: 3.1593258}
 --- !u!1 &1669973115
 GameObject:
   m_ObjectHideFlags: 0
@@ -3535,6 +3890,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1669973116}
   - component: {fileID: 1669973117}
+  - component: {fileID: 1669973119}
+  - component: {fileID: 1669973118}
   m_Layer: 0
   m_Name: Chipx64 (1)
   m_TagString: Untagged
@@ -3590,6 +3947,36 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!114 &1669973118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1669973115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 279ce8a1086601f47a050ba0f41c670a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 728
+  maxHealth: 1525
+  isPlayerCharacter: 1
+  healthBar: {fileID: 0}
+  healthText: {fileID: 0}
+--- !u!61 &1669973119
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1669973115}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: -0.11375366, y: -0.42034057}
+  serializedVersion: 2
+  m_Size: {x: 1.8100822, y: 3.1593258}
 --- !u!1 &1770605232
 GameObject:
   m_ObjectHideFlags: 0
@@ -3710,6 +4097,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1814100903}
   - component: {fileID: 1814100904}
+  - component: {fileID: 1814100906}
+  - component: {fileID: 1814100905}
   m_Layer: 0
   m_Name: Chipx64 (5)
   m_TagString: Untagged
@@ -3765,6 +4154,36 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
+--- !u!114 &1814100905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1814100902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dc5fc62319a10748bf319e7a24dd2de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 728
+  maxHealth: 1525
+  isPlayerCharacter: 0
+  healthBar: {fileID: 0}
+  healthText: {fileID: 0}
+--- !u!61 &1814100906
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1814100902}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: -0.11375366, y: -0.42034057}
+  serializedVersion: 2
+  m_Size: {x: 1.8100822, y: 3.1593258}
 --- !u!1 &1901084548
 GameObject:
   m_ObjectHideFlags: 0
@@ -3774,6 +4193,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1901084549}
   - component: {fileID: 1901084550}
+  - component: {fileID: 1901084552}
+  - component: {fileID: 1901084551}
   m_Layer: 0
   m_Name: Chipx64 (11)
   m_TagString: Untagged
@@ -3829,6 +4250,36 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
+--- !u!114 &1901084551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1901084548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dc5fc62319a10748bf319e7a24dd2de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 728
+  maxHealth: 1525
+  isPlayerCharacter: 0
+  healthBar: {fileID: 0}
+  healthText: {fileID: 0}
+--- !u!61 &1901084552
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1901084548}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: -0.11375366, y: -0.42034057}
+  serializedVersion: 2
+  m_Size: {x: 1.8100822, y: 3.1593258}
 --- !u!1 &1948552783
 GameObject:
   m_ObjectHideFlags: 0
@@ -4026,6 +4477,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2046384722}
   - component: {fileID: 2046384723}
+  - component: {fileID: 2046384724}
+  - component: {fileID: 2046384725}
   m_Layer: 0
   m_Name: Chipx64 (3)
   m_TagString: Untagged
@@ -4078,9 +4531,39 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8c70938de97c61c43b01b8aa12a5b4eb, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 1
   m_FlipY: 0
+--- !u!114 &2046384724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2046384721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dc5fc62319a10748bf319e7a24dd2de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 728
+  maxHealth: 1525
+  isPlayerCharacter: 0
+  healthBar: {fileID: 0}
+  healthText: {fileID: 0}
+--- !u!61 &2046384725
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2046384721}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: -0.037738983, y: -0.353258}
+  serializedVersion: 2
+  m_Size: {x: 2.0375314, y: 3.2934835}
 --- !u!1 &2048524337
 GameObject:
   m_ObjectHideFlags: 0
@@ -4159,6 +4642,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2085794628}
   - component: {fileID: 2085794629}
+  - component: {fileID: 2085794631}
+  - component: {fileID: 2085794630}
   m_Layer: 0
   m_Name: Chipx64 (7)
   m_TagString: Untagged
@@ -4214,6 +4699,36 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!114 &2085794630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2085794627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 279ce8a1086601f47a050ba0f41c670a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 728
+  maxHealth: 1525
+  isPlayerCharacter: 1
+  healthBar: {fileID: 0}
+  healthText: {fileID: 0}
+--- !u!61 &2085794631
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2085794627}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: -0.11375366, y: -0.42034057}
+  serializedVersion: 2
+  m_Size: {x: 1.8100822, y: 3.1593258}
 --- !u!1 &2093630513
 GameObject:
   m_ObjectHideFlags: 0

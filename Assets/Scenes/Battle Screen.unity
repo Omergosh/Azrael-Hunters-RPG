@@ -518,8 +518,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 198}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 0.6, y: 198}
+  m_SizeDelta: {x: 393.2, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &128549375
 MonoBehaviour:
@@ -637,8 +637,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 279ce8a1086601f47a050ba0f41c670a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: Chip
   currentHealth: 728
   maxHealth: 1525
+  attackStat: 20
+  isDead: 0
+  canMove: 1
+  canAct: 1
   isPlayerCharacter: 1
   healthBar: {fileID: 0}
   healthText: {fileID: 0}
@@ -807,8 +812,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 279ce8a1086601f47a050ba0f41c670a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: Chip
   currentHealth: 728
   maxHealth: 1525
+  attackStat: 20
+  isDead: 0
+  canMove: 1
+  canAct: 1
   isPlayerCharacter: 1
   healthBar: {fileID: 0}
   healthText: {fileID: 0}
@@ -1011,11 +1021,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 274217906}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dc5fc62319a10748bf319e7a24dd2de, type: 3}
+  m_Script: {fileID: 11500000, guid: 279ce8a1086601f47a050ba0f41c670a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 728
-  maxHealth: 1525
+  characterName: Basilisk
+  currentHealth: 20
+  maxHealth: 400
+  attackStat: 10
+  isDead: 0
+  canMove: 1
+  canAct: 1
   isPlayerCharacter: 0
   healthBar: {fileID: 0}
   healthText: {fileID: 0}
@@ -1326,8 +1341,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 279ce8a1086601f47a050ba0f41c670a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: Chip
   currentHealth: 728
   maxHealth: 1525
+  attackStat: 20
+  isDead: 0
+  canMove: 1
+  canAct: 1
   isPlayerCharacter: 1
   healthBar: {fileID: 0}
   healthText: {fileID: 0}
@@ -1628,11 +1648,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 446521674}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dc5fc62319a10748bf319e7a24dd2de, type: 3}
+  m_Script: {fileID: 11500000, guid: 279ce8a1086601f47a050ba0f41c670a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 728
-  maxHealth: 1525
+  characterName: Basilisk
+  currentHealth: 20
+  maxHealth: 400
+  attackStat: 10
+  isDead: 0
+  canMove: 1
+  canAct: 1
   isPlayerCharacter: 0
   healthBar: {fileID: 0}
   healthText: {fileID: 0}
@@ -2050,11 +2075,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 705293919}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dc5fc62319a10748bf319e7a24dd2de, type: 3}
+  m_Script: {fileID: 11500000, guid: 279ce8a1086601f47a050ba0f41c670a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 728
-  maxHealth: 1525
+  characterName: Basilisk
+  currentHealth: 20
+  maxHealth: 400
+  attackStat: 10
+  isDead: 0
+  canMove: 1
+  canAct: 1
   isPlayerCharacter: 0
   healthBar: {fileID: 0}
   healthText: {fileID: 0}
@@ -2546,8 +2576,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 279ce8a1086601f47a050ba0f41c670a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: Chip
   currentHealth: 728
   maxHealth: 1525
+  attackStat: 20
+  isDead: 0
+  canMove: 1
+  canAct: 1
   isPlayerCharacter: 1
   healthBar: {fileID: 0}
   healthText: {fileID: 0}
@@ -2718,8 +2753,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 279ce8a1086601f47a050ba0f41c670a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: Chip
   currentHealth: 728
   maxHealth: 1525
+  attackStat: 20
+  isDead: 0
+  canMove: 1
+  canAct: 1
   isPlayerCharacter: 1
   healthBar: {fileID: 0}
   healthText: {fileID: 0}
@@ -2935,8 +2975,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 279ce8a1086601f47a050ba0f41c670a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: Chip
   currentHealth: 728
   maxHealth: 1250
+  attackStat: 20
+  isDead: 0
+  canMove: 1
+  canAct: 1
   isPlayerCharacter: 1
   healthBar: {fileID: 0}
   healthText: {fileID: 314854917}
@@ -3140,7 +3185,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCharacterList: []
   enemyList: []
+  UI_combatText: {fileID: 0}
+  combatText: {fileID: 0}
+  combatTextString: 
   selectedCharacter: {fileID: 0}
+  selectedEnemy: {fileID: 0}
   currentState: 0
 --- !u!1 &1310945684
 GameObject:
@@ -3290,11 +3339,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1342017810}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dc5fc62319a10748bf319e7a24dd2de, type: 3}
+  m_Script: {fileID: 11500000, guid: 279ce8a1086601f47a050ba0f41c670a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 728
-  maxHealth: 1525
+  characterName: Basilisk
+  currentHealth: 20
+  maxHealth: 400
+  attackStat: 10
+  isDead: 0
+  canMove: 1
+  canAct: 1
   isPlayerCharacter: 0
   healthBar: {fileID: 0}
   healthText: {fileID: 0}
@@ -3537,7 +3591,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1490076427}
   - component: {fileID: 1490076429}
-  - component: {fileID: 1490076428}
   - component: {fileID: 1490076431}
   - component: {fileID: 1490076430}
   m_Layer: 0
@@ -3560,18 +3613,6 @@ Transform:
   m_Father: {fileID: 1191217257}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1490076428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1490076426}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e50744e608363384bb998e57abdfaf99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PixelsPerUnit: 16
 --- !u!212 &1490076429
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3618,8 +3659,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 279ce8a1086601f47a050ba0f41c670a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: Chip
   currentHealth: 728
   maxHealth: 1525
+  attackStat: 20
+  isDead: 0
+  canMove: 1
+  canAct: 1
   isPlayerCharacter: 1
   healthBar: {fileID: 0}
   healthText: {fileID: 0}
@@ -3859,11 +3905,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1659582663}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dc5fc62319a10748bf319e7a24dd2de, type: 3}
+  m_Script: {fileID: 11500000, guid: 279ce8a1086601f47a050ba0f41c670a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 728
-  maxHealth: 1525
+  characterName: Basilisk
+  currentHealth: 20
+  maxHealth: 400
+  attackStat: 10
+  isDead: 0
+  canMove: 1
+  canAct: 1
   isPlayerCharacter: 0
   healthBar: {fileID: 0}
   healthText: {fileID: 0}
@@ -3958,8 +4009,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 279ce8a1086601f47a050ba0f41c670a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: Chip
   currentHealth: 728
   maxHealth: 1525
+  attackStat: 20
+  isDead: 0
+  canMove: 1
+  canAct: 1
   isPlayerCharacter: 1
   healthBar: {fileID: 0}
   healthText: {fileID: 0}
@@ -4162,11 +4218,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1814100902}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dc5fc62319a10748bf319e7a24dd2de, type: 3}
+  m_Script: {fileID: 11500000, guid: 279ce8a1086601f47a050ba0f41c670a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 728
-  maxHealth: 1525
+  characterName: Basilisk
+  currentHealth: 20
+  maxHealth: 400
+  attackStat: 10
+  isDead: 0
+  canMove: 1
+  canAct: 1
   isPlayerCharacter: 0
   healthBar: {fileID: 0}
   healthText: {fileID: 0}
@@ -4258,11 +4319,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1901084548}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dc5fc62319a10748bf319e7a24dd2de, type: 3}
+  m_Script: {fileID: 11500000, guid: 279ce8a1086601f47a050ba0f41c670a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 728
-  maxHealth: 1525
+  characterName: Basilisk
+  currentHealth: 20
+  maxHealth: 400
+  attackStat: 10
+  isDead: 0
+  canMove: 1
+  canAct: 1
   isPlayerCharacter: 0
   healthBar: {fileID: 0}
   healthText: {fileID: 0}
@@ -4432,7 +4498,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2019610915}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1191217258}
+        m_MethodName: SendMessage
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Attack
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &2019610915
@@ -4477,8 +4554,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2046384722}
   - component: {fileID: 2046384723}
-  - component: {fileID: 2046384724}
   - component: {fileID: 2046384725}
+  - component: {fileID: 2046384724}
   m_Layer: 0
   m_Name: Chipx64 (3)
   m_TagString: Untagged
@@ -4542,11 +4619,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2046384721}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dc5fc62319a10748bf319e7a24dd2de, type: 3}
+  m_Script: {fileID: 11500000, guid: 279ce8a1086601f47a050ba0f41c670a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 728
-  maxHealth: 1525
+  characterName: Basilisk
+  currentHealth: 20
+  maxHealth: 400
+  attackStat: 10
+  isDead: 0
+  canMove: 1
+  canAct: 1
   isPlayerCharacter: 0
   healthBar: {fileID: 0}
   healthText: {fileID: 0}
@@ -4710,8 +4792,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 279ce8a1086601f47a050ba0f41c670a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: Chip
   currentHealth: 728
   maxHealth: 1525
+  attackStat: 20
+  isDead: 0
+  canMove: 1
+  canAct: 1
   isPlayerCharacter: 1
   healthBar: {fileID: 0}
   healthText: {fileID: 0}

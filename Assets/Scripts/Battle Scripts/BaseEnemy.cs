@@ -7,8 +7,16 @@ public class BaseEnemy : MonoBehaviour
 {
 
     //public GameObject enemy;
+    public string characterName = "Basilisk";
     public int currentHealth = 728;
     public int maxHealth = 1525;
+    public int attackStat = 10;
+
+    public bool isDead = false;
+    public bool canMove = true;
+    public bool canAct = true;
+
+
 
     public bool isPlayerCharacter = false;
     public Image healthBar;
@@ -25,11 +33,12 @@ public class BaseEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         // temporary health bar tester
         if (currentHealth > 0)
         {
             currentHealth -= 1;
-        }
+        }*/
         //updateHealthBar();
     }
 

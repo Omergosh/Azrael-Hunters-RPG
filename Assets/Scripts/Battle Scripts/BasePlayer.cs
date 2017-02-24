@@ -5,11 +5,17 @@ using UnityEngine.UI;
 
 public class BasePlayer: MonoBehaviour {
 
-    //public GameObject player;
+    //public GameObject player or enemy;
+    public string characterName;
     public int currentHealth = 728;
     public int maxHealth = 1525;
+    public int attackStat = 20;
 
-    public bool isPlayerCharacter = true;
+    public bool isDead = false;
+    public bool canMove = true;
+    public bool canAct = true;
+
+    public bool isPlayerCharacter;
     public Image healthBar;
     public Text healthText;
     
@@ -22,11 +28,12 @@ public class BasePlayer: MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        /*
         //temporary health bar tester
         if(currentHealth > 0)
         {
             currentHealth -= 1;
-        }
+        }*/
         //updateHealthBar();
 	}
 

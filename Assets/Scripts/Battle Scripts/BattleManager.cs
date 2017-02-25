@@ -31,26 +31,33 @@ public class BattleManager : MonoBehaviour {
 
     public phaseState currentState;
 
-	// Use this for initialization
+
 	void Start () {// initializing things for battle such as models and stuff
 
         UI_combatText = GameObject.Find("Combat Text"); // finding GameObject
         combatText = UI_combatText.GetComponent<Text>();    // referencing text component
 
+        int playerID = 1;
+        int enemyID = 1;    //for determining appropriate UI
         foreach (Transform child in transform)   // adding each combatant to one of two lists: player or enemy
         {
             if(child.GetComponent<BasePlayer>() != null && child.GetComponent<BasePlayer>().isPlayerCharacter == true)
             {
                 playerCharacterList.Add(child);
+                child.GetComponent<BasePlayer>().ID = playerID;
+                playerID++;
             }
 
             else
             {
                 enemyList.Add(child);
+                child.GetComponent<BasePlayer>().ID = enemyID;
+                enemyID++;
             }
+            child.GetComponent<BasePlayer>().battleManagerStart();
         }
 
-        playerTurnsRemaining = playerCharacterList.Count;
+        playerTurnsRemaining = playerCharacterList.Count;   //actions equal to num of characters
 
 
         // intimidation phase here
@@ -173,10 +180,18 @@ public class BattleManager : MonoBehaviour {
 
         damage = attacker.GetComponent<BasePlayer>().attackStat;
         defender.GetComponent<BasePlayer>().currentHealth -= damage;
+
         Debug.Log(attacker + " dealt " + damage + " to " + defender);
         combatTextString = (attacker.GetComponent<BasePlayer>().characterName + " dealt " + damage + " damage to " + defender.GetComponent<BasePlayer>().characterName);
         combatText.text = combatTextString;
 
+
+        defender.GetComponent<BasePlayer>().updateHealthBar();
+        if(defender.GetComponent<BasePlayer>().currentHealth <= 0)
+        {
+            defender.GetComponent<BasePlayer>().currentHealth = 0;  // health can't go below 0
+            Destroy(defender);
+        }
 
     }
 

@@ -58,4 +58,9 @@ public class MenuRoot : MonoBehaviour {
         childObject = GameObject.Find(nameOfGameObject);
         childObject.SetActive(true);
     }
+
+    public void load(int fileNum)
+    {
+        GameManager.control.Load(fileNum);
+    }
 }

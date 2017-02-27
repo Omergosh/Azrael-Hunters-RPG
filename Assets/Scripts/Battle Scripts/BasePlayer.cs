@@ -18,6 +18,7 @@ public class BasePlayer: MonoBehaviour {
     public bool isDead = false;
     public bool canMove = true;
     public bool canAct = true;
+    public bool conscious = true;   // player character thing
 
     public bool isPlayerCharacter;  // distinguish between player and enemy characters
 

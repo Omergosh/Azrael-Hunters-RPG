@@ -934,6 +934,7 @@ MonoBehaviour:
   isDead: 0
   canMove: 1
   canAct: 1
+  conscious: 1
   isPlayerCharacter: 1
   characterUI: {fileID: 0}
   healthBar: {fileID: 0}
@@ -1301,6 +1302,7 @@ MonoBehaviour:
   isDead: 0
   canMove: 1
   canAct: 1
+  conscious: 1
   isPlayerCharacter: 1
   characterUI: {fileID: 0}
   healthBar: {fileID: 0}
@@ -1797,6 +1799,7 @@ MonoBehaviour:
   isDead: 0
   canMove: 1
   canAct: 1
+  conscious: 1
   isPlayerCharacter: 0
   characterUI: {fileID: 0}
   healthBar: {fileID: 0}
@@ -2188,6 +2191,7 @@ MonoBehaviour:
   isDead: 0
   canMove: 1
   canAct: 1
+  conscious: 1
   isPlayerCharacter: 1
   characterUI: {fileID: 0}
   healthBar: {fileID: 0}
@@ -2752,6 +2756,7 @@ MonoBehaviour:
   isDead: 0
   canMove: 1
   canAct: 1
+  conscious: 1
   isPlayerCharacter: 0
   characterUI: {fileID: 0}
   healthBar: {fileID: 0}
@@ -3888,6 +3893,7 @@ MonoBehaviour:
   isDead: 0
   canMove: 1
   canAct: 1
+  conscious: 1
   isPlayerCharacter: 0
   characterUI: {fileID: 0}
   healthBar: {fileID: 0}
@@ -4812,6 +4818,7 @@ MonoBehaviour:
   isDead: 0
   canMove: 1
   canAct: 1
+  conscious: 1
   isPlayerCharacter: 1
   characterUI: {fileID: 0}
   healthBar: {fileID: 0}
@@ -5101,6 +5108,7 @@ MonoBehaviour:
   isDead: 0
   canMove: 1
   canAct: 1
+  conscious: 1
   isPlayerCharacter: 1
   characterUI: {fileID: 0}
   healthBar: {fileID: 0}
@@ -6774,6 +6782,7 @@ MonoBehaviour:
   isDead: 0
   canMove: 1
   canAct: 1
+  conscious: 1
   isPlayerCharacter: 0
   characterUI: {fileID: 0}
   healthBar: {fileID: 0}
@@ -8086,6 +8095,7 @@ MonoBehaviour:
   isDead: 0
   canMove: 1
   canAct: 1
+  conscious: 1
   isPlayerCharacter: 1
   characterUI: {fileID: 0}
   healthBar: {fileID: 0}
@@ -8403,6 +8413,7 @@ MonoBehaviour:
   isDead: 0
   canMove: 1
   canAct: 1
+  conscious: 1
   isPlayerCharacter: 0
   characterUI: {fileID: 0}
   healthBar: {fileID: 0}
@@ -8510,6 +8521,7 @@ MonoBehaviour:
   isDead: 0
   canMove: 1
   canAct: 1
+  conscious: 1
   isPlayerCharacter: 1
   characterUI: {fileID: 0}
   healthBar: {fileID: 0}
@@ -8976,6 +8988,7 @@ MonoBehaviour:
   isDead: 0
   canMove: 1
   canAct: 1
+  conscious: 1
   isPlayerCharacter: 0
   characterUI: {fileID: 0}
   healthBar: {fileID: 0}
@@ -9195,6 +9208,7 @@ MonoBehaviour:
   isDead: 0
   canMove: 1
   canAct: 1
+  conscious: 1
   isPlayerCharacter: 0
   characterUI: {fileID: 0}
   healthBar: {fileID: 0}
@@ -9878,9 +9892,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Basilisk
-  currentHealth: 20
-  maxHealth: 400
-  attackStat: 10
+  currentHealth: 9999
+  maxHealth: 9999
+  attackStat: 9001
   defenseStat: 24
   agilityStat: 19
   techStat: 16
@@ -9888,6 +9902,7 @@ MonoBehaviour:
   isDead: 0
   canMove: 1
   canAct: 1
+  conscious: 1
   isPlayerCharacter: 0
   characterUI: {fileID: 0}
   healthBar: {fileID: 0}
@@ -10138,6 +10153,7 @@ MonoBehaviour:
   isDead: 0
   canMove: 1
   canAct: 1
+  conscious: 1
   isPlayerCharacter: 1
   characterUI: {fileID: 0}
   healthBar: {fileID: 0}

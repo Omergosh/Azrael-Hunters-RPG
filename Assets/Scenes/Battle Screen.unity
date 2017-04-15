@@ -1423,7 +1423,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Chip passed his turn!
+  m_Text: 'Chip passed his turn!
+
+'
 --- !u!222 &128549376
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1580,7 +1582,7 @@ MonoBehaviour:
   maxHealth: 1525
   attackStat: 11
   defenseStat: 24
-  agilityStat: 19
+  agilityStat: 12
   techStat: 16
   actionPoints: 5
   isDead: 0

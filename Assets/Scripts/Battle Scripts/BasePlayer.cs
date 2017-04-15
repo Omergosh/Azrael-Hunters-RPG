@@ -25,6 +25,10 @@ public class BasePlayer: MonoBehaviour {
     public GameObject characterUI;
     public Image healthBar;
     public Text healthText;
+    public Text attackText;
+    public Text defenseText;
+    public Text agilityText;
+    public Text techText;
     public int ID;
     
 
@@ -57,7 +61,21 @@ public class BasePlayer: MonoBehaviour {
 
         healthBar = characterUI.transform.GetChild(4).GetComponent<Image>();
         healthText = characterUI.transform.GetChild(2).GetComponent<Text>();
+        attackText = characterUI.transform.GetChild(9).GetComponent<Text>();
+        defenseText = characterUI.transform.GetChild(10).GetComponent<Text>();
+        agilityText = characterUI.transform.GetChild(11).GetComponent<Text>();
+        techText = characterUI.transform.GetChild(12).GetComponent<Text>();
+
+        updateStats();
         updateHealthBar();
+    }
+
+    public void updateStats()
+    {
+        attackText.text = attackStat.ToString();
+        defenseText.text = defenseStat.ToString();
+        agilityText.text = agilityStat.ToString();
+        techText.text = techStat.ToString();
     }
 
     public void updateHealthBar()

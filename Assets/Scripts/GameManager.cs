@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour {
     public Vector2 dir;
     GameObject player;
 
+    public List<string> enemies;    // list of enemies for battle
+
 	void Awake ()
     {
 		if(control == null)

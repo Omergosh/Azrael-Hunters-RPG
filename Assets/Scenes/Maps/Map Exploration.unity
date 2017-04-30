@@ -1910,7 +1910,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &766258996
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4696,13 +4696,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1557597679}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63330cdb7a9401048b95c53714376c30, type: 3}
+  m_Script: {fileID: 11500000, guid: fb2a7960a76e1a740a114b9b0b1a39ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  level: Battle Screen
-  pos: {x: 43, y: -35}
-  directionV: {x: 1, y: 0}
+  enemies:
+  - Enemy
 --- !u!61 &1557597681
 BoxCollider2D:
   m_ObjectHideFlags: 0

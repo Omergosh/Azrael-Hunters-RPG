@@ -150,7 +150,18 @@ public class PlayerControlsOverworld : MonoBehaviour {
                     //interacting = true;
                     //canMove = false;
                     gameManagerUpdate();
-                    transferPoint.transfer();   // set to HYPERSPEED, WE'RE GOING PLACES
+                    transferPoint.transfer();   // set to HYPERSPEED, WE'RE GOING PLACES. 
+                    updatePos();
+                }
+                if (objectHit.GetComponent<hostileEncounter>() && interacting == false)  //interacting with enemy or something similar that starts an encounter immediately
+                {
+                    hostileEncounter hostileEncounter = objectHit.GetComponent<hostileEncounter>();
+
+                    //interacting = true;
+                    //canMove = false;
+                    gameManagerUpdate();
+
+                    hostileEncounter.startBattle();   // starts the battle
                     updatePos();
                 }
             }
@@ -266,6 +277,8 @@ public class PlayerControlsOverworld : MonoBehaviour {
     {
         GameManager.control.health = health;
         GameManager.control.exp = exp;
+        GameManager.control.pos = pos;
+        GameManager.control.dir = directionV;
     }
 
     public void updatePos()

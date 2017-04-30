@@ -10,6 +10,9 @@ public class BattleManager : MonoBehaviour {
 
     public List<Transform> playerCharacterList;
     public List<Transform> enemyList;
+    public List<string> enemiesPassedIn;
+    public List<GridTile> enemyTiles;
+
     int playerTurnsRemaining;
 
     public GameObject UI_combatText;
@@ -34,6 +37,34 @@ public class BattleManager : MonoBehaviour {
 
 
 	void Start () {// initializing things for battle such as models and stuff
+
+        for (int i = 0; i < 2; i++)
+        {        // generating enemy grid positions //TODO: add another outer for loop to generate ally positions as well
+            for (int j = 0; j < 4; j++)
+            {
+                GridTile tile = (GridTile)ScriptableObject.CreateInstance("GridTile");
+                tile.setID((i * 4) + j);
+                tile.setX((i * 2.4f) - 20);   //TODO be more precise and remake positioning
+                tile.setY((j * 2) + 10);
+                enemyTiles.Add(tile);
+            }
+        }
+
+        int counter = 0;
+
+        if(GameManager.control != null)
+        {
+            enemiesPassedIn = GameManager.control.enemies;
+        }
+        if (enemiesPassedIn.Count > 0)
+        {
+            foreach (string enemyName in enemiesPassedIn)   // finds enemy based off prefab name and generates it
+            {
+                Instantiate(Resources.Load(enemyName), new Vector3(enemyTiles[counter].getX(), enemyTiles[counter].getY(), 0), Quaternion.identity, GameObject.Find("BattleManager").transform);
+                counter++;    //TODO: enemies still need UI generated
+            }
+        }
+        
 
         UI_combatText = GameObject.Find("Combat Text"); // finding GameObject
         combatText = UI_combatText.GetComponent<Text>();    // referencing text component
@@ -215,7 +246,7 @@ public class BattleManager : MonoBehaviour {
         }
 	}
 
-    public void Attack()    // function needed for each different possible action
+    public void Attack()    // function needed for each different possible action, possible animations go here?
     {
         // selected characters attacks should show
         if(currentState == phaseState.SELECTINGACTION)
@@ -230,6 +261,8 @@ public class BattleManager : MonoBehaviour {
     {
 
         int damage;
+
+        //TODO: Play animation of attacker and when it finishes, continue?
 
         damage = attacker.GetComponent<BasePlayer>().attackStat;
         defender.GetComponent<BasePlayer>().currentHealth -= damage;

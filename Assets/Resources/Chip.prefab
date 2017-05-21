@@ -9,52 +9,52 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1014111606773244}
+  m_RootGameObject: {fileID: 1483186743500630}
   m_IsPrefabParent: 1
---- !u!1 &1014111606773244
+--- !u!1 &1483186743500630
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4978342551706802}
-  - component: {fileID: 212522885291245726}
-  - component: {fileID: 61943208417778218}
-  - component: {fileID: 114439916610604078}
+  - component: {fileID: 4990047294464972}
+  - component: {fileID: 212089410723200636}
+  - component: {fileID: 61907935815172036}
+  - component: {fileID: 114183395146684286}
   m_Layer: 0
-  m_Name: Enemy
-  m_TagString: Untagged
+  m_Name: Chip
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4978342551706802
+--- !u!4 &4990047294464972
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1014111606773244}
+  m_GameObject: {fileID: 1483186743500630}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.18, y: 12.28, z: 0}
+  m_LocalPosition: {x: -7.94, y: 12.37, z: 0}
   m_LocalScale: {x: 0.6965371, y: 0.7069259, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61943208417778218
+--- !u!61 &61907935815172036
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1014111606773244}
+  m_GameObject: {fileID: 1483186743500630}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.037738983, y: -0.353258}
+  m_Offset: {x: -0.11375366, y: -0.42034057}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -65,32 +65,32 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.0375314, y: 3.2934835}
+  m_Size: {x: 1.8100822, y: 3.1593258}
   m_EdgeRadius: 0
---- !u!114 &114439916610604078
+--- !u!114 &114183395146684286
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1014111606773244}
+  m_GameObject: {fileID: 1483186743500630}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 279ce8a1086601f47a050ba0f41c670a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Basilisk
-  currentHealth: 20
-  maxHealth: 20
-  attackStat: 33
-  defenseStat: 20
-  agilityStat: 27
-  techStat: 22
+  characterName: Chip
+  currentHealth: 1000
+  maxHealth: 1500
+  attackStat: 19
+  defenseStat: 16
+  agilityStat: 21
+  techStat: 24
   actionPoints: 5
   isDead: 0
   canMove: 1
   canAct: 1
   conscious: 1
-  isPlayerCharacter: 0
+  isPlayerCharacter: 1
   characterUI: {fileID: 0}
   healthBar: {fileID: 0}
   healthText: {fileID: 0}
@@ -99,12 +99,12 @@ MonoBehaviour:
   agilityText: {fileID: 0}
   techText: {fileID: 0}
   ID: 0
---- !u!212 &212522885291245726
+--- !u!212 &212089410723200636
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1014111606773244}
+  m_GameObject: {fileID: 1483186743500630}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -132,8 +132,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8c70938de97c61c43b01b8aa12a5b4eb, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_FlipX: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}

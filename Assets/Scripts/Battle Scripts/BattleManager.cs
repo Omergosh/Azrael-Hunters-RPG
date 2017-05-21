@@ -9,6 +9,8 @@ public class BattleManager : MonoBehaviour {
     //This class manages turn order, actions and calls on other classes to appropriately apply methods
 
     public List<Transform> playerCharacterList;
+    public List<string> playerCharactersPassedIn;
+    public List<GridTile> playerCharacterTiles;
     public List<Transform> enemyList;
     public List<string> enemiesPassedIn;
     public List<GridTile> enemyTiles;
@@ -35,22 +37,43 @@ public class BattleManager : MonoBehaviour {
 
     public phaseState currentState;
 
+    //  BATTLE GRID VISUALIZATION //
+    //       |7|3|    |7|3|       //
+    //      |6|2|      |6|2|      //
+    //     |5|1|        |5|1|     //
+    //    |4|0|          |4|0|    //
+    //   ALLIES          ENEMIES  //
 
-	void Start () {// initializing things for battle such as models and stuff
-
+    void Start () {// initializing things for battle such as models and stuff
+        // Generate ally grid positions
         for (int i = 0; i < 2; i++)
-        {        // generating enemy grid positions //TODO: add another outer for loop to generate ally positions as well
+        {
             for (int j = 0; j < 4; j++)
             {
                 GridTile tile = (GridTile)ScriptableObject.CreateInstance("GridTile");
                 tile.setID((i * 4) + j);
-                tile.setX((i * 2.4f) - 20);   //TODO be more precise and remake positioning
-                tile.setY((j * 2) + 10);
+                tile.setX((i * -2.4f) - ((3 - j) * 1.2f) - 27.6f);
+                tile.setY((j * 2.0f) + 10);
+                playerCharacterTiles.Add(tile);
+            }
+        }
+
+        // Generate enemy grid positions
+        for (int i = 0; i < 2; i++)
+        {        
+            for (int j = 0; j < 4; j++)
+            {
+                GridTile tile = (GridTile)ScriptableObject.CreateInstance("GridTile");
+                tile.setID((i * 4) + j);
+                tile.setX((i * 2.4f) - (j * 1.2f) - 18);
+                tile.setY((j * 2.0f) + 10);
                 enemyTiles.Add(tile);
             }
         }
 
-        int counter = 0;
+        // Counts how many allies/enemies have been spawned in
+        int counterAllies = 0;
+        int counterEnemies = 0;
 
         if(GameManager.control != null)
         {
@@ -58,10 +81,24 @@ public class BattleManager : MonoBehaviour {
         }
         if (enemiesPassedIn.Count > 0)
         {
-            foreach (string enemyName in enemiesPassedIn)   // finds enemy based off prefab name and generates it
+            //If enemy list is provided, clear field of pre-existing entities, then generate combatants
+            foreach (Transform child in transform)   // Adding each combatant to one of two lists: player or enemy
             {
-                Instantiate(Resources.Load(enemyName), new Vector3(enemyTiles[counter].getX(), enemyTiles[counter].getY(), 0), Quaternion.identity, GameObject.Find("BattleManager").transform);
-                counter++;    //TODO: enemies still need UI generated
+                Destroy(child.gameObject);
+            }
+
+            // Finds ally based off prefab name and generates them
+            foreach (string allyName in playerCharactersPassedIn)
+            {
+                Instantiate(Resources.Load(allyName), new Vector3(playerCharacterTiles[counterAllies].getX(), playerCharacterTiles[counterAllies].getY(), 0), Quaternion.identity, GameObject.Find("BattleManager").transform);
+                counterAllies++;    //TODO: allies still need UI generated
+            }
+
+            // Finds enemy based off prefab name and generates it
+            foreach (string enemyName in enemiesPassedIn)
+            {
+                Instantiate(Resources.Load(enemyName), new Vector3(enemyTiles[counterEnemies].getX(), enemyTiles[counterEnemies].getY(), 0), Quaternion.identity, GameObject.Find("BattleManager").transform);
+                counterEnemies++;    //TODO: enemies still need UI generated
             }
         }
         
@@ -69,9 +106,12 @@ public class BattleManager : MonoBehaviour {
         UI_combatText = GameObject.Find("Combat Text"); // finding GameObject
         combatText = UI_combatText.GetComponent<Text>();    // referencing text component
 
+        // For determining appropriate UI
         int playerID = 1;
-        int enemyID = 1;    //for determining appropriate UI
-        foreach (Transform child in transform)   // adding each combatant to one of two lists: player or enemy
+        int enemyID = 1;
+
+        // Adding each combatant to one of two lists: player or enemy
+        foreach (Transform child in transform)
         {
             if(child.GetComponent<BasePlayer>() != null && child.GetComponent<BasePlayer>().isPlayerCharacter == true)
             {
@@ -89,12 +129,12 @@ public class BattleManager : MonoBehaviour {
             child.GetComponent<BasePlayer>().battleManagerStart();
         }
 
-        playerTurnsRemaining = playerCharacterList.Count;   //actions equal to num of characters
+        playerTurnsRemaining = playerCharacterList.Count;   // actions equal to num of characters
 
 
-        // intimidation phase here
+        // Intimidation phase goes here
 
-        // intimidation ends
+        // Intimidation phase ends
 
         currentState = phaseState.SELECTINGCHAR;   // initialize to player select turn
     }
@@ -169,7 +209,8 @@ public class BattleManager : MonoBehaviour {
                 playerTurnsRemaining = 0;
                 foreach (Transform character in playerCharacterList)    // checking if any players still have to go
                 {
-                    if (character.gameObject.GetComponent<BasePlayer>().canAct == true)
+                    //MYSTERY BUG
+                    if (character.gameObject.GetComponent<BasePlayer>().canAct == true) //BUG: Null reference here after a PC is made to attack, for some reason
                     {
                         playerTurnsRemaining++;
                     }
@@ -202,7 +243,8 @@ public class BattleManager : MonoBehaviour {
                         selectedEnemy = playerCharacterList[Random.Range(0, playerCharacterList.Count)].gameObject;
                     }
 
-                    // pick random action here out of available actions
+                    // Pick random action here out of available actions
+                    // (Dependent on 'mood')
                     executeAttack(selectedCharacter, selectedEnemy);    // only action currently available
                 }
 
@@ -259,18 +301,26 @@ public class BattleManager : MonoBehaviour {
 
     public void executeAttack(GameObject attacker, GameObject defender) // probably needs more parameters at some point
     {
+        //Determine if attack hits or is dodged
+        bool attackHits = true;
 
         int damage;
 
-        //TODO: Play animation of attacker and when it finishes, continue?
-
-        damage = attacker.GetComponent<BasePlayer>().attackStat;
+        //Damage calculation
+        damage = attacker.GetComponent<BasePlayer>().attackStat; //DMG = Attack*power
+        damage -= (int)(defender.GetComponent<BasePlayer>().defenseStat / 1.7935); //DMG reduction = Def*Armor/1.7935
+        if (damage < 0)
+        {
+            damage = 0;
+        }
         defender.GetComponent<BasePlayer>().currentHealth -= damage;
 
+        //TODO: Play animation of attacker and when it finishes, continue?
+
+        //Placeholder for animations: Console + UI Text
         Debug.Log(attacker + " dealt " + damage + " to " + defender);
         combatTextString = (attacker.GetComponent<BasePlayer>().characterName + " dealt " + damage + " damage to " + defender.GetComponent<BasePlayer>().characterName);
         combatText.text = combatTextString;
-
 
         defender.GetComponent<BasePlayer>().updateHealthBar();
 

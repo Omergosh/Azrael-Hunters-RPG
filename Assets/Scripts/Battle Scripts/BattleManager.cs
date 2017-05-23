@@ -107,26 +107,34 @@ public class BattleManager : MonoBehaviour {
         combatText = UI_combatText.GetComponent<Text>();    // referencing text component
 
         // For determining appropriate UI
-        int playerID = 1;
-        int enemyID = 1;
+        int playerID = 0;
+        int enemyID = 0;
 
         // Adding each combatant to one of two lists: player or enemy
         foreach (Transform child in transform)
         {
-            if(child.GetComponent<BasePlayer>() != null && child.GetComponent<BasePlayer>().isPlayerCharacter == true)
+            if (child.GetComponent<BasePlayer>() != null && !child.GetComponent<BasePlayer>().Equals(null))
             {
-                playerCharacterList.Add(child);
-                child.GetComponent<BasePlayer>().ID = playerID;
-                playerID++;
-            }
+                if (child.GetComponent<BasePlayer>().isPlayerCharacter == true)
+                {
+                    playerCharacterList.Add(child);
+                    child.GetComponent<BasePlayer>().ID = playerID;
+                    playerID++;
+                }
 
+                else
+                {
+                    enemyList.Add(child);
+                    child.GetComponent<BasePlayer>().ID = enemyID;
+                    enemyID++;
+                }
+                child.GetComponent<BasePlayer>().battleManagerStart();
+            }
             else
             {
-                enemyList.Add(child);
-                child.GetComponent<BasePlayer>().ID = enemyID;
-                enemyID++;
+                //Invalid child object found in BattleManager
+                Debug.Log("ERROR: BattleManager contains invalid child object");
             }
-            child.GetComponent<BasePlayer>().battleManagerStart();
         }
 
         playerTurnsRemaining = playerCharacterList.Count;   // actions equal to num of characters
@@ -237,7 +245,7 @@ public class BattleManager : MonoBehaviour {
                 foreach (Transform enemy in enemyList)
                 {
                     selectedCharacter = enemy.gameObject;
-                    selectedEnemy = playerCharacterList[Random.Range(0, playerCharacterList.Count)].gameObject; // need to adjust for unconscious players
+                    selectedEnemy = playerCharacterList[Random.Range(0, playerCharacterList.Count)].gameObject; //TODO: Adjust for unconscious players
                     while(selectedEnemy.GetComponent<BasePlayer>().conscious == false)
                     {
                         selectedEnemy = playerCharacterList[Random.Range(0, playerCharacterList.Count)].gameObject;

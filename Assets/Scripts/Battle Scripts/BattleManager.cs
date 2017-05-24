@@ -38,10 +38,10 @@ public class BattleManager : MonoBehaviour {
     public phaseState currentState;
 
     //  BATTLE GRID VISUALIZATION //
-    //       |7|3|    |7|3|       //
-    //      |6|2|      |6|2|      //
-    //     |5|1|        |5|1|     //
-    //    |4|0|          |4|0|    //
+    //       |7|3|    |3|7|       //
+    //      |6|2|      |2|6|      //
+    //     |5|1|        |1|5|     //
+    //    |4|0|          |0|4|    //
     //   ALLIES          ENEMIES  //
 
     void Start () {// initializing things for battle such as models and stuff
@@ -161,7 +161,7 @@ public class BattleManager : MonoBehaviour {
 
                 if (Input.GetMouseButtonDown(0))
                 {
-                    //Converting Mouse Pos to 2D (vector2) World Pos
+                    // Converting Mouse Pos to 2D (vector2) World Pos
                     RaycastHit2D hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition));
 
                     if (hit)
@@ -171,11 +171,12 @@ public class BattleManager : MonoBehaviour {
                             Debug.Log("You clicked a Friendly Chip!");
                             Debug.Log("Target Position: " + hit.collider.gameObject.transform.position);
                             selectedCharacter = hit.transform.gameObject;
-                            selectedCharacter.GetComponent<SpriteRenderer>().color = new Color32(0, 100, 25, 150);  //is selected
+                            selectedCharacter.GetComponent<SpriteRenderer>().color = new Color32(0, 100, 25, 150);  // is selected
                             currentState = phaseState.SELECTINGACTION;
+                            combatText.text = "Select an action";
                             break;
                         }
-                        currentState = phaseState.SELECTINGCHAR;
+                        currentState = phaseState.SELECTINGCHAR; //ALERT: Redundant and pointless, unless I'm missing something? -Omer
                     }
 
                 }
@@ -208,6 +209,10 @@ public class BattleManager : MonoBehaviour {
                         }
                     }
 
+                }
+                else
+                {
+                    combatText.text = "Select a target";
                 }
                 break;
 
@@ -309,25 +314,49 @@ public class BattleManager : MonoBehaviour {
 
     public void executeAttack(GameObject attacker, GameObject defender) // probably needs more parameters at some point
     {
-        //Determine if attack hits or is dodged
+        //Determine if attack hits or is avoided
         bool attackHits = true;
+        float hitChance = 0.75f - (defender.GetComponent<BasePlayer>().agilityStat - attacker.GetComponent<BasePlayer>().agilityStat);
+        if (hitChance < 0.50f)
+        {
+            hitChance = 0.50f;
+        }
+        float hitRoll = Random.value;
+        if(hitRoll < hitChance)
+        {
+            attackHits = false;
+        }
 
         int damage;
 
         //Damage calculation
         damage = attacker.GetComponent<BasePlayer>().attackStat; //DMG = Attack*power
         damage -= (int)(defender.GetComponent<BasePlayer>().defenseStat / 1.7935); //DMG reduction = Def*Armor/1.7935
-        if (damage < 0)
+        if (damage < 1) // Attacks always deal at least 1 damage
         {
-            damage = 0;
+            damage = 1;
         }
-        defender.GetComponent<BasePlayer>().takeDamage(damage);
+        if (attackHits)
+        {
+            defender.GetComponent<BasePlayer>().takeDamage(damage);
+        }
 
         //TODO: Play animation of attacker and when it finishes, continue?
 
         //Placeholder for animations: Console + UI Text
-        Debug.Log(attacker + " dealt " + damage + " to " + defender);
-        combatTextString = (attacker.GetComponent<BasePlayer>().characterName + " dealt " + damage + " damage to " + defender.GetComponent<BasePlayer>().characterName);
+        string message;
+        if (attackHits)
+        {
+            message = attacker.GetComponent<BasePlayer>().characterName + " dealt " + damage + " damage to " + defender.GetComponent<BasePlayer>().characterName;
+            Debug.Log(attacker + " dealt " + damage + " to " + defender);
+        }
+        else
+        {
+            message = attacker.GetComponent<BasePlayer>().characterName + " missed!";
+            Debug.Log(attacker + " missed!");
+        }
+        
+        combatTextString = (message);
         combatText.text = combatTextString;
 
         defender.GetComponent<BasePlayer>().updateHealthBar();

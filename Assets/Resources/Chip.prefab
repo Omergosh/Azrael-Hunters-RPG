@@ -79,12 +79,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Chip
-  currentHealth: 1000
-  maxHealth: 1500
+  currentHealth: 100
+  maxHealth: 100
   attackStat: 19
   defenseStat: 16
   agilityStat: 21
   techStat: 24
+  healthModifier: 1
+  attackBase: 21
+  defenseBase: 24
+  agilityBase: 19
+  techBase: 16
   actionPoints: 5
   isDead: 0
   canMove: 1

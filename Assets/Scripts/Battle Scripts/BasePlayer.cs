@@ -18,7 +18,7 @@ public class BasePlayer: MonoBehaviour {
     public bool isDead = false;
     public bool canMove = true;
     public bool canAct = true;
-    public bool conscious = true;   // player character thing
+    public bool conscious = true;   // player character thing. Specifically indicates death (HP <= 0), NOT a sleep status effect
 
     public bool isPlayerCharacter;  // distinguish between player and enemy characters
 
@@ -50,6 +50,7 @@ public class BasePlayer: MonoBehaviour {
 
     public void battleManagerStart()
     {
+        //Set up and update relevant UI elements
         if (isPlayerCharacter == true)
         {
             characterUI = GameObject.Find("Combatants UI/playerCombatantsUI/Player" + ID);
@@ -70,8 +71,19 @@ public class BasePlayer: MonoBehaviour {
         updateHealthBar();
     }
 
+    public void takeDamage(int damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+            conscious = false;
+        }
+    }
+
     public void updateStats()
     {
+        //Update display
         attackText.text = attackStat.ToString();
         defenseText.text = defenseStat.ToString();
         agilityText.text = agilityStat.ToString();

@@ -321,7 +321,7 @@ public class BattleManager : MonoBehaviour {
         {
             damage = 0;
         }
-        defender.GetComponent<BasePlayer>().currentHealth -= damage;
+        defender.GetComponent<BasePlayer>().takeDamage(damage);
 
         //TODO: Play animation of attacker and when it finishes, continue?
 
@@ -332,9 +332,8 @@ public class BattleManager : MonoBehaviour {
 
         defender.GetComponent<BasePlayer>().updateHealthBar();
 
-        if (defender.GetComponent<BasePlayer>().currentHealth <= 0)
+        if (defender.GetComponent<BasePlayer>().conscious == false)
         {
-            defender.GetComponent<BasePlayer>().currentHealth = 0;  // health can't go below 0
             if (defender.GetComponent<BasePlayer>().isPlayerCharacter == false)
             {
                 enemyList.Remove(defender.transform);
@@ -342,7 +341,6 @@ public class BattleManager : MonoBehaviour {
             }
             else
             {
-                defender.GetComponent<BasePlayer>().conscious = false;
                 defender.GetComponent<SpriteRenderer>().color = new Color32(100, 100, 100, 125);
                 Debug.Log(defender + " has fallen!");
             }

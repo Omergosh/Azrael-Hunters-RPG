@@ -86,10 +86,11 @@ MonoBehaviour:
   agilityStat: 21
   techStat: 24
   healthModifier: 1
-  attackBase: 21
-  defenseBase: 24
-  agilityBase: 19
-  techBase: 16
+  attackBase: 19
+  defenseBase: 16
+  agilityBase: 21
+  techBase: 24
+  gridPosition: -1
   actionPoints: 5
   isDead: 0
   canMove: 1

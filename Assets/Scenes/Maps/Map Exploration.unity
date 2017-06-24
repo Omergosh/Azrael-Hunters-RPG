@@ -4800,14 +4800,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies:
-  - Enemy
-  - Enemy
-  - Enemy
-  - Enemy
-  - Enemy
-  - Enemy
-  - Enemy
-  - Enemy
+  - name: Enemy
+    level: 1
+    gridPos: 0
+  - name: Enemy
+    level: 1
+    gridPos: 1
+  - name: Enemy
+    level: 1
+    gridPos: 2
+  - name: Enemy
+    level: 1
+    gridPos: 3
+  - name: Enemy
+    level: 2
+    gridPos: 4
+  - name: Enemy
+    level: 3
+    gridPos: 5
+  - name: Enemy
+    level: 4
+    gridPos: 6
+  - name: Enemy
+    level: 5
+    gridPos: 7
 --- !u!61 &1557597681
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5277,6 +5293,7 @@ MonoBehaviour:
   pos: {x: 0, y: 0, z: 0}
   health: 0
   exp: 0
+  party: []
   speed: 16
   interactDelay: 1
   paused: 0

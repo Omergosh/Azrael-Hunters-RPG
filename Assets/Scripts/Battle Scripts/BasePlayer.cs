@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class BasePlayer: MonoBehaviour {
 
     // Progression (Level + XP)
-    int level = 1;
-    int currentEXP = 0;
-    int requiredEXP = 100;
+    public int level = 1;
+    public int currentEXP = 0;
+    public int requiredEXP = 100;
 
     // Player or Enemy stats (current)
     public string characterName;
@@ -27,7 +27,7 @@ public class BasePlayer: MonoBehaviour {
     public int techBase = 16;
 
     public int gridPosition = -1;   // Used to determine front/backline stuff.
-                                    // -If unspecified at start of battle, position on grid is randomly assigned from open spaces.
+                                    // -If unspecified at start of battle (-1), position on grid is randomly assigned from open spaces.
     public int actionPoints = 5;    // Minor action costs 2, major costs 3
     public bool isDead = false;
     public bool canMove = true;
@@ -115,8 +115,32 @@ public class BasePlayer: MonoBehaviour {
         {
             newLevel = level;
         }
+        requiredEXP = level * 100;
         updateHealth();
         updateStats();
+    }
+
+    public void setExpByLevel(int levelToReach = -1)
+    {
+        if (levelToReach <= 1)
+        {
+            currentEXP = 0;
+        }
+        else if(levelToReach == 2)
+        {
+            currentEXP = 100;
+        }
+        else
+        {
+            currentEXP = 0;
+            level = 1;
+            while(level < levelToReach)
+            {
+                currentEXP += level * 100;
+                level += 1;
+            }
+        }
+        requiredEXP = level * 100;
     }
 
     public void updateHealth()
@@ -143,10 +167,10 @@ public class BasePlayer: MonoBehaviour {
         // Increase temp stats based on level
         while(tempLevel < level)
         {
-            attack += ((3.6f + ((attackBase - 20.0f) * 0.1f)) * (level - 1));
-            defense += ((3.6f + ((defenseBase - 20.0f) * 0.1f)) * (level - 1));
-            agility += ((3.6f + ((agilityBase - 20.0f) * 0.1f)) * (level - 1));
-            tech += ((3.6f + ((techBase - 20.0f) * 0.1f)) * (level - 1));
+            attack += ((3.6f + ((attackBase - 20.0f) * 0.1f)) * (tempLevel - 1));
+            defense += ((3.6f + ((defenseBase - 20.0f) * 0.1f)) * (tempLevel - 1));
+            agility += ((3.6f + ((agilityBase - 20.0f) * 0.1f)) * (tempLevel - 1));
+            tech += ((3.6f + ((techBase - 20.0f) * 0.1f)) * (tempLevel - 1));
             tempLevel++;
         }
 

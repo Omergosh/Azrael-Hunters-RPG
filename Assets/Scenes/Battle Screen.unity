@@ -117,7 +117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4597040}
   m_Layer: 5
-  m_Name: Player2
+  m_Name: Player1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,7 +147,7 @@ RectTransform:
   - {fileID: 414352683}
   - {fileID: 2101644272}
   m_Father: {fileID: 1026343868}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -984,7 +984,7 @@ GameObject:
   m_Component:
   - component: {fileID: 99289278}
   m_Layer: 5
-  m_Name: Player4
+  m_Name: Player2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -998,7 +998,7 @@ RectTransform:
   m_GameObject: {fileID: 99289277}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1310129482}
   - {fileID: 1141919641}
@@ -1014,11 +1014,11 @@ RectTransform:
   - {fileID: 774379128}
   - {fileID: 1387607930}
   m_Father: {fileID: 1026343868}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 201, y: 214}
+  m_AnchoredPosition: {x: 200.99994, y: 213.99998}
   m_SizeDelta: {x: 303.7, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &106555177
@@ -1742,7 +1742,7 @@ GameObject:
   m_Component:
   - component: {fileID: 192400846}
   m_Layer: 5
-  m_Name: Player5
+  m_Name: Player6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1772,7 +1772,7 @@ RectTransform:
   - {fileID: 409507074}
   - {fileID: 2047858312}
   m_Father: {fileID: 1026343868}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2945,7 +2945,7 @@ GameObject:
   m_Component:
   - component: {fileID: 321025789}
   m_Layer: 5
-  m_Name: Player6
+  m_Name: Player3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2975,7 +2975,7 @@ RectTransform:
   - {fileID: 2077619061}
   - {fileID: 1373597088}
   m_Father: {fileID: 1026343868}
-  m_RootOrder: 6
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6365,7 +6365,7 @@ GameObject:
   m_Component:
   - component: {fileID: 791127274}
   m_Layer: 5
-  m_Name: Player3
+  m_Name: Player5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6395,7 +6395,7 @@ RectTransform:
   - {fileID: 355003302}
   - {fileID: 1392644819}
   m_Father: {fileID: 1026343868}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7855,12 +7855,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 972377022}
-  - {fileID: 2045610092}
   - {fileID: 4597040}
-  - {fileID: 791127274}
   - {fileID: 99289278}
-  - {fileID: 192400846}
   - {fileID: 321025789}
+  - {fileID: 2045610092}
+  - {fileID: 791127274}
+  - {fileID: 192400846}
   - {fileID: 1925242139}
   m_Father: {fileID: 538147927}
   m_RootOrder: 0
@@ -8300,7 +8300,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1128452256}
   m_Layer: 5
-  m_Name: Enemy1
+  m_Name: Enemy4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8330,7 +8330,7 @@ RectTransform:
   - {fileID: 1015997327}
   - {fileID: 259037580}
   m_Father: {fileID: 1751199741}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9050,7 +9050,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1179375840}
   m_Layer: 5
-  m_Name: Enemy2
+  m_Name: Enemy1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9080,7 +9080,7 @@ RectTransform:
   - {fileID: 1508515811}
   - {fileID: 289585248}
   m_Father: {fileID: 1751199741}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11825,7 +11825,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1482112283}
   m_Layer: 5
-  m_Name: Enemy3
+  m_Name: Enemy5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11855,7 +11855,7 @@ RectTransform:
   - {fileID: 430515332}
   - {fileID: 2099472360}
   m_Father: {fileID: 1751199741}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -12359,7 +12359,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1540929957}
   m_Layer: 5
-  m_Name: Enemy6
+  m_Name: Enemy3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12389,7 +12389,7 @@ RectTransform:
   - {fileID: 1180853219}
   - {fileID: 1046004140}
   m_Father: {fileID: 1751199741}
-  m_RootOrder: 6
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -13552,12 +13552,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 235707345}
-  - {fileID: 1128452256}
   - {fileID: 1179375840}
-  - {fileID: 1482112283}
   - {fileID: 2140395320}
-  - {fileID: 1943317355}
   - {fileID: 1540929957}
+  - {fileID: 1128452256}
+  - {fileID: 1482112283}
+  - {fileID: 1943317355}
   - {fileID: 1871796514}
   m_Father: {fileID: 538147927}
   m_RootOrder: 1
@@ -13680,7 +13680,7 @@ Prefab:
     - target: {fileID: 224241993429475670, guid: 0883b722516966c4bacce8860bb6c98f,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -443.2
+      value: -443.20004
       objectReference: {fileID: 0}
     - target: {fileID: 224241993429475670, guid: 0883b722516966c4bacce8860bb6c98f,
         type: 2}
@@ -15008,7 +15008,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1943317355}
   m_Layer: 5
-  m_Name: Enemy5
+  m_Name: Enemy6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15038,7 +15038,7 @@ RectTransform:
   - {fileID: 1795491204}
   - {fileID: 2109669395}
   m_Father: {fileID: 1751199741}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -15874,7 +15874,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2045610092}
   m_Layer: 5
-  m_Name: Player1
+  m_Name: Player4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15904,7 +15904,7 @@ RectTransform:
   - {fileID: 1218549123}
   - {fileID: 1715312766}
   m_Father: {fileID: 1026343868}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -17010,7 +17010,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2140395320}
   m_Layer: 5
-  m_Name: Enemy4
+  m_Name: Enemy2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17040,7 +17040,7 @@ RectTransform:
   - {fileID: 865124854}
   - {fileID: 386513115}
   m_Father: {fileID: 1751199741}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

@@ -78,13 +78,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 279ce8a1086601f47a050ba0f41c670a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Basilisk
+  characterName: Direwolf
   currentHealth: 20
   maxHealth: 20
-  attackStat: 33
+  attackStat: 22
   defenseStat: 20
-  agilityStat: 27
-  techStat: 22
+  agilityStat: 20
+  techStat: 18
+  healthModifier: 1
+  attackBase: 22
+  defenseBase: 20
+  agilityBase: 20
+  techBase: 18
+  gridPosition: -1
   actionPoints: 5
   isDead: 0
   canMove: 1

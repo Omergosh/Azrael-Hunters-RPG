@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +10,7 @@ public class PlayerControlsOverworld : MonoBehaviour {
 
     public float health;                //battle stats
     public float exp;
+    public List<PlayerCharacterData> party;
 
     public float speed = 4.0f;      // Speed of movement
     public float interactDelay = 1.0f;  //delay after talking
@@ -33,8 +35,7 @@ public class PlayerControlsOverworld : MonoBehaviour {
     {
 
         if(GameManager.control != null) {
-            health = GameManager.control.health;    // setting stats on loading into level
-            exp = GameManager.control.exp;
+            party = GameManager.control.party;    // setting stats on loading into level
             pos = GameManager.control.pos;          // Take the gameManager position
 
 
@@ -275,8 +276,7 @@ public class PlayerControlsOverworld : MonoBehaviour {
 
     public void gameManagerUpdate()     // updating the gameManager before loading a new scene or loading into battle
     {
-        GameManager.control.health = health;
-        GameManager.control.exp = exp;
+        GameManager.control.party = party;
         GameManager.control.pos = pos;
         GameManager.control.dir = directionV;
     }

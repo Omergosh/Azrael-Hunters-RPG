@@ -10,14 +10,14 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager control;
 
-    public float health;
-    public float exp;
     public string scene;
     public Vector2 pos;
     public Vector2 dir;
     GameObject player;
 
-    public List<string> enemies;    // list of enemies for battle
+    public List<PlayerCharacterData> party;
+
+    public List<EnemyData> enemies;    // List of enemies for battle
 
 	void Awake ()
     {
@@ -37,16 +37,33 @@ public class GameManager : MonoBehaviour {
         scene = "";
         pos = Vector2.zero;
         dir = Vector2.zero;
+
+        //Reset party members to default
+        party.Clear();
+        //Add Chip to party
+        PlayerCharacterData dataChipFletcher = new PlayerCharacterData();
+        dataChipFletcher.name = "Chip";
+        dataChipFletcher.level = 1;
+        dataChipFletcher.exp = 0;
+        dataChipFletcher.health = 100;
+        dataChipFletcher.gridPos = 0;
+        party.Add(dataChipFletcher);
+        PlayerCharacterData dataChipFletcher2 = new PlayerCharacterData();
+        dataChipFletcher2.name = "Chip";
+        dataChipFletcher2.level = 1;
+        dataChipFletcher2.exp = 0;
+        dataChipFletcher2.health = 100;
+        dataChipFletcher2.gridPos = 2;
+        party.Add(dataChipFletcher2);
     }
 
-    public void Save(int saveNumber)    //saves file number "saveNumber"
+    // Saves file number "saveNumber"
+    public void Save(int saveNumber)
     {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/playerInfo" + saveNumber + ".dat");
 
         PlayerData data = new PlayerData();
-        data.health = health;
-        data.exp = exp;
         data.scene = SceneManager.GetActiveScene().name;
 
         player = GameObject.FindGameObjectWithTag("Player");
@@ -57,13 +74,15 @@ public class GameManager : MonoBehaviour {
         data.dirx = dir.x;
         data.diry = dir.y;
         scene = data.scene;
+        data.party = party;
 
         bf.Serialize(file, data);
         file.Close();
         Debug.Log("Data saved");
     }
 
-    public void Load(int saveNumber)    //loads file number "saveNumber"
+    // Loads file number "saveNumber"
+    public void Load(int saveNumber)    
     {
         if(File.Exists(Application.persistentDataPath + "/playerInfo" + saveNumber + ".dat"))
         {
@@ -73,10 +92,9 @@ public class GameManager : MonoBehaviour {
             PlayerData data = (PlayerData)bf.Deserialize(file);
             file.Close();
 
-            health = data.health;
-            exp = data.exp;
             pos = new Vector2(data.posx, data.posy);
             dir = new Vector2(data.dirx, data.diry);
+            party = data.party;
             SceneManager.LoadScene(data.scene);
         }
         else
@@ -86,15 +104,23 @@ public class GameManager : MonoBehaviour {
     }
 }
 
-[Serializable]  //allows for class to be written to a file
+[Serializable]  // Allows for class to be written to a file
 class PlayerData
 {
-    public float health;
-    public float exp;
     public string scene;
     public int posx;
     public int posy;
     public float dirx;
     public float diry;
+    public List<PlayerCharacterData> party;
+}
 
+[Serializable]  // Allows for class to be written to a file
+public class PlayerCharacterData
+{
+    public string name;
+    public int level;
+    public int health;
+    public int exp;
+    public int gridPos;
 }

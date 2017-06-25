@@ -1864,7 +1864,7 @@ GameObject:
   - component: {fileID: 205793095}
   - component: {fileID: 205793094}
   m_Layer: 5
-  m_Name: DefenseStat
+  m_Name: TechStat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2231,7 +2231,7 @@ GameObject:
   - component: {fileID: 259037582}
   - component: {fileID: 259037581}
   m_Layer: 5
-  m_Name: DefenseStat
+  m_Name: TechStat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2515,7 +2515,7 @@ GameObject:
   - component: {fileID: 289585250}
   - component: {fileID: 289585249}
   m_Layer: 5
-  m_Name: DefenseStat
+  m_Name: TechStat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3691,7 +3691,7 @@ GameObject:
   - component: {fileID: 386513117}
   - component: {fileID: 386513116}
   m_Layer: 5
-  m_Name: DefenseStat
+  m_Name: TechStat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4049,7 +4049,7 @@ GameObject:
   - component: {fileID: 421119332}
   - component: {fileID: 421119331}
   m_Layer: 5
-  m_Name: DefenseStat
+  m_Name: TechStat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8018,7 +8018,7 @@ GameObject:
   - component: {fileID: 1046004142}
   - component: {fileID: 1046004141}
   m_Layer: 5
-  m_Name: DefenseStat
+  m_Name: TechStat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9277,14 +9277,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCharacterList: []
   playerCharactersPassedIn:
-  - Chip
-  - Chip
-  - Chip
-  - Chip
-  - Chip
-  - Chip
-  - Chip
-  - Chip
+  - name: 
+    level: 0
+    health: 0
+    exp: 0
+    gridPos: 0
+  - name: 
+    level: 0
+    health: 0
+    exp: 0
+    gridPos: 0
+  - name: 
+    level: 0
+    health: 0
+    exp: 0
+    gridPos: 0
+  - name: 
+    level: 0
+    health: 0
+    exp: 0
+    gridPos: 0
+  - name: 
+    level: 0
+    health: 0
+    exp: 0
+    gridPos: 0
+  - name: 
+    level: 0
+    health: 0
+    exp: 0
+    gridPos: 0
+  - name: 
+    level: 0
+    health: 0
+    exp: 0
+    gridPos: 0
+  - name: 
+    level: 0
+    health: 0
+    exp: 0
+    gridPos: 0
   playerCharacterTiles: []
   enemyList: []
   enemiesPassedIn: []
@@ -10784,7 +10816,7 @@ GameObject:
   - component: {fileID: 1373597090}
   - component: {fileID: 1373597089}
   m_Layer: 5
-  m_Name: DefenseStat
+  m_Name: TechStat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10858,7 +10890,7 @@ GameObject:
   - component: {fileID: 1387607932}
   - component: {fileID: 1387607931}
   m_Layer: 5
-  m_Name: DefenseStat
+  m_Name: TechStat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11000,7 +11032,7 @@ GameObject:
   - component: {fileID: 1392644821}
   - component: {fileID: 1392644820}
   m_Layer: 5
-  m_Name: DefenseStat
+  m_Name: TechStat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12679,7 +12711,7 @@ GameObject:
   - component: {fileID: 1619857054}
   - component: {fileID: 1619857053}
   m_Layer: 5
-  m_Name: DefenseStat
+  m_Name: TechStat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13179,7 +13211,7 @@ GameObject:
   - component: {fileID: 1715312768}
   - component: {fileID: 1715312767}
   m_Layer: 5
-  m_Name: DefenseStat
+  m_Name: TechStat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13730,6 +13762,10 @@ Prefab:
     - target: {fileID: 1072105551402298, guid: 0883b722516966c4bacce8860bb6c98f, type: 2}
       propertyPath: m_Name
       value: Player0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854125041607674, guid: 0883b722516966c4bacce8860bb6c98f, type: 2}
+      propertyPath: m_Name
+      value: TechStat
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0883b722516966c4bacce8860bb6c98f, type: 2}
@@ -15922,7 +15958,7 @@ GameObject:
   - component: {fileID: 2047858314}
   - component: {fileID: 2047858313}
   m_Layer: 5
-  m_Name: DefenseStat
+  m_Name: TechStat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16349,7 +16385,7 @@ GameObject:
   - component: {fileID: 2099472362}
   - component: {fileID: 2099472361}
   m_Layer: 5
-  m_Name: DefenseStat
+  m_Name: TechStat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16423,7 +16459,7 @@ GameObject:
   - component: {fileID: 2101644274}
   - component: {fileID: 2101644273}
   m_Layer: 5
-  m_Name: DefenseStat
+  m_Name: TechStat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16645,7 +16681,7 @@ GameObject:
   - component: {fileID: 2109669397}
   - component: {fileID: 2109669396}
   m_Layer: 5
-  m_Name: DefenseStat
+  m_Name: TechStat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

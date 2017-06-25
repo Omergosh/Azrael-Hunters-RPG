@@ -12,19 +12,19 @@ public class BasePlayer: MonoBehaviour {
 
     // Player or Enemy stats (current)
     public string characterName;
-    public int currentHealth = 150;
-    public int maxHealth = 275;
-    public int attackStat = 21;
-    public int defenseStat = 24;
-    public int agilityStat = 19;
-    public int techStat = 16;
+    public int currentHealth;
+    public int maxHealth;
+    public int attackStat;
+    public int defenseStat;
+    public int agilityStat;
+    public int techStat;
 
     // Base stats
     public float healthModifier = 1.0f;
-    public int attackBase = 21;
-    public int defenseBase = 24;
-    public int agilityBase = 19;
-    public int techBase = 16;
+    public int attackBase;
+    public int defenseBase;
+    public int agilityBase;
+    public int techBase;
 
     public int gridPosition = -1;   // Used to determine front/backline stuff.
                                     // -If unspecified at start of battle (-1), position on grid is randomly assigned from open spaces.
@@ -95,12 +95,12 @@ public class BasePlayer: MonoBehaviour {
         }
     }
 
-    public bool gainEXP(int expToGain = 1)
+    public bool gainEXP(int expToGain)
     {
         // Return true if combatant levels up, false if not
         currentEXP += expToGain;
         requiredEXP = level * 100; // Update required EXP
-        while(currentEXP >= requiredEXP)
+        if(currentEXP >= requiredEXP)
         {
             setLevel(level + 1);
             requiredEXP = level * 100;
@@ -108,13 +108,14 @@ public class BasePlayer: MonoBehaviour {
         return false;
     }
 
-    public void setLevel(int newLevel = -1)
+    public void setLevel(int newLevel)
     {
         // Sets level and updates Health/Stats
         if(newLevel == -1) // Use '-1' to refresh Health/Stats without changing level
         {
             newLevel = level;
         }
+        level++;
         requiredEXP = level * 100;
         updateHealth();
         updateStats();
@@ -159,20 +160,21 @@ public class BasePlayer: MonoBehaviour {
         // Calculates stats based on level
         // First, reset temp to level 1 stats (base stats)
         int tempLevel = 1;
-        float attack = attackBase;
-        float defense = defenseBase;
-        float agility = agilityBase;
-        float tech = techBase;
+        float attack = attackBase * level;
+        float defense = defenseBase * level;
+        float agility = agilityBase * level;
+        float tech = techBase * level;
  
         // Increase temp stats based on level
-        while(tempLevel < level)
+        /*while(tempLevel < level)
         {
             attack += ((3.6f + ((attackBase - 20.0f) * 0.1f)) * (tempLevel - 1));
             defense += ((3.6f + ((defenseBase - 20.0f) * 0.1f)) * (tempLevel - 1));
             agility += ((3.6f + ((agilityBase - 20.0f) * 0.1f)) * (tempLevel - 1));
             tech += ((3.6f + ((techBase - 20.0f) * 0.1f)) * (tempLevel - 1));
             tempLevel++;
-        }
+            
+        }*/
 
         // Update to temp stats
         attackStat = Mathf.FloorToInt(attack);

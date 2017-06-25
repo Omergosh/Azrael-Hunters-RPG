@@ -9,6 +9,7 @@ public class BattleManager : MonoBehaviour {
     //This class manages turn order, actions and calls on other classes to appropriately apply methods
 
     public List<Transform> playerCharacterList;
+    public List<Transform> alivePlayerCharacterList;
     public List<PlayerCharacterData> playerCharactersPassedIn;
     public List<GridTile> playerCharacterTiles;
     public List<Transform> enemyList;
@@ -44,7 +45,7 @@ public class BattleManager : MonoBehaviour {
     //    |4|0|          |0|4|    //
     //   ALLIES          ENEMIES  //
 
-    void Start () {// initializing things for battle such as models and stuff
+    void Start() {// initializing things for battle such as models and stuff
         // Generate ally grid positions
         for (int i = 0; i < 2; i++)
         {
@@ -60,7 +61,7 @@ public class BattleManager : MonoBehaviour {
 
         // Generate enemy grid positions
         for (int i = 0; i < 2; i++)
-        {        
+        {
             for (int j = 0; j < 4; j++)
             {
                 GridTile tile = (GridTile)ScriptableObject.CreateInstance("GridTile");
@@ -75,7 +76,7 @@ public class BattleManager : MonoBehaviour {
         int counterAllies = 0;
         int counterEnemies = 0;
 
-        if(GameManager.control != null)
+        if (GameManager.control != null)
         {
             enemiesPassedIn = GameManager.control.enemies;
             playerCharactersPassedIn = GameManager.control.party;
@@ -112,7 +113,7 @@ public class BattleManager : MonoBehaviour {
                 counterEnemies++;    //TODO: enemies still need UI generated
             }
         }
-        
+
 
         UI_combatText = GameObject.Find("Combat Text"); // finding GameObject
         combatText = UI_combatText.GetComponent<Text>();    // referencing text component
@@ -125,6 +126,7 @@ public class BattleManager : MonoBehaviour {
                 if (child.GetComponent<BasePlayer>().isPlayerCharacter == true)
                 {
                     playerCharacterList.Add(child);
+                    alivePlayerCharacterList.Add(child);
                 }
 
                 else
@@ -145,14 +147,14 @@ public class BattleManager : MonoBehaviour {
 
         // Sort each list and assign ID here
         playerCharacterList.Sort(SortByGridPos);
-        foreach(Transform player in playerCharacterList)
+        foreach (Transform player in playerCharacterList)
         {
             player.GetComponent<BasePlayer>().ID = playerID;
             playerID++;
             player.GetComponent<BasePlayer>().battleManagerStart();
         }
         enemyList.Sort(SortByGridPos);
-        foreach(Transform enemy in enemyList)
+        foreach (Transform enemy in enemyList)
         {
             enemy.GetComponent<BasePlayer>().ID = enemyID;
             enemyID++;
@@ -160,7 +162,7 @@ public class BattleManager : MonoBehaviour {
         }
 
         // Actions equal to number of characters
-        playerTurnsRemaining = playerCharacterList.Count;
+        playerTurnsRemaining = alivePlayerCharacterList.Count;
 
         // Intimidation phase goes here
 
@@ -168,14 +170,14 @@ public class BattleManager : MonoBehaviour {
 
         currentState = phaseState.SELECTINGCHAR;   // initialize to player select turn
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update() {
         switch (currentState)
         {
             case (phaseState.SELECTINGCHAR):    // selecting a character to use
 
-                if(enemyList.Count == 0)
+                if (enemyList.Count == 0)
                 {
                     currentState = phaseState.VICTORY;
                     break;
@@ -188,7 +190,7 @@ public class BattleManager : MonoBehaviour {
 
                     if (hit)
                     {
-                        if(hit.collider.GetComponent<BasePlayer>() != null && hit.collider.GetComponent<BasePlayer>().canAct == true && hit.collider.GetComponent<BasePlayer>().isPlayerCharacter == true)
+                        if (hit.collider.GetComponent<BasePlayer>() != null && hit.collider.GetComponent<BasePlayer>().canAct == true && hit.collider.GetComponent<BasePlayer>().isPlayerCharacter == true)
                         {
                             //Debug.Log("You clicked a Friendly Chip!");
                             //Debug.Log("Target Position: " + hit.collider.gameObject.transform.position);
@@ -217,7 +219,7 @@ public class BattleManager : MonoBehaviour {
 
                     if (hit)
                     {
-                        if(hit.collider.GetComponent<BasePlayer>() != null && hit.collider.GetComponent<BasePlayer>().isPlayerCharacter == false)
+                        if (hit.collider.GetComponent<BasePlayer>() != null && hit.collider.GetComponent<BasePlayer>().isPlayerCharacter == false)
                         {
                             //Debug.Log("You clicked an Enemy Chip!");
                             //Debug.Log("Target Position: " + hit.collider.gameObject.transform.position);
@@ -251,7 +253,7 @@ public class BattleManager : MonoBehaviour {
                     }
                 }
 
-                if(playerTurnsRemaining > 0)
+                if (playerTurnsRemaining > 0)
                 {
                     currentState = phaseState.SELECTINGCHAR;    // player still has actions left
                 }
@@ -264,7 +266,7 @@ public class BattleManager : MonoBehaviour {
                 {
                     currentState = phaseState.VICTORY;
                 }
-                
+
                 break;
 
             case (phaseState.ENEMYTURN):
@@ -272,15 +274,18 @@ public class BattleManager : MonoBehaviour {
                 foreach (Transform enemy in enemyList)
                 {
                     selectedCharacter = enemy.gameObject;
-                    selectedEnemy = playerCharacterList[Random.Range(0, playerCharacterList.Count)].gameObject; //TODO: Adjust for unconscious players
-                    while(selectedEnemy.GetComponent<BasePlayer>().conscious == false)
+                    if (alivePlayerCharacterList.Count > 0)
                     {
-                        selectedEnemy = playerCharacterList[Random.Range(0, playerCharacterList.Count)].gameObject;
+                        selectedEnemy = alivePlayerCharacterList[Random.Range(0, alivePlayerCharacterList.Count)].gameObject;
+                        // Pick random action here out of available actions
+                        // (Dependent on 'mood')
+                        executeAttack(selectedCharacter, selectedEnemy);    // only action currently available
+                    }
+                    else
+                    {
+                        executePass(selectedCharacter);
                     }
 
-                    // Pick random action here out of available actions
-                    // (Dependent on 'mood')
-                    executeAttack(selectedCharacter, selectedEnemy);    // only action currently available
                 }
 
                 currentState = phaseState.NEWROUND;
@@ -293,12 +298,17 @@ public class BattleManager : MonoBehaviour {
 
                 foreach (Transform character in playerCharacterList)    // players can act again
                 {
-                    if(character.gameObject.GetComponent<BasePlayer>().conscious == true)
+                    if (character.gameObject.GetComponent<BasePlayer>().conscious == true)
                     {
                         character.gameObject.GetComponent<BasePlayer>().canAct = true;
                         character.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);   // can act again
                         battleLost = false;
                     }
+                }
+
+                foreach (Transform enemy in enemyList)
+                {
+                    enemy.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);   // can act again
                 }
 
                 if (battleLost)
@@ -321,12 +331,12 @@ public class BattleManager : MonoBehaviour {
                 SceneManager.LoadScene("mainMenu");
                 break;
         }
-	}
+    }
 
     public void Attack()    // function needed for each different possible action, possible animations go here?
     {
         // selected characters attacks should show
-        if(currentState == phaseState.SELECTINGACTION)
+        if (currentState == phaseState.SELECTINGACTION)
         {
             currentState = phaseState.SELECTINGENEMY;
         }
@@ -338,13 +348,13 @@ public class BattleManager : MonoBehaviour {
     {
         //Determine if attack hits or is avoided
         bool attackHits = false;
-        float hitChance = 0.75f - (float)(defender.GetComponent<BasePlayer>().agilityStat - attacker.GetComponent<BasePlayer>().agilityStat)/100;
+        float hitChance = 0.75f - (float)(defender.GetComponent<BasePlayer>().agilityStat - attacker.GetComponent<BasePlayer>().agilityStat) / 100;
         Debug.Log("Hit chance: " + hitChance);
         if (hitChance < 0.50f)
         {
             hitChance = 0.50f;
         }
-        if(hitChance > 1.0f)
+        if (hitChance > 1.0f)
         {
             hitChance = 1.0f;
         }
@@ -383,7 +393,7 @@ public class BattleManager : MonoBehaviour {
             message = attacker.GetComponent<BasePlayer>().characterName + " missed!";
             Debug.Log(attacker + " missed!");
         }
-        
+
         combatTextString = (message);
         combatText.text = combatTextString;
 
@@ -400,11 +410,17 @@ public class BattleManager : MonoBehaviour {
             {
                 defender.GetComponent<SpriteRenderer>().color = new Color32(100, 100, 100, 125);
                 Debug.Log(defender + " has fallen!");
+                alivePlayerCharacterList.Remove(defender.transform);
             }
 
         }
     }
 
+    public void executePass(GameObject selectedCharacter)
+    {
+        selectedCharacter.GetComponent<BasePlayer>().canAct = false;
+        selectedCharacter.GetComponent<SpriteRenderer>().color = new Color32(25, 25, 25, 100);  // character now inactive coloured
+    }
     // C#
     static int SortByGridPos(Transform p1, Transform p2)
     {

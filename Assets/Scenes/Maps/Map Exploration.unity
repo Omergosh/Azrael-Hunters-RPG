@@ -402,6 +402,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!4 &84255748
 Transform:
   m_ObjectHideFlags: 0
@@ -1825,6 +1826,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!4 &711991378
 Transform:
   m_ObjectHideFlags: 0
@@ -1932,6 +1934,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!4 &734802742
 Transform:
   m_ObjectHideFlags: 0
@@ -3898,6 +3901,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!4 &1324511907
 Transform:
   m_ObjectHideFlags: 0
@@ -4225,6 +4229,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!4 &1345907757
 Transform:
   m_ObjectHideFlags: 0
@@ -4812,18 +4817,6 @@ MonoBehaviour:
   - name: Enemy
     level: 1
     gridPos: 3
-  - name: Enemy
-    level: 2
-    gridPos: 4
-  - name: Enemy
-    level: 3
-    gridPos: 5
-  - name: Enemy
-    level: 4
-    gridPos: 6
-  - name: Enemy
-    level: 5
-    gridPos: 7
 --- !u!61 &1557597681
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4889,6 +4882,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!4 &1557597683
 Transform:
   m_ObjectHideFlags: 0
@@ -5266,6 +5260,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!4 &1731385806
 Transform:
   m_ObjectHideFlags: 0

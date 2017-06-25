@@ -11,10 +11,10 @@ public class BattleManager : MonoBehaviour {
     public List<Transform> playerCharacterList;
     public List<Transform> alivePlayerCharacterList;
     public List<PlayerCharacterData> playerCharactersPassedIn;
-    public List<GridTile> playerCharacterTiles;
+    public List<GameObject> playerCharacterTiles;
     public List<Transform> enemyList;
     public List<EnemyData> enemiesPassedIn;
-    public List<GridTile> enemyTiles;
+    public List<GameObject> enemyTiles;
 
     int playerTurnsRemaining;
 
@@ -24,10 +24,12 @@ public class BattleManager : MonoBehaviour {
 
     public GameObject selectedCharacter;
     public GameObject selectedEnemy;
+    public GameObject selectedTile;
 
     public enum phaseState {
         SELECTINGCHAR,      // player is selecting a character
         SELECTINGACTION,    // player is selecting an action
+        SELECTINGTILE,      // selecting tile for either attack or movement
         SELECTINGENEMY,     // player is selecting an enemy to attack
         PROCESSING,     // something is happening!
         ENEMYTURN,      // It's getting real!
@@ -51,10 +53,14 @@ public class BattleManager : MonoBehaviour {
         {
             for (int j = 0; j < 4; j++)
             {
-                GridTile tile = (GridTile)ScriptableObject.CreateInstance("GridTile");
-                tile.setID((i * 4) + j);
-                tile.setX((i * -2.4f) - ((3 - j) * 1.2f) - 27.6f);
-                tile.setY((j * 2.0f) + 10);
+                GameObject tile = (GameObject)Instantiate(Resources.Load("GridTile"), new Vector3(0, 0, 0), Quaternion.identity, GameObject.Find("AllyGrid").transform);
+                tile.AddComponent<GridTile>();
+                tile.AddComponent<BoxCollider2D>();
+                tile.GetComponent<GridTile>().setID((i * 4) + j);
+                tile.GetComponent<GridTile>().setX((i * -2.4f) - ((3 - j) * 1.2f) - 27.6f);
+                tile.GetComponent<GridTile>().setY((j * 2.0f) + 10);
+                tile.transform.Translate(tile.GetComponent<GridTile>().getX(), tile.GetComponent<GridTile>().getY()-1, 0);
+
                 playerCharacterTiles.Add(tile);
             }
         }
@@ -64,10 +70,14 @@ public class BattleManager : MonoBehaviour {
         {
             for (int j = 0; j < 4; j++)
             {
-                GridTile tile = (GridTile)ScriptableObject.CreateInstance("GridTile");
-                tile.setID((i * 4) + j);
-                tile.setX((i * 2.4f) - (j * 1.2f) - 18);
-                tile.setY((j * 2.0f) + 10);
+                GameObject tile = (GameObject)Instantiate(Resources.Load("GridTile"), new Vector3(0,0,0), Quaternion.identity, GameObject.Find("EnemyGrid").transform);
+                tile.AddComponent<GridTile>();
+                tile.AddComponent<BoxCollider2D>();
+                tile.GetComponent<GridTile>().setID((i * 4) + j);
+                tile.GetComponent<GridTile>().setX((i * 2.4f) - (j * 1.2f) - 18);
+                tile.GetComponent<GridTile>().setY((j * 2.0f) + 10);
+                tile.transform.Translate(tile.GetComponent<GridTile>().getX(), tile.GetComponent<GridTile>().getY()-1, 0);
+
                 enemyTiles.Add(tile);
             }
         }
@@ -95,10 +105,11 @@ public class BattleManager : MonoBehaviour {
                 //TODO: Determine grid position and do stuff in full
                 //First, put allies with filled in 'gridPos' on grid
                 //Second, put allies with empty (-1) 'gridPos' on grid
-                GameObject newAlly = (GameObject)Instantiate(Resources.Load(allyCharacter.name), new Vector3(playerCharacterTiles[allyCharacter.gridPos].getX(), playerCharacterTiles[allyCharacter.gridPos].getY(), 0), Quaternion.identity, GameObject.Find("BattleManager").transform);
+                GameObject newAlly = (GameObject)Instantiate(Resources.Load(allyCharacter.name), new Vector3(playerCharacterTiles[allyCharacter.gridPos].GetComponent<GridTile>().getX(), playerCharacterTiles[allyCharacter.gridPos].GetComponent<GridTile>().getY(), 0), Quaternion.identity, GameObject.Find("BattleManager").transform);
                 newAlly.GetComponent<BasePlayer>().gainEXP(allyCharacter.exp);
                 newAlly.GetComponent<BasePlayer>().currentHealth = allyCharacter.health;
                 newAlly.GetComponent<BasePlayer>().gridPosition = allyCharacter.gridPos;
+                playerCharacterTiles[allyCharacter.gridPos].GetComponent<GridTile>().isOccupied = true;
                 counterAllies++;    //TODO: allies still need UI generated
             }
 
@@ -106,10 +117,11 @@ public class BattleManager : MonoBehaviour {
             foreach (EnemyData enemy in enemiesPassedIn)
             {
                 //Same deal with enemies (take in level and 
-                GameObject newEnemy = (GameObject)Instantiate(Resources.Load(enemy.name), new Vector3(enemyTiles[enemy.gridPos].getX(), enemyTiles[enemy.gridPos].getY(), 0), Quaternion.identity, GameObject.Find("BattleManager").transform);
+                GameObject newEnemy = (GameObject)Instantiate(Resources.Load(enemy.name), new Vector3(enemyTiles[enemy.gridPos].GetComponent<GridTile>().getX(), enemyTiles[enemy.gridPos].GetComponent<GridTile>().getY(), 0), Quaternion.identity, GameObject.Find("BattleManager").transform);
                 newEnemy.GetComponent<BasePlayer>().setLevel(enemy.level);
                 newEnemy.GetComponent<BasePlayer>().setExpByLevel(enemy.level);
                 newEnemy.GetComponent<BasePlayer>().gridPosition = enemy.gridPos;
+                enemyTiles[enemy.gridPos].GetComponent<GridTile>().isOccupied = true;
                 counterEnemies++;    //TODO: enemies still need UI generated
             }
         }
@@ -209,6 +221,39 @@ public class BattleManager : MonoBehaviour {
 
             case (phaseState.SELECTINGACTION):
                 // anything that needs to happen while the player is selecting an action
+                break;
+
+            case (phaseState.SELECTINGTILE):
+                if (Input.GetMouseButtonDown(0))
+                {
+                    //Converting Mouse Pos to 2D (vector2) World Pos
+                    RaycastHit2D hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition));
+
+                    if (hit)
+                    {
+                        if (hit.collider.GetComponent<GridTile>() != null)
+                        {
+                            Debug.Log("You clicked on a GridTile!");
+                            selectedTile = hit.transform.gameObject;
+                            if(hit.collider.GetComponent<GridTile>().isOccupied == false) { //checking if tile is occupied
+                                executeMove(selectedCharacter, selectedTile);    // doing the move calculations
+
+                                currentState = phaseState.PROCESSING;
+                                break;
+                            }
+                            
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("You clicked something, not sure what!");
+                    }
+
+                }
+                else
+                {
+                    combatText.text = "Select a tile.";
+                }
                 break;
 
             case (phaseState.SELECTINGENEMY):
@@ -416,11 +461,34 @@ public class BattleManager : MonoBehaviour {
         }
     }
 
+    public void Move()  // move the character
+    {
+        // selected characters attacks should show
+        if (currentState == phaseState.SELECTINGACTION)
+        {
+            currentState = phaseState.SELECTINGTILE;
+        }
+
+    }
+
+    public void executeMove(GameObject selectedCharacter, GameObject tile)
+    {
+        selectedCharacter.transform.position = new Vector3(tile.GetComponent<GridTile>().getX(), tile.GetComponent<GridTile>().getY(), 0);
+        selectedCharacter.GetComponent<BasePlayer>().canAct = false;
+        selectedCharacter.GetComponent<SpriteRenderer>().color = new Color32(25, 25, 25, 100);  // character now inactive coloured
+
+        combatTextString = "Select a character";
+        combatText.text = combatTextString;
+
+    }
+
+
     public void executePass(GameObject selectedCharacter)
     {
         selectedCharacter.GetComponent<BasePlayer>().canAct = false;
         selectedCharacter.GetComponent<SpriteRenderer>().color = new Color32(25, 25, 25, 100);  // character now inactive coloured
     }
+
     // C#
     static int SortByGridPos(Transform p1, Transform p2)
     {

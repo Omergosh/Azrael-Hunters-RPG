@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GridTile : ScriptableObject {
+public class GridTile : MonoBehaviour {
 
     public float x;
     public float y;
     public int id;
+    public bool isOccupied;
 
 	// Use this for initialization
 	void Start () {

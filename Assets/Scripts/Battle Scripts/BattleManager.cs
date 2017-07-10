@@ -380,7 +380,7 @@ public class BattleManager : MonoBehaviour {
 
     public void Attack()    // function needed for each different possible action, possible animations go here?
     {
-        // selected characters attacks should show
+        // selected character's attacks should show
         if (currentState == phaseState.SELECTINGACTION)
         {
             currentState = phaseState.SELECTINGENEMY;
@@ -465,7 +465,6 @@ public class BattleManager : MonoBehaviour {
 
     public void Move()  // move the character
     {
-        // selected characters attacks should show
         if (currentState == phaseState.SELECTINGACTION)
         {
             currentState = phaseState.SELECTINGTILE;
@@ -489,6 +488,15 @@ public class BattleManager : MonoBehaviour {
 
     }
 
+    public void Pass()  // move the character
+    {
+        if (currentState == phaseState.SELECTINGACTION)
+        {
+            executePass(selectedCharacter);
+            currentState = phaseState.PROCESSING;
+        }
+
+    }
 
     public void executePass(GameObject selectedCharacter)
     {

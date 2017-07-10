@@ -449,7 +449,9 @@ public class BattleManager : MonoBehaviour {
             if (defender.GetComponent<BasePlayer>().isPlayerCharacter == false)
             {
                 enemyList.Remove(defender.transform);
-                Destroy(defender);  // a defender has been slain!
+                // Remove defeated foe from the battle grid
+                enemyTiles[defender.GetComponent<BasePlayer>().gridPosition].GetComponent<GridTile>().isOccupied = false;
+                Destroy(defender);  // A defender has been slain!
             }
             else
             {
@@ -473,6 +475,11 @@ public class BattleManager : MonoBehaviour {
 
     public void executeMove(GameObject selectedCharacter, GameObject tile)
     {
+        int pastID = selectedCharacter.GetComponent<BasePlayer>().gridPosition;
+        playerCharacterTiles[pastID].GetComponent<GridTile>().isOccupied = false;
+        selectedCharacter.GetComponent<BasePlayer>().gridPosition = tile.GetComponent<GridTile>().id;
+        tile.GetComponent<GridTile>().isOccupied = true;
+
         selectedCharacter.transform.position = new Vector3(tile.GetComponent<GridTile>().getX(), tile.GetComponent<GridTile>().getY(), 0);
         selectedCharacter.GetComponent<BasePlayer>().canAct = false;
         selectedCharacter.GetComponent<SpriteRenderer>().color = new Color32(25, 25, 25, 100);  // character now inactive coloured

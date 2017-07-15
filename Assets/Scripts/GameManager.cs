@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour {
     GameObject player;
 
     public List<PlayerCharacterData> party;
+    public List<PlayerInventoryData> inventory;
 
     public List<EnemyData> enemies;    // List of enemies for battle
 
@@ -55,6 +56,11 @@ public class GameManager : MonoBehaviour {
         dataChipFletcher2.health = 100;
         dataChipFletcher2.gridPos = 2;
         party.Add(dataChipFletcher2);
+
+        inventory.Clear();
+        PlayerInventoryData apple = new PlayerInventoryData();
+        apple.name = "Apple";
+        inventory.Add(apple);
     }
 
     // Saves file number "saveNumber"
@@ -123,4 +129,10 @@ public class PlayerCharacterData
     public int health;
     public int exp;
     public int gridPos;
+}
+
+[Serializable]  // Allows for class to be written to a file
+public class PlayerInventoryData
+{
+    public string name;
 }

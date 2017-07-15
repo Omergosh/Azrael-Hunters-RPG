@@ -11,6 +11,7 @@ public class BattleManager : MonoBehaviour {
     public List<Transform> playerCharacterList;
     public List<Transform> alivePlayerCharacterList;
     public List<PlayerCharacterData> playerCharactersPassedIn;
+    public List<PlayerInventoryData> playerInventory;
     public List<GameObject> playerCharacterTiles;
     public List<Transform> enemyList;
     public List<EnemyData> enemiesPassedIn;
@@ -25,7 +26,7 @@ public class BattleManager : MonoBehaviour {
     public GameObject selectedCharacter;
     public GameObject selectedEnemy;
     public GameObject selectedTile;
-
+    public PlayerInventoryData apple;
     public enum phaseState {
         SELECTINGCHAR,      // player is selecting a character
         SELECTINGACTION,    // player is selecting an action
@@ -48,6 +49,10 @@ public class BattleManager : MonoBehaviour {
     //   ALLIES          ENEMIES  //
 
     void Start() {// initializing things for battle such as models and stuff
+
+        playerInventory = GameManager.control.inventory;    // loading inventory
+
+
         // Generate ally grid positions
         for (int i = 0; i < 2; i++)
         {
@@ -414,6 +419,10 @@ public class BattleManager : MonoBehaviour {
 
         //Damage calculation
         damage = attacker.GetComponent<BasePlayer>().attackStat; //DMG = Attack*power
+
+        float damageVariation = Random.Range(0.9f, 1.1f);    // This allows attacks to hit from 90% to 110% of intended damage for damage variation
+        damage = (int)(damage * damageVariation);
+
         damage -= (int)(defender.GetComponent<BasePlayer>().defenseStat / 1.7935); //DMG reduction = Def*Armor/1.7935
         if (damage < 1) // Attacks always deal at least 1 damage
         {
@@ -485,6 +494,25 @@ public class BattleManager : MonoBehaviour {
 
         combatTextString = "Select a character";
         combatText.text = combatTextString;
+
+    }
+
+    public void Items()  // move the character
+    {
+        if (currentState == phaseState.SELECTINGACTION)
+        {
+            executeItems(selectedCharacter);
+        }
+
+    }
+
+    public void executeItems(GameObject selectedCharacter)
+    {
+        Debug.Log("Items:");
+        foreach(PlayerInventoryData item in playerInventory)
+        {
+            Debug.Log(item.name);
+        }
 
     }
 

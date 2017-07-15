@@ -111,11 +111,17 @@ public class BasePlayer: MonoBehaviour {
     public void setLevel(int newLevel)
     {
         // Sets level and updates Health/Stats
+        /*
         if(newLevel == -1) // Use '-1' to refresh Health/Stats without changing level
         {
             newLevel = level;
         }
         level++;
+        requiredEXP = level * 100;
+        updateHealth();
+        updateStats();
+        */
+        level = newLevel;
         requiredEXP = level * 100;
         updateHealth();
         updateStats();
@@ -149,7 +155,7 @@ public class BasePlayer: MonoBehaviour {
         // Calculates health based on level
         // Update Maximum Hit Points
         int oldHealth = maxHealth;
-        maxHealth = Mathf.FloorToInt(100.0f + ((level - 1.0f) * 10.0f * healthModifier));
+        maxHealth = Mathf.FloorToInt(maxHealth + ((level - 1.0f) * 10.0f * healthModifier));
 
         // Resolve Current Hit Points
         currentHealth += (maxHealth - oldHealth);

@@ -78,18 +78,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 279ce8a1086601f47a050ba0f41c670a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 1
+  currentEXP: 0
+  requiredEXP: 100
   characterName: Direwolf
   currentHealth: 20
   maxHealth: 20
-  attackStat: 22
-  defenseStat: 20
-  agilityStat: 20
-  techStat: 18
+  attackStat: 12
+  defenseStat: 4
+  agilityStat: 6
+  techStat: 2
   healthModifier: 1
-  attackBase: 22
-  defenseBase: 20
-  agilityBase: 20
-  techBase: 18
+  attackBase: 12
+  defenseBase: 4
+  agilityBase: 6
+  techBase: 2
   gridPosition: -1
   actionPoints: 5
   isDead: 0
@@ -145,3 +148,4 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1

@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 61943208417778218}
   - component: {fileID: 114439916610604078}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Direwolf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

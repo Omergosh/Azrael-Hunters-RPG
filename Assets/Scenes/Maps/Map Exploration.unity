@@ -4805,12 +4805,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies:
-  - name: Enemy
-    level: 4
-    gridPos: 0
-  - name: Enemy
+  - name: Direwolf
+    level: 2
+    gridPos: 5
+  - name: Direwolf
     level: 1
     gridPos: 1
+  isActive: 1
 --- !u!61 &1557597681
 BoxCollider2D:
   m_ObjectHideFlags: 0

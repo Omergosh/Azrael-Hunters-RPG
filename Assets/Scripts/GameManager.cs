@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager control;
 
     public string scene;
+    public string currentMapScene; // map that player is on
     public Vector2 pos;
     public Vector2 dir;
     GameObject player;
@@ -19,6 +20,9 @@ public class GameManager : MonoBehaviour {
     public List<PlayerInventoryData> inventory;
 
     public List<EnemyData> enemies;    // List of enemies for battle
+    public string enemyEncounter;
+    public bool mostRecentBattleWon;
+
 
 	void Awake ()
     {

@@ -105,6 +105,10 @@ public class BattleManager : MonoBehaviour {
             }
 
             // Finds ally based off prefab name and generates them
+            int playerNum = 0;
+            int enemyNum = 0;
+            int i = 0;
+            int j = 0;
             foreach (PlayerCharacterData allyCharacter in playerCharactersPassedIn)
             {
                 //TODO: Determine grid position and do stuff in full
@@ -115,9 +119,23 @@ public class BattleManager : MonoBehaviour {
                 newAlly.GetComponent<BasePlayer>().currentHealth = allyCharacter.health;
                 newAlly.GetComponent<BasePlayer>().gridPosition = allyCharacter.gridPos;
                 playerCharacterTiles[allyCharacter.gridPos].GetComponent<GridTile>().isOccupied = true;
-                counterAllies++;    //TODO: allies still need UI generated
+                counterAllies++;
+
+                // Generate UI
+                GameObject playerUI = (GameObject)Instantiate(Resources.Load("combatUI"), new Vector3(GameObject.Find("Canvas/Combatants UI/playerCombatantsUI").transform.position.x, GameObject.Find("Canvas/Combatants UI/playerCombatantsUI").transform.position.y), Quaternion.identity, GameObject.Find("Canvas/Combatants UI/playerCombatantsUI").transform);
+                playerUI.name = "Player" + playerNum;
+                playerNum++;
+                playerUI.transform.Translate(new Vector3(-438f + i, 212f+j));
+                i += 322;
+                if (i >= 1000)
+                {
+                    j += 59;
+                    i = 0;
+                }
             }
 
+            i = 0;
+            j = 0;
             // Finds enemy based off prefab name and generates it
             foreach (EnemyData enemy in enemiesPassedIn)
             {
@@ -128,6 +146,18 @@ public class BattleManager : MonoBehaviour {
                 newEnemy.GetComponent<BasePlayer>().gridPosition = enemy.gridPos;
                 enemyTiles[enemy.gridPos].GetComponent<GridTile>().isOccupied = true;
                 counterEnemies++;    //TODO: enemies still need UI generated
+
+                // Generate UI
+                GameObject enemyUI = (GameObject)Instantiate(Resources.Load("combatUI"), new Vector3(GameObject.Find("Canvas/Combatants UI/enemyCombatantsUI").transform.position.x, GameObject.Find("Canvas/Combatants UI/enemyCombatantsUI").transform.position.y), Quaternion.identity, GameObject.Find("Canvas/Combatants UI/enemyCombatantsUI").transform);
+                enemyUI.name = "Enemy" + enemyNum;
+                enemyNum++;
+                enemyUI.transform.Translate(new Vector3(-438f + i, -366f + j));
+                i += 322;
+                if (i >= 1000)
+                {
+                    j -= 59;
+                    i = 0;
+                }
             }
         }
 
@@ -373,7 +403,8 @@ public class BattleManager : MonoBehaviour {
 
             case (phaseState.VICTORY):
                 Debug.Log("Battle won!");
-                SceneManager.LoadScene("Map Exploration");
+                GameManager.control.mostRecentBattleWon = true;
+                SceneManager.LoadScene(GameManager.control.currentMapScene);
                 break;
 
             case (phaseState.DEFEAT):

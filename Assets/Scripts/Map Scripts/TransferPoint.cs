@@ -9,6 +9,7 @@ public class TransferPoint : MonoBehaviour {
     public string level;    // level to load
     public Vector2 pos;
     public Vector2 directionV;  //direction of player
+    public bool respawnEnemies;
 
     // Use this for initialization
     void Start () {
@@ -18,6 +19,10 @@ public class TransferPoint : MonoBehaviour {
 	public void transfer () {
         GameManager.control.pos = pos;
         GameManager.control.dir = directionV;
+        if (respawnEnemies)
+        {
+            GameManager.control.overworldEnemies.Clear();
+        }
         UnityEngine.SceneManagement.SceneManager.LoadScene(level);  //loads the level
 	}
 

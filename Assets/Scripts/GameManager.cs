@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour {
     public List<PlayerInventoryData> inventory;
 
     public List<EnemyData> enemies;    // List of enemies for battle
+    public List<string> overworldEnemies;   // keeps track of all enemies on overworld map
     public string enemyEncounter;
     public bool mostRecentBattleWon;
 
@@ -35,7 +36,8 @@ public class GameManager : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-	}
+        overworldEnemies.Clear();
+    }
 
     public void Reset()
     {

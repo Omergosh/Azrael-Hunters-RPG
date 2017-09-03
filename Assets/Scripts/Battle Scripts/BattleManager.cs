@@ -145,7 +145,7 @@ public class BattleManager : MonoBehaviour {
                 newEnemy.GetComponent<BasePlayer>().setExpByLevel(enemy.level);
                 newEnemy.GetComponent<BasePlayer>().gridPosition = enemy.gridPos;
                 enemyTiles[enemy.gridPos].GetComponent<GridTile>().isOccupied = true;
-                counterEnemies++;    //TODO: enemies still need UI generated
+                counterEnemies++;
 
                 // Generate UI
                 GameObject enemyUI = (GameObject)Instantiate(Resources.Load("combatUI"), new Vector3(GameObject.Find("Canvas/Combatants UI/enemyCombatantsUI").transform.position.x, GameObject.Find("Canvas/Combatants UI/enemyCombatantsUI").transform.position.y), Quaternion.identity, GameObject.Find("Canvas/Combatants UI/enemyCombatantsUI").transform);

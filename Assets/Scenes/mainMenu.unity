@@ -2087,12 +2087,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89561d04f4146b442ad9a6e6d9c8e9d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  exp: 0
   scene: 
+  currentMapScene: 
   pos: {x: 0, y: 0}
   dir: {x: 0, y: 0}
+  party: []
+  inventory: []
   enemies: []
+  enemyEncounter: 
+  mostRecentBattleWon: 0
 --- !u!4 &1480608478
 Transform:
   m_ObjectHideFlags: 0
@@ -2436,7 +2439,7 @@ MonoBehaviour:
 
     Matthew Fryer - Lead Director, Writer and Designer
 
-    Omer Ahmed - Assistant Director, Programmer, Designr, Pixel Artist
+    Omer Ahmed - Assistant Director, Programmer, Designer, Pixel Artist
 
     Boris Fleysher - Programmer
 

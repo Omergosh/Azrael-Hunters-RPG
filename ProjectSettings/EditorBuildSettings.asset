@@ -7,7 +7,10 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/mainMenu.unity
+    guid: f8e55339c3ea95e4f8a426db27e8062b
   - enabled: 1
     path: Assets/Scenes/Maps/Map Exploration.unity
+    guid: 6d2e59432bdfb774bb2c1ca52767b0ec
   - enabled: 1
     path: Assets/Scenes/Battle Screen.unity
+    guid: 2f40ff76d139b214bad9a503b6f27f59

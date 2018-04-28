@@ -40,8 +40,11 @@ public class BattleManager : MonoBehaviour {
     }
 
     //Used for delaying enemies from all attacking instantly
-    private float nextEnemyActionDelay = 1.0F;
+    private float nextEnemyActionDelay = 2.0F;
     private float nextEnemyAction = 0.0F;
+
+    int currentEnemyToAct = 0;
+    int enemiesLeftToAct = 0;
 
     public phaseState currentState;
 
@@ -343,6 +346,9 @@ public class BattleManager : MonoBehaviour {
                 }
                 else
                 {
+                    currentEnemyToAct = 0;
+                    enemiesLeftToAct = enemyList.Count;
+                    nextEnemyAction = Time.time + nextEnemyActionDelay; //setting delay
                     currentState = phaseState.ENEMYTURN;    // enemy time
                 }
 
@@ -355,18 +361,10 @@ public class BattleManager : MonoBehaviour {
 
             case (phaseState.ENEMYTURN):
                 //Enemy does stuff
-                //    private float nextEnemyActionDelay = 1.0F;
-                //    private float nextEnemyAction = 0.0F;
-                nextEnemyAction = Time.time;
-                foreach (Transform enemy in enemyList)
+                if (Time.time >= nextEnemyAction)
                 {
-                    while (Time.time < nextEnemyAction)
-                    {
-                        //do nothing
-                        
-                    }
-                    nextEnemyAction = Time.time + nextEnemyActionDelay; // Resetting timer and starting next action
-
+                    nextEnemyAction = Time.time + nextEnemyActionDelay;// Resetting timer and starting next action
+                    Transform enemy = enemyList[currentEnemyToAct];
                     selectedCharacter = enemy.gameObject;
                     if (alivePlayerCharacterList.Count > 0)
                     {
@@ -379,10 +377,12 @@ public class BattleManager : MonoBehaviour {
                     {
                         executePass(selectedCharacter);
                     }
-
+                    currentEnemyToAct += 1;
+                    enemiesLeftToAct -= 1;
+                    if (enemiesLeftToAct == 0){
+                        currentState = phaseState.NEWROUND;
+                    }
                 }
-
-                currentState = phaseState.NEWROUND;
 
                 break;
 

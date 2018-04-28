@@ -165,7 +165,7 @@ public class BasePlayer: MonoBehaviour {
     {
         // Calculates stats based on level
         // First, reset temp to level 1 stats (base stats)
-        int tempLevel = 1;
+        //int tempLevel = 1;
         float attack = attackBase * level;
         float defense = defenseBase * level;
         float agility = agilityBase * level;

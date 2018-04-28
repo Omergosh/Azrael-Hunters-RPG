@@ -39,6 +39,10 @@ public class BattleManager : MonoBehaviour {
         DEFEAT      // battle lost
     }
 
+    //Used for delaying enemies from all attacking instantly
+    private float nextEnemyActionDelay = 1.0F;
+    private float nextEnemyAction = 0.0F;
+
     public phaseState currentState;
 
     //  BATTLE GRID VISUALIZATION //
@@ -351,8 +355,18 @@ public class BattleManager : MonoBehaviour {
 
             case (phaseState.ENEMYTURN):
                 //Enemy does stuff
+                //    private float nextEnemyActionDelay = 1.0F;
+                //    private float nextEnemyAction = 0.0F;
+                nextEnemyAction = Time.time;
                 foreach (Transform enemy in enemyList)
                 {
+                    while (Time.time < nextEnemyAction)
+                    {
+                        //do nothing
+                        
+                    }
+                    nextEnemyAction = Time.time + nextEnemyActionDelay; // Resetting timer and starting next action
+
                     selectedCharacter = enemy.gameObject;
                     if (alivePlayerCharacterList.Count > 0)
                     {

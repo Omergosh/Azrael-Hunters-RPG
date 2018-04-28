@@ -60,8 +60,16 @@ public class PlayerControlsOverworld : MonoBehaviour {
         transform.position = Vector3.MoveTowards(transform.position, pos, 1000);   //moving to new pos instantly thanks to HIGH SPEEDS
 
         canvas = GameObject.Find("Canvas");   //finding the Canvas gameObject
-		UI_DialogueSystem = canvas.transform.Find("UI_DialogueSystem").gameObject;
-		UI_PauseMenu = canvas.transform.Find("UI_PauseMenu").gameObject;
+        try
+        {
+            UI_DialogueSystem = canvas.transform.Find("UI_DialogueSystem").gameObject;
+        }
+        catch
+        {
+               //TODO? DialogueSystem can't be found, should probably be made persistant?
+        }
+
+        UI_PauseMenu = canvas.transform.Find("UI_PauseMenu").gameObject;
 		UI_PauseMenuRoot = UI_PauseMenu.transform.Find("UI_PauseMenuRoot").gameObject;
         UI_PauseMenuQuit = UI_PauseMenu.transform.Find("UI_PauseMenuQuit").gameObject;
         UI_SaveCrystal = canvas.transform.Find("UI_SaveCrystal").gameObject;

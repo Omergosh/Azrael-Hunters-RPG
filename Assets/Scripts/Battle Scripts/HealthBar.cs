@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class HealthBar : MonoBehaviour
 {
-    float barDisplay = 0;
+/*    float barDisplay = 0;
     public Vector2 pos;
     public Vector2 size = new Vector2(60, 20);
-    Texture2D progressBarEmpty;
-    Texture2D progressBarFull;
+    Texture2D progressBarEmpty = null;
+    Texture2D progressBarFull = null;
 
     void Start()
     {
@@ -36,5 +36,5 @@ public class HealthBar : MonoBehaviour
         // for this test, the bar display is linked to the current time
         // However, we'll need to set it to the player's health later
         barDisplay = Time.time * 0.05f;
-    }
+    }*/
 }

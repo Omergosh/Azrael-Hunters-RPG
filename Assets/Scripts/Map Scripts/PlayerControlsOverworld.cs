@@ -25,6 +25,8 @@ public class PlayerControlsOverworld : MonoBehaviour {
 	GameObject UI_DialogueSystem;
 	GameObject UI_PauseMenu;
 	GameObject UI_PauseMenuRoot;
+    GameObject UI_PauseMenuParty;
+    GameObject UI_PauseMenuJournal;
     GameObject UI_PauseMenuQuit;
     GameObject UI_SaveCrystal;
 
@@ -71,6 +73,8 @@ public class PlayerControlsOverworld : MonoBehaviour {
 
         UI_PauseMenu = canvas.transform.Find("UI_PauseMenu").gameObject;
 		UI_PauseMenuRoot = UI_PauseMenu.transform.Find("UI_PauseMenuRoot").gameObject;
+        UI_PauseMenuParty = UI_PauseMenu.transform.Find("UI_PauseMenuParty").gameObject;
+        UI_PauseMenuJournal = UI_PauseMenu.transform.Find("UI_PauseMenuJournal").gameObject;
         UI_PauseMenuQuit = UI_PauseMenu.transform.Find("UI_PauseMenuQuit").gameObject;
         UI_SaveCrystal = canvas.transform.Find("UI_SaveCrystal").gameObject;
     }
@@ -184,7 +188,9 @@ public class PlayerControlsOverworld : MonoBehaviour {
 			if (paused) { //Unpausing
 				UI_PauseMenuRoot.SetActive (false);
 				UI_PauseMenu.SetActive (false);
-				paused = false;
+                UI_PauseMenuParty.SetActive(false);
+                UI_PauseMenuJournal.SetActive(false);
+                paused = false;
 			} else {
 				if (!UI_DialogueSystem.activeSelf) { //If the dialogue box is not open/active
 					UI_PauseMenu.SetActive (true);
@@ -241,19 +247,16 @@ public class PlayerControlsOverworld : MonoBehaviour {
                 canMove = true; // see above comment
                 break;
 			case "party":
-				//UI_PauseMenuRoot.SetActive (false);
-				//UI_PauseMenu.SetActive (false);
-				//paused = false;
+                UI_PauseMenuParty.SetActive(true);
+				UI_PauseMenuRoot.SetActive (false);
 				break;
 			case "missions":
 				//UI_PauseMenuRoot.SetActive (false);
 				//UI_PauseMenu.SetActive (false);
-				//paused = false;
 				break;
 			case "journal":
-				//UI_PauseMenuRoot.SetActive (false);
-				//UI_PauseMenu.SetActive (false);
-				//paused = false;
+				UI_PauseMenuRoot.SetActive (false);
+                UI_PauseMenuJournal.SetActive(true);
 				break;
 			case "quit":
                 UI_PauseMenuRoot.SetActive (false);

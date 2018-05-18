@@ -99,11 +99,12 @@ public class BasePlayer: MonoBehaviour {
     {
         // Return true if combatant levels up, false if not
         currentEXP += expToGain;
-        requiredEXP = level * 100; // Update required EXP
+        requiredEXP = level * 100;      // Update required EXP
         if(currentEXP >= requiredEXP)
         {
             setLevel(level + 1);
             requiredEXP = level * 100;
+            return true;                // Return true; combatant leveled up
         }
         return false;
     }

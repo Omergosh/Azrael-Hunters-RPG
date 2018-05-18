@@ -3,9 +3,9 @@
 public class TransferPoint : MonoBehaviour {
 
     public GameObject player;
-    public string level;    // level to load
+    public string level;    // Level to load
     public Vector2 pos;
-    public Vector2 directionV;  //direction of player
+    public Vector2 directionV;  // Direction of player
     public bool respawnEnemies;
 
     // Use this for initialization
@@ -20,7 +20,7 @@ public class TransferPoint : MonoBehaviour {
         {
             GameManager.control.overworldEnemies.Clear();
         }
-        UnityEngine.SceneManagement.SceneManager.LoadScene(level);  //loads the level
+        UnityEngine.SceneManagement.SceneManager.LoadScene(level);  // Loads the level
 	}
 
 }

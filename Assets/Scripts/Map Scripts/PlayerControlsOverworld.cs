@@ -8,17 +8,18 @@ public class PlayerControlsOverworld : MonoBehaviour {
 
     public Vector3 pos;                    // For movement
 
-    public float health;                //battle stats
-    public float exp;
+    // Battle stats
+    public float health; // Obsolete?                
+    public float exp; // Obsolete?
     public List<PlayerCharacterData> party;
 
     public float speed = 4.0f;      // Speed of movement
-    public float interactDelay = 1.0f;  //delay after talking
-    private float timestamp;    //for keeping time
+    public float interactDelay = 1.0f;  // Delay after talking
+    private float timestamp;    // For keeping time
 	public bool paused = false;
     public bool canMove = true;
     public bool interacting = false;
-    public Vector2 directionV;  //direction of player
+    public Vector2 directionV;  // Direction of player
     public int layerMaskCollisions = 1 << 8;
     public int layerMaskInteracts = 1 << 9;
     GameObject canvas;
@@ -37,7 +38,7 @@ public class PlayerControlsOverworld : MonoBehaviour {
     {
 
         if(GameManager.control != null) {
-            party = GameManager.control.party;    // setting stats on loading into level
+            party = GameManager.control.party;    // Setting stats on loading into level
             pos = GameManager.control.pos;          // Take the gameManager position
 
 
@@ -59,16 +60,16 @@ public class PlayerControlsOverworld : MonoBehaviour {
             pos = transform.position;          // Take the starting pos
             directionV = Vector2.down;   // Take the starting pos
         }
-        transform.position = Vector3.MoveTowards(transform.position, pos, 1000);   //moving to new pos instantly thanks to HIGH SPEEDS
+        transform.position = Vector3.MoveTowards(transform.position, pos, 1000);   // Moving to new pos instantly thanks to HIGH SPEEDS
 
-        canvas = GameObject.Find("Canvas");   //finding the Canvas gameObject
+        canvas = GameObject.Find("Canvas");   // Finding the Canvas gameObject
         try
         {
             UI_DialogueSystem = canvas.transform.Find("UI_DialogueSystem").gameObject;
         }
         catch
         {
-               //TODO? DialogueSystem can't be found, should probably be made persistant?
+               // TODO? DialogueSystem can't be found, should probably be made persistant?
         }
 
         UI_PauseMenu = canvas.transform.Find("UI_PauseMenu").gameObject;
@@ -88,7 +89,7 @@ public class PlayerControlsOverworld : MonoBehaviour {
 					if (CollisionCheck (directionV)) {
 						GameObject objectHit = InteractCheck (directionV);
 						pushing (objectHit);
-						//Walk into wall sound effect
+						// Walk into wall sound effect
 					} else {
 						pos += 2 * Vector3.left;
 					}
@@ -99,7 +100,7 @@ public class PlayerControlsOverworld : MonoBehaviour {
 						{
 							GameObject objectHit = InteractCheck (directionV);
 							pushing (objectHit);
-							//Walk into wall sound effect
+							// Walk into wall sound effect
 						}
 					} else {
 						pos += 2 * Vector3.right;
@@ -111,7 +112,7 @@ public class PlayerControlsOverworld : MonoBehaviour {
 						{
 							GameObject objectHit = InteractCheck (directionV);
 							pushing (objectHit);
-							//Walk into wall sound effect
+							// Walk into wall sound effect
 						}
 					} else {
 						pos += 2 * Vector3.up;
@@ -123,7 +124,7 @@ public class PlayerControlsOverworld : MonoBehaviour {
 						{
 							GameObject objectHit = InteractCheck (directionV);
 							pushing (objectHit);
-							//Walk into wall sound effect
+							// Walk into wall sound effect
 						}
 					} else {
 						pos += 2 * Vector3.down;
@@ -134,13 +135,15 @@ public class PlayerControlsOverworld : MonoBehaviour {
 	        transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * speed);    // Moving to new pos
 		}
 
-        if (Input.GetAxisRaw("Interact") > 0 & Time.time >= timestamp) //user interaction with a delay of how quickly it can be done equal to interactDelay
+        // User interaction with a delay of how quickly it can be done equal to interactDelay
+        if (Input.GetAxisRaw("Interact") > 0 & Time.time >= timestamp)
         {
             timestamp = Time.time + interactDelay;
             GameObject objectHit = InteractCheck(directionV);
             if (objectHit != null)
             {
-                if (objectHit.GetComponent<NPC_Behavior>() && interacting == false) //interacting with person or object
+                // Interacting with person or object
+                if (objectHit.GetComponent<NPC_Behavior>() && interacting == false)
                 {
                     NPC_Behavior NPC = objectHit.GetComponent<NPC_Behavior>();
                     UI_DialogueSystem.SetActive(true);
@@ -148,7 +151,8 @@ public class PlayerControlsOverworld : MonoBehaviour {
                     canMove = false;
                     StartCoroutine(NPC.Interact());
                 }
-                if (objectHit.GetComponent<SaveCrystal>() && interacting == false)  //interacting with savepoint
+                // Interacting with savepoint
+                if (objectHit.GetComponent<SaveCrystal>() && interacting == false)  
                 {
                     //SaveCrystal saveCrystal = objectHit.GetComponent<SaveCrystal>();
                     UI_SaveCrystal.SetActive(true);
@@ -156,17 +160,19 @@ public class PlayerControlsOverworld : MonoBehaviour {
                     canMove = false;
                     //saveCrystal.save();
                 }
-                if (objectHit.GetComponent<TransferPoint>() && interacting == false)  //interacting with door, teleporter or something similar
+                // Interacting with door, teleporter or something similar
+                if (objectHit.GetComponent<TransferPoint>() && interacting == false)
                 {
                     TransferPoint transferPoint = objectHit.GetComponent<TransferPoint>();
 
                     //interacting = true;
                     //canMove = false;
                     gameManagerUpdate();
-                    transferPoint.transfer();   // set to HYPERSPEED, WE'RE GOING PLACES. 
+                    transferPoint.transfer();   // Set to HYPERSPEED, WE'RE GOING PLACES. 
                     updatePos();
                 }
-                if (objectHit.GetComponent<hostileEncounter>() && interacting == false)  //interacting with enemy or something similar that starts an encounter immediately
+                // Interacting with enemy or something similar that starts an encounter immediately
+                if (objectHit.GetComponent<hostileEncounter>() && interacting == false)
                 {
                     hostileEncounter hostileEncounter = objectHit.GetComponent<hostileEncounter>();
 
@@ -174,34 +180,40 @@ public class PlayerControlsOverworld : MonoBehaviour {
                     //canMove = false;
                     gameManagerUpdate();
 
-                    hostileEncounter.startBattle();   // starts the battle
+                    hostileEncounter.startBattle();   // Starts the battle
                     updatePos();
                 }
             }
 		}
-		if (Input.GetAxisRaw ("Pause") > 0) { //pause, pause, pause everything please! bring up the menu make everything stop
+
+        // Pause, pause, pause everything please! bring up the menu make everything stop
+		if (Input.GetAxisRaw ("Pause") > 0) {
 			pauseButtonDown = true;
 		} else {
 			pauseButtonDown = false;
 		}
 		if(pauseButtonDown == true && pauseButtonPrevious == false){
-			if (paused) { //Unpausing
+			if (paused) {
+                // Unpausing
 				UI_PauseMenuRoot.SetActive (false);
 				UI_PauseMenu.SetActive (false);
                 UI_PauseMenuParty.SetActive(false);
                 UI_PauseMenuJournal.SetActive(false);
                 paused = false;
 			} else {
-				if (!UI_DialogueSystem.activeSelf) { //If the dialogue box is not open/active
+				if (!UI_DialogueSystem.activeSelf) {
+                    // If the dialogue box is not open/active
 					UI_PauseMenu.SetActive (true);
 					UI_PauseMenuRoot.SetActive (true);
 					paused = true;
 				}
 			}
 		}
-        if (Input.GetAxisRaw("Back") > 0) //abort! abort! you know, dialogue
+        // Abort! abort! you know, dialogue
+        if (Input.GetAxisRaw("Back") > 0) 
         {
-			if (paused) { //Unpausing
+			if (paused) {
+                //Unpausing
 				UI_PauseMenuRoot.SetActive (false);
 				UI_PauseMenu.SetActive (false);
 				paused = false;
@@ -241,10 +253,10 @@ public class PlayerControlsOverworld : MonoBehaviour {
 			case "resume":
 				UI_PauseMenuRoot.SetActive (false);
 				UI_PauseMenu.SetActive (false);
-                UI_SaveCrystal.SetActive(false);    //added to avoid making a second resume for save menus, technically doesn't belong here
-				paused = false; // see above comment
-                interacting = false;    // see above comment
-                canMove = true; // see above comment
+                UI_SaveCrystal.SetActive(false);    // Added to avoid making a second resume for save menus, technically doesn't belong here
+				paused = false; // See above comment
+                interacting = false;    // See above comment
+                canMove = true; // See above comment
                 break;
 			case "party":
                 UI_PauseMenuParty.SetActive(true);
@@ -280,12 +292,13 @@ public class PlayerControlsOverworld : MonoBehaviour {
             if (objectHit.GetComponent<NPC_Behavior>())
             {
                 NPC_Behavior NPC = objectHit.GetComponent<NPC_Behavior>();
-                NPC.Push(directionV);   //pushing things
+                NPC.Push(directionV);   // Pushing things
             }
         }
     }
 
-    public void gameManagerUpdate()     // updating the gameManager before loading a new scene or loading into battle
+    // Updating the gameManager before loading a new scene or loading into battle
+    public void gameManagerUpdate()
     {
         GameManager.control.party = party;
         GameManager.control.pos = pos;

@@ -11,16 +11,16 @@ public class GameManager : MonoBehaviour {
     public static GameManager control;
 
     public string scene;
-    public string currentMapScene; // map that player is on
+    public string currentMapScene; // Map that player is on
     public Vector2 pos;
     public Vector2 dir;
     GameObject player;
 
     public List<PlayerCharacterData> party;
-    public List<PlayerInventoryData> inventory;
+    public List<ItemData> inventory;
 
     public List<EnemyData> enemies;    // List of enemies for battle
-    public List<string> overworldEnemies;   // keeps track of all enemies on overworld map
+    public List<string> overworldEnemies;   // Keeps track of all enemies on overworld map
     public string enemyEncounter;
     public bool mostRecentBattleWon;
 
@@ -45,9 +45,9 @@ public class GameManager : MonoBehaviour {
         pos = Vector2.zero;
         dir = Vector2.zero;
 
-        //Reset party members to default
+        // Reset party members to default
         party.Clear();
-        //Add Chip to party
+        // Add Chip to party
         PlayerCharacterData dataChipFletcher = new PlayerCharacterData();
         dataChipFletcher.name = "Chip";
         dataChipFletcher.level = 1;
@@ -64,8 +64,13 @@ public class GameManager : MonoBehaviour {
         party.Add(dataChipFletcher2);
 
         inventory.Clear();
-        PlayerInventoryData apple = new PlayerInventoryData();
-        apple.name = "Apple";
+        ItemData apple = new ItemData
+        {
+            name = "Apple",
+            quantity = 1,
+            isEquipment = false,
+            isCatalyst = false
+        };
         inventory.Add(apple);
     }
 
@@ -87,6 +92,7 @@ public class GameManager : MonoBehaviour {
         data.diry = dir.y;
         scene = data.scene;
         data.party = party;
+        data.inventory = inventory;
 
         bf.Serialize(file, data);
         file.Close();
@@ -107,6 +113,7 @@ public class GameManager : MonoBehaviour {
             pos = new Vector2(data.posx, data.posy);
             dir = new Vector2(data.dirx, data.diry);
             party = data.party;
+            inventory = data.inventory;
             SceneManager.LoadScene(data.scene);
         }
         else
@@ -125,6 +132,14 @@ class PlayerData
     public float dirx;
     public float diry;
     public List<PlayerCharacterData> party;
+    public List<ItemData> inventory;
+    /* Other things to save:
+     *  -Unlocked Areas
+     *  -Unlocked Journal Entries (encountered Azrael, NPCs, Places, etc.)
+     *  -Missions Completed
+     *  -Mission Progress (Current)
+     *  -Plot Points / Cutscenes triggered
+    */
 }
 
 [Serializable]  // Allows for class to be written to a file
@@ -135,10 +150,29 @@ public class PlayerCharacterData
     public int health;
     public int exp;
     public int gridPos;
+    public ItemData equipmentSlot1;
+    public ItemData equipmentSlot2;
+    public ItemData armorSlot;
+    public List<ItemData> catalystSlots; //Slots A-B-C-D
+    /* Other things to save:
+     *  -Skill Tree Progression (which skills did the player choose to progress so far?)
+    */
 }
 
 [Serializable]  // Allows for class to be written to a file
 public class PlayerInventoryData
 {
+    //Data for the entire inventory of the player
+    //Does this include currently equipped items? Answer for now: yes
+    public List<ItemData> items;
+}
+
+[Serializable]  // Allows for class to be written to a file
+public class ItemData
+{
+    //Data for a given item as saved - no implementation or additional details necessary
     public string name;
+    public int quantity;
+    public bool isEquipment;
+    public bool isCatalyst;
 }

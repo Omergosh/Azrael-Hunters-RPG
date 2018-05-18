@@ -6,8 +6,8 @@ using System;
 
 public class hostileEncounter : MonoBehaviour {
 
-//    public string level;    // combat level to load
-    public List<EnemyData> enemies = new List<EnemyData>(); // list of enemies
+//    public string level;    // Combat level to load
+    public List<EnemyData> enemies = new List<EnemyData>(); // List of enemies
 
 
     // Use this for initialization
@@ -25,7 +25,7 @@ public class hostileEncounter : MonoBehaviour {
         GameManager.control.enemyEncounter = gameObject.name;
         GameManager.control.overworldEnemies.Add(gameObject.name);
         GameManager.control.currentMapScene = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene("Battle Screen");  //loads the level
+        SceneManager.LoadScene("Battle Screen");  // Loads the level
     }
 
 }

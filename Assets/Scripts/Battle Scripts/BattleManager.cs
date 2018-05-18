@@ -11,7 +11,7 @@ public class BattleManager : MonoBehaviour {
     public List<Transform> playerCharacterList;
     public List<Transform> alivePlayerCharacterList;
     public List<PlayerCharacterData> playerCharactersPassedIn;
-    public List<PlayerInventoryData> playerInventory;
+    public List<ItemData> playerInventory;
     public List<GameObject> playerCharacterTiles;
     public List<Transform> enemyList;
     public List<EnemyData> enemiesPassedIn;
@@ -20,26 +20,26 @@ public class BattleManager : MonoBehaviour {
     int playerTurnsRemaining;
 
     public GameObject UI_combatText;
-    public Text combatText; // text component indicating what's happening
-    public string combatTextString; // text string itself
+    public Text combatText; // Text component indicating what's happening
+    public string combatTextString; // Text string itself
 
     public GameObject selectedCharacter;
     public GameObject selectedEnemy;
     public GameObject selectedTile;
-    public PlayerInventoryData apple;
+    public ItemData apple;
     public enum phaseState {
-        SELECTINGCHAR,      // player is selecting a character
-        SELECTINGACTION,    // player is selecting an action
-        SELECTINGTILE,      // selecting tile for either attack or movement
-        SELECTINGENEMY,     // player is selecting an enemy to attack
-        PROCESSING,     // something is happening!
+        SELECTINGCHAR,      // Player is selecting a character
+        SELECTINGACTION,    // Player is selecting an action
+        SELECTINGTILE,      // Selecting tile for either attack or movement
+        SELECTINGENEMY,     // Player is selecting an enemy to attack
+        PROCESSING,     // Something is happening!
         ENEMYTURN,      // It's getting real!
-        NEWROUND,   // new turn order at the end of each round, plus checking Buffs/Debuffs
-        VICTORY,    // battle won
-        DEFEAT      // battle lost
+        NEWROUND,   // New turn order at the end of each round, plus checking Buffs/Debuffs
+        VICTORY,    // Battle won
+        DEFEAT      // Battle lost
     }
 
-    //Used for delaying enemies from all attacking instantly
+    // Used for delaying enemies from all attacking instantly
     private float nextEnemyActionDelay = 2.0F;
     private float nextEnemyAction = 0.0F;
 
@@ -55,9 +55,9 @@ public class BattleManager : MonoBehaviour {
     //    |4|0|          |0|4|    //
     //   ALLIES          ENEMIES  //
 
-    void Start() {// initializing things for battle such as models and stuff
+    void Start() {// Initializing things for battle such as models and stuff
 
-        playerInventory = GameManager.control.inventory;    // loading inventory
+        playerInventory = GameManager.control.inventory;    // Loading inventory
 
 
         // Generate ally grid positions
@@ -105,7 +105,7 @@ public class BattleManager : MonoBehaviour {
         }
         if (enemiesPassedIn.Count > 0)
         {
-            //If enemy list is provided, clear field of pre-existing entities, then generate combatants
+            // If enemy list is provided, clear field of pre-existing entities, then generate combatants
             foreach (Transform child in transform)   // Adding each combatant to one of two lists: player or enemy
             {
                 Destroy(child.gameObject);
@@ -118,9 +118,9 @@ public class BattleManager : MonoBehaviour {
             int j = 0;
             foreach (PlayerCharacterData allyCharacter in playerCharactersPassedIn)
             {
-                //TODO: Determine grid position and do stuff in full
-                //First, put allies with filled in 'gridPos' on grid
-                //Second, put allies with empty (-1) 'gridPos' on grid
+                // TODO: Determine grid position and do stuff in full
+                // First, put allies with filled in 'gridPos' on grid
+                // Second, put allies with empty (-1) 'gridPos' on grid
                 GameObject newAlly = (GameObject)Instantiate(Resources.Load(allyCharacter.name), new Vector3(playerCharacterTiles[allyCharacter.gridPos].GetComponent<GridTile>().getX(), playerCharacterTiles[allyCharacter.gridPos].GetComponent<GridTile>().getY(), 0), Quaternion.identity, GameObject.Find("BattleManager").transform);
                 newAlly.GetComponent<BasePlayer>().gainEXP(allyCharacter.exp);
                 newAlly.GetComponent<BasePlayer>().currentHealth = allyCharacter.health;
@@ -169,8 +169,8 @@ public class BattleManager : MonoBehaviour {
         }
 
 
-        UI_combatText = GameObject.Find("Combat Text"); // finding GameObject
-        combatText = UI_combatText.GetComponent<Text>();    // referencing text component
+        UI_combatText = GameObject.Find("Combat Text"); // Finding GameObject
+        combatText = UI_combatText.GetComponent<Text>();    // Referencing text component
 
         // Add each combatant to one of two lists: player or enemy
         foreach (Transform child in transform)
@@ -222,14 +222,14 @@ public class BattleManager : MonoBehaviour {
 
         // Intimidation phase ends
 
-        currentState = phaseState.SELECTINGCHAR;   // initialize to player select turn
+        currentState = phaseState.SELECTINGCHAR;   // Initialize to player select turn
     }
 
     // Update is called once per frame
     void Update() {
         switch (currentState)
         {
-            case (phaseState.SELECTINGCHAR):    // selecting a character to use
+            case (phaseState.SELECTINGCHAR):    // Selecting a character to use
 
                 if (enemyList.Count == 0)
                 {
@@ -254,7 +254,7 @@ public class BattleManager : MonoBehaviour {
                             combatText.text = "Select an action";
                             break;
                         }
-                        currentState = phaseState.SELECTINGCHAR; //ALERT: Redundant and pointless, unless I'm missing something? -Omer
+                        currentState = phaseState.SELECTINGCHAR; // ALERT: Redundant and pointless, unless I'm missing something? -Omer
                     }
 
                 }
@@ -262,13 +262,13 @@ public class BattleManager : MonoBehaviour {
                 break;
 
             case (phaseState.SELECTINGACTION):
-                // anything that needs to happen while the player is selecting an action
+                // Anything that needs to happen while the player is selecting an action
                 break;
 
             case (phaseState.SELECTINGTILE):
                 if (Input.GetMouseButtonDown(0))
                 {
-                    //Converting Mouse Pos to 2D (vector2) World Pos
+                    // Converting Mouse Pos to 2D (vector2) World Pos
                     RaycastHit2D hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition));
 
                     if (hit)
@@ -277,8 +277,8 @@ public class BattleManager : MonoBehaviour {
                         {
                             Debug.Log("You clicked on a GridTile!");
                             selectedTile = hit.transform.gameObject;
-                            if(hit.collider.GetComponent<GridTile>().isOccupied == false) { //checking if tile is occupied
-                                executeMove(selectedCharacter, selectedTile);    // doing the move calculations
+                            if(hit.collider.GetComponent<GridTile>().isOccupied == false) { // Checking if tile is occupied
+                                executeMove(selectedCharacter, selectedTile);    // Doing the move calculations
 
                                 currentState = phaseState.PROCESSING;
                                 break;
@@ -301,7 +301,7 @@ public class BattleManager : MonoBehaviour {
             case (phaseState.SELECTINGENEMY):
                 if (Input.GetMouseButtonDown(0))
                 {
-                    //Converting Mouse Pos to 2D (vector2) World Pos
+                    // Converting Mouse Pos to 2D (vector2) World Pos
                     RaycastHit2D hit = Physics2D.GetRayIntersection(Camera.main.ScreenPointToRay(Input.mousePosition));
 
                     if (hit)
@@ -311,10 +311,10 @@ public class BattleManager : MonoBehaviour {
                             //Debug.Log("You clicked an Enemy Chip!");
                             //Debug.Log("Target Position: " + hit.collider.gameObject.transform.position);
                             selectedEnemy = hit.transform.gameObject;
-                            executeAttack(selectedCharacter, selectedEnemy);    // doing the damage calculations
+                            executeAttack(selectedCharacter, selectedEnemy);    // Doing the damage calculations
 
                             selectedCharacter.GetComponent<BasePlayer>().canAct = false;
-                            selectedCharacter.GetComponent<SpriteRenderer>().color = new Color32(25, 25, 25, 100);  // character now inactive coloured
+                            selectedCharacter.GetComponent<SpriteRenderer>().color = new Color32(25, 25, 25, 100);  // Character now inactive coloured
                             currentState = phaseState.PROCESSING;
                             break;
                         }
@@ -328,12 +328,12 @@ public class BattleManager : MonoBehaviour {
                 break;
 
             case (phaseState.PROCESSING):
-                // animations or something probably goes here too
+                // Animations or something probably goes here too
 
                 playerTurnsRemaining = 0;
-                foreach (Transform character in playerCharacterList)    // checking if any players still have to go
+                foreach (Transform character in playerCharacterList)    // Checking if any players still have to go
                 {
-                    //MYSTERY BUG
+                    // MYSTERY BUG
                     if (character.gameObject.GetComponent<BasePlayer>().canAct == true)
                     {
                         playerTurnsRemaining++;
@@ -342,17 +342,17 @@ public class BattleManager : MonoBehaviour {
 
                 if (playerTurnsRemaining > 0)
                 {
-                    currentState = phaseState.SELECTINGCHAR;    // player still has actions left
+                    currentState = phaseState.SELECTINGCHAR;    // Player still has actions left
                 }
                 else
                 {
                     currentEnemyToAct = 0;
                     enemiesLeftToAct = enemyList.Count;
-                    nextEnemyAction = Time.time + nextEnemyActionDelay; //setting delay
-                    currentState = phaseState.ENEMYTURN;    // enemy time
+                    nextEnemyAction = Time.time + nextEnemyActionDelay; // Setting delay
+                    currentState = phaseState.ENEMYTURN;    // Enemy time
                 }
 
-                if (enemyList.Count == 0)    // checking if enemies have been defeated
+                if (enemyList.Count == 0)    // Checking if enemies have been defeated
                 {
                     currentState = phaseState.VICTORY;
                 }
@@ -360,7 +360,7 @@ public class BattleManager : MonoBehaviour {
                 break;
 
             case (phaseState.ENEMYTURN):
-                //Enemy does stuff
+                // Enemy does stuff
                 if (Time.time >= nextEnemyAction)
                 {
                     nextEnemyAction = Time.time + nextEnemyActionDelay;// Resetting timer and starting next action
@@ -371,7 +371,7 @@ public class BattleManager : MonoBehaviour {
                         selectedEnemy = alivePlayerCharacterList[Random.Range(0, alivePlayerCharacterList.Count)].gameObject;
                         // Pick random action here out of available actions
                         // (Dependent on 'mood')
-                        executeAttack(selectedCharacter, selectedEnemy);    // only action currently available
+                        executeAttack(selectedCharacter, selectedEnemy);    // Only action currently available
                     }
                     else
                     {
@@ -388,21 +388,21 @@ public class BattleManager : MonoBehaviour {
 
             case (phaseState.NEWROUND):
 
-                bool battleLost = true; // we assume battle is lost unless someone is still alive
+                bool battleLost = true; // We assume battle is lost unless someone is still alive
 
-                foreach (Transform character in playerCharacterList)    // players can act again
+                foreach (Transform character in playerCharacterList)    // Players can act again
                 {
                     if (character.gameObject.GetComponent<BasePlayer>().conscious == true)
                     {
                         character.gameObject.GetComponent<BasePlayer>().canAct = true;
-                        character.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);   // can act again
+                        character.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);   // Can act again
                         battleLost = false;
                     }
                 }
 
                 foreach (Transform enemy in enemyList)
                 {
-                    enemy.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);   // can act again
+                    enemy.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);   // Can act again
                 }
 
                 if (battleLost)
@@ -417,6 +417,7 @@ public class BattleManager : MonoBehaviour {
 
             case (phaseState.VICTORY):
                 Debug.Log("Battle won!");
+                // Award EXP and Rewards (items, catalysts) either here or in GameManager
                 GameManager.control.mostRecentBattleWon = true;
                 SceneManager.LoadScene(GameManager.control.currentMapScene);
                 break;
@@ -428,9 +429,9 @@ public class BattleManager : MonoBehaviour {
         }
     }
 
-    public void Attack()    // function needed for each different possible action, possible animations go here?
+    public void Attack()    // Function needed for each different possible action, possible animations go here?
     {
-        // selected character's attacks should show
+        // Selected character's attacks should show
         if (currentState == phaseState.SELECTINGACTION)
         {
             currentState = phaseState.SELECTINGENEMY;
@@ -439,9 +440,9 @@ public class BattleManager : MonoBehaviour {
     }
 
 
-    public void executeAttack(GameObject attacker, GameObject defender) // probably needs more parameters at some point
+    public void executeAttack(GameObject attacker, GameObject defender) // Probably needs more parameters at some point
     {
-        //Determine if attack hits or is avoided
+        // Determine if attack hits or is avoided
         bool attackHits = false;
         float hitChance = 0.75f - (float)(defender.GetComponent<BasePlayer>().agilityStat - attacker.GetComponent<BasePlayer>().agilityStat) / 100;
         Debug.Log("Hit chance: " + hitChance);
@@ -462,14 +463,16 @@ public class BattleManager : MonoBehaviour {
 
         int damage;
 
-        //Damage calculation
-        damage = attacker.GetComponent<BasePlayer>().attackStat; //DMG = Attack*power
+        // Damage calculation
+        damage = attacker.GetComponent<BasePlayer>().attackStat; // DMG = Attack*power
 
-        float damageVariation = Random.Range(0.9f, 1.1f);    // This allows attacks to hit from 90% to 110% of intended damage for damage variation
+        // This allows attacks to hit from 90% to 110% of intended damage for damage variation
+        float damageVariation = Random.Range(0.9f, 1.1f);    
         damage = (int)(damage * damageVariation);
 
-        damage -= (int)(defender.GetComponent<BasePlayer>().defenseStat / 1.7935); //DMG reduction = Def*Armor/1.7935
-        if (damage < 1) // Attacks always deal at least 1 damage
+        damage -= (int)(defender.GetComponent<BasePlayer>().defenseStat / 1.7935); // DMG reduction = Def*Armor/1.7935
+        // Attacks always deal at least 1 damage
+        if (damage < 1) 
         {
             damage = 1;
         }
@@ -478,9 +481,9 @@ public class BattleManager : MonoBehaviour {
             defender.GetComponent<BasePlayer>().takeDamage(damage);
         }
 
-        //TODO: Play animation of attacker and when it finishes, continue?
+        // TODO: Play animation of attacker and when it finishes, continue?
 
-        //Placeholder for animations: Console + UI Text
+        // Placeholder for animations: Console + UI Text
         string message;
         if (attackHits)
         {
@@ -517,7 +520,7 @@ public class BattleManager : MonoBehaviour {
         }
     }
 
-    public void Move()  // move the character
+    public void Move()  // Move the character
     {
         if (currentState == phaseState.SELECTINGACTION)
         {
@@ -535,14 +538,14 @@ public class BattleManager : MonoBehaviour {
 
         selectedCharacter.transform.position = new Vector3(tile.GetComponent<GridTile>().getX(), tile.GetComponent<GridTile>().getY(), 0);
         selectedCharacter.GetComponent<BasePlayer>().canAct = false;
-        selectedCharacter.GetComponent<SpriteRenderer>().color = new Color32(25, 25, 25, 100);  // character now inactive coloured
+        selectedCharacter.GetComponent<SpriteRenderer>().color = new Color32(25, 25, 25, 100);  // Character now inactive coloured
 
         combatTextString = "Select a character";
         combatText.text = combatTextString;
 
     }
 
-    public void Items()  // move the character
+    public void Items()  // Check Inventory + potentially use items
     {
         if (currentState == phaseState.SELECTINGACTION)
         {
@@ -554,14 +557,14 @@ public class BattleManager : MonoBehaviour {
     public void executeItems(GameObject selectedCharacter)
     {
         Debug.Log("Items:");
-        foreach(PlayerInventoryData item in playerInventory)
+        foreach(ItemData item in playerInventory)
         {
             Debug.Log(item.name);
         }
 
     }
 
-    public void Pass()  // move the character
+    public void Pass()  // Skip the character's turn
     {
         if (currentState == phaseState.SELECTINGACTION)
         {
@@ -574,7 +577,7 @@ public class BattleManager : MonoBehaviour {
     public void executePass(GameObject selectedCharacter)
     {
         selectedCharacter.GetComponent<BasePlayer>().canAct = false;
-        selectedCharacter.GetComponent<SpriteRenderer>().color = new Color32(25, 25, 25, 100);  // character now inactive coloured
+        selectedCharacter.GetComponent<SpriteRenderer>().color = new Color32(25, 25, 25, 100);  // Character now inactive coloured
     }
 
     // C#

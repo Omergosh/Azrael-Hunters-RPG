@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BasePlayer: MonoBehaviour {
+public class BaseCombatant: MonoBehaviour {
 
     // Progression (Level + XP)
     public int level = 1;
@@ -26,6 +27,7 @@ public class BasePlayer: MonoBehaviour {
     public int agilityBase;
     public int techBase;
 
+    public int partyIndex;          // Used to keep track of which index of GameManager's party list a character is associated with
     public int gridPosition = -1;   // Used to determine front/backline stuff.
                                     // -If unspecified at start of battle (-1), position on grid is randomly assigned from open spaces.
     public int actionPoints = 5;    // Minor action costs 2, major costs 3
@@ -44,12 +46,34 @@ public class BasePlayer: MonoBehaviour {
     public Text agilityText;
     public Text techText;
     public int ID;
-    
+
+    //End of battle rewards, if this is an enemy to be fought and defeated
+    [Serializable]
+    public struct LootData
+    {
+        public ItemData item;
+        public float dropChance;
+        //public Texture2D image;
+    }
+    public List<LootData> dropChances;
+    //public Dictionary<ItemData, float> dropChances = new Dictionary<ItemData, float>();
+    public float baseRewardEXP = 5f;
 
 	// Use this for initialization
 	void Start () {
-
-	}
+        //Test to make sure loot table existed
+        /*ItemData exampleLootItem = new ItemData
+        {
+            name = "Rock",
+            quantity = 1,
+            isEquipment = false,
+            isCatalyst = false
+        };
+        LootData exampleLootData = new LootData();
+        exampleLootData.item = exampleLootItem;
+        exampleLootData.dropChance = 1.0f;
+        dropChances.Add(exampleLootData);*/
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -99,11 +123,11 @@ public class BasePlayer: MonoBehaviour {
     {
         // Return true if combatant levels up, false if not
         currentEXP += expToGain;
-        requiredEXP = level * 100;      // Update required EXP
+        requiredEXP = (int)Mathf.Pow(level, 2f) * 100;      // Update required EXP
         if(currentEXP >= requiredEXP)
         {
             setLevel(level + 1);
-            requiredEXP = level * 100;
+            requiredEXP = (int)Mathf.Pow(level,2f) * 100;
             return true;                // Return true; combatant leveled up
         }
         return false;
@@ -204,5 +228,39 @@ public class BasePlayer: MonoBehaviour {
         // Update Health Bar
         healthText.text = currentHealth.ToString() + " HP";
         healthBar.transform.localScale = new Vector3(Mathf.Clamp(((float)currentHealth/ maxHealth), 0, 1), healthBar.transform.localScale.y, healthBar.transform.localScale.z);
+    }
+
+    public List<ItemData> dropLootRewards()
+    {
+        // Give loot drops
+        List<ItemData> loot = new List<ItemData>();
+        
+        foreach (LootData lootEntry in dropChances)
+        {
+            // Roll to see if each piece of potential loot makes it into the player's hands
+            float lootRoll = UnityEngine.Random.value;
+            if(lootRoll <= lootEntry.dropChance)
+            {
+                loot.Add(lootEntry.item);
+            }
+        }
+
+        return loot;
+    }
+
+    public int rewardExperience()
+    {
+        float finalRewardEXP;
+
+        finalRewardEXP = (attackBase + defenseBase + agilityBase + techBase) / 4f;
+        finalRewardEXP = finalRewardEXP / 7f;
+        finalRewardEXP *= healthModifier + (level * 0.2f);
+        finalRewardEXP *= baseRewardEXP;
+
+        if (finalRewardEXP < 1)
+        {
+            finalRewardEXP = 1;
+        }
+        return (int)finalRewardEXP;
     }
 }

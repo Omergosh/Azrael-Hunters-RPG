@@ -14,6 +14,7 @@ public class BattleManager : MonoBehaviour {
     public List<ItemData> playerInventory;
     public List<GameObject> playerCharacterTiles;
     public List<Transform> enemyList;
+    public List<Transform> aliveEnemyList;
     public List<EnemyData> enemiesPassedIn;
     public List<GameObject> enemyTiles;
 
@@ -122,9 +123,10 @@ public class BattleManager : MonoBehaviour {
                 // First, put allies with filled in 'gridPos' on grid
                 // Second, put allies with empty (-1) 'gridPos' on grid
                 GameObject newAlly = (GameObject)Instantiate(Resources.Load(allyCharacter.name), new Vector3(playerCharacterTiles[allyCharacter.gridPos].GetComponent<GridTile>().getX(), playerCharacterTiles[allyCharacter.gridPos].GetComponent<GridTile>().getY(), 0), Quaternion.identity, GameObject.Find("BattleManager").transform);
-                newAlly.GetComponent<BasePlayer>().gainEXP(allyCharacter.exp);
-                newAlly.GetComponent<BasePlayer>().currentHealth = allyCharacter.health;
-                newAlly.GetComponent<BasePlayer>().gridPosition = allyCharacter.gridPos;
+                newAlly.GetComponent<BaseCombatant>().gainEXP(allyCharacter.exp);
+                newAlly.GetComponent<BaseCombatant>().currentHealth = allyCharacter.health;
+                newAlly.GetComponent<BaseCombatant>().gridPosition = allyCharacter.gridPos;
+                newAlly.GetComponent<BaseCombatant>().partyIndex = playerCharactersPassedIn.IndexOf(allyCharacter);
                 playerCharacterTiles[allyCharacter.gridPos].GetComponent<GridTile>().isOccupied = true;
                 counterAllies++;
 
@@ -148,9 +150,9 @@ public class BattleManager : MonoBehaviour {
             {
                 //Same deal with enemies (take in level and 
                 GameObject newEnemy = (GameObject)Instantiate(Resources.Load(enemy.name), new Vector3(enemyTiles[enemy.gridPos].GetComponent<GridTile>().getX(), enemyTiles[enemy.gridPos].GetComponent<GridTile>().getY(), 0), Quaternion.identity, GameObject.Find("BattleManager").transform);
-                newEnemy.GetComponent<BasePlayer>().setLevel(enemy.level);
-                newEnemy.GetComponent<BasePlayer>().setExpByLevel(enemy.level);
-                newEnemy.GetComponent<BasePlayer>().gridPosition = enemy.gridPos;
+                newEnemy.GetComponent<BaseCombatant>().setLevel(enemy.level);
+                newEnemy.GetComponent<BaseCombatant>().setExpByLevel(enemy.level);
+                newEnemy.GetComponent<BaseCombatant>().gridPosition = enemy.gridPos;
                 enemyTiles[enemy.gridPos].GetComponent<GridTile>().isOccupied = true;
                 counterEnemies++;
 
@@ -175,9 +177,9 @@ public class BattleManager : MonoBehaviour {
         // Add each combatant to one of two lists: player or enemy
         foreach (Transform child in transform)
         {
-            if (child.GetComponent<BasePlayer>() != null && !child.GetComponent<BasePlayer>().Equals(null))
+            if (child.GetComponent<BaseCombatant>() != null && !child.GetComponent<BaseCombatant>().Equals(null))
             {
-                if (child.GetComponent<BasePlayer>().isPlayerCharacter == true)
+                if (child.GetComponent<BaseCombatant>().isPlayerCharacter == true)
                 {
                     playerCharacterList.Add(child);
                     alivePlayerCharacterList.Add(child);
@@ -186,6 +188,7 @@ public class BattleManager : MonoBehaviour {
                 else
                 {
                     enemyList.Add(child);
+                    aliveEnemyList.Add(child);
                 }
             }
             else
@@ -203,16 +206,16 @@ public class BattleManager : MonoBehaviour {
         playerCharacterList.Sort(SortByGridPos);
         foreach (Transform player in playerCharacterList)
         {
-            player.GetComponent<BasePlayer>().ID = playerID;
+            player.GetComponent<BaseCombatant>().ID = playerID;
             playerID++;
-            player.GetComponent<BasePlayer>().battleManagerStart();
+            player.GetComponent<BaseCombatant>().battleManagerStart();
         }
         enemyList.Sort(SortByGridPos);
         foreach (Transform enemy in enemyList)
         {
-            enemy.GetComponent<BasePlayer>().ID = enemyID;
+            enemy.GetComponent<BaseCombatant>().ID = enemyID;
             enemyID++;
-            enemy.GetComponent<BasePlayer>().battleManagerStart();
+            enemy.GetComponent<BaseCombatant>().battleManagerStart();
         }
 
         // Actions equal to number of characters
@@ -231,7 +234,7 @@ public class BattleManager : MonoBehaviour {
         {
             case (phaseState.SELECTINGCHAR):    // Selecting a character to use
 
-                if (enemyList.Count == 0)
+                if (aliveEnemyList.Count == 0)
                 {
                     currentState = phaseState.VICTORY;
                     break;
@@ -244,7 +247,7 @@ public class BattleManager : MonoBehaviour {
 
                     if (hit)
                     {
-                        if (hit.collider.GetComponent<BasePlayer>() != null && hit.collider.GetComponent<BasePlayer>().canAct == true && hit.collider.GetComponent<BasePlayer>().isPlayerCharacter == true)
+                        if (hit.collider.GetComponent<BaseCombatant>() != null && hit.collider.GetComponent<BaseCombatant>().canAct == true && hit.collider.GetComponent<BaseCombatant>().isPlayerCharacter == true)
                         {
                             //Debug.Log("You clicked a Friendly Chip!");
                             //Debug.Log("Target Position: " + hit.collider.gameObject.transform.position);
@@ -277,13 +280,13 @@ public class BattleManager : MonoBehaviour {
                         {
                             Debug.Log("You clicked on a GridTile!");
                             selectedTile = hit.transform.gameObject;
-                            if(hit.collider.GetComponent<GridTile>().isOccupied == false) { // Checking if tile is occupied
+                            if (hit.collider.GetComponent<GridTile>().isOccupied == false) { // Checking if tile is occupied
                                 executeMove(selectedCharacter, selectedTile);    // Doing the move calculations
 
                                 currentState = phaseState.PROCESSING;
                                 break;
                             }
-                            
+
                         }
                     }
                     else
@@ -306,14 +309,14 @@ public class BattleManager : MonoBehaviour {
 
                     if (hit)
                     {
-                        if (hit.collider.GetComponent<BasePlayer>() != null && hit.collider.GetComponent<BasePlayer>().isPlayerCharacter == false)
+                        if (hit.collider.GetComponent<BaseCombatant>() != null && hit.collider.GetComponent<BaseCombatant>().isPlayerCharacter == false)
                         {
                             //Debug.Log("You clicked an Enemy Chip!");
                             //Debug.Log("Target Position: " + hit.collider.gameObject.transform.position);
                             selectedEnemy = hit.transform.gameObject;
                             executeAttack(selectedCharacter, selectedEnemy);    // Doing the damage calculations
 
-                            selectedCharacter.GetComponent<BasePlayer>().canAct = false;
+                            selectedCharacter.GetComponent<BaseCombatant>().canAct = false;
                             selectedCharacter.GetComponent<SpriteRenderer>().color = new Color32(25, 25, 25, 100);  // Character now inactive coloured
                             currentState = phaseState.PROCESSING;
                             break;
@@ -334,7 +337,7 @@ public class BattleManager : MonoBehaviour {
                 foreach (Transform character in playerCharacterList)    // Checking if any players still have to go
                 {
                     // MYSTERY BUG
-                    if (character.gameObject.GetComponent<BasePlayer>().canAct == true)
+                    if (character.gameObject.GetComponent<BaseCombatant>().canAct == true)
                     {
                         playerTurnsRemaining++;
                     }
@@ -347,12 +350,12 @@ public class BattleManager : MonoBehaviour {
                 else
                 {
                     currentEnemyToAct = 0;
-                    enemiesLeftToAct = enemyList.Count;
+                    enemiesLeftToAct = aliveEnemyList.Count;
                     nextEnemyAction = Time.time + nextEnemyActionDelay; // Setting delay
                     currentState = phaseState.ENEMYTURN;    // Enemy time
                 }
 
-                if (enemyList.Count == 0)    // Checking if enemies have been defeated
+                if (aliveEnemyList.Count == 0)    // Checking if enemies have been defeated
                 {
                     currentState = phaseState.VICTORY;
                 }
@@ -364,7 +367,7 @@ public class BattleManager : MonoBehaviour {
                 if (Time.time >= nextEnemyAction)
                 {
                     nextEnemyAction = Time.time + nextEnemyActionDelay;// Resetting timer and starting next action
-                    Transform enemy = enemyList[currentEnemyToAct];
+                    Transform enemy = aliveEnemyList[currentEnemyToAct];
                     selectedCharacter = enemy.gameObject;
                     if (alivePlayerCharacterList.Count > 0)
                     {
@@ -379,7 +382,7 @@ public class BattleManager : MonoBehaviour {
                     }
                     currentEnemyToAct += 1;
                     enemiesLeftToAct -= 1;
-                    if (enemiesLeftToAct == 0){
+                    if (enemiesLeftToAct == 0) {
                         currentState = phaseState.NEWROUND;
                     }
                 }
@@ -392,15 +395,15 @@ public class BattleManager : MonoBehaviour {
 
                 foreach (Transform character in playerCharacterList)    // Players can act again
                 {
-                    if (character.gameObject.GetComponent<BasePlayer>().conscious == true)
+                    if (character.gameObject.GetComponent<BaseCombatant>().conscious == true)
                     {
-                        character.gameObject.GetComponent<BasePlayer>().canAct = true;
+                        character.gameObject.GetComponent<BaseCombatant>().canAct = true;
                         character.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);   // Can act again
                         battleLost = false;
                     }
                 }
 
-                foreach (Transform enemy in enemyList)
+                foreach (Transform enemy in aliveEnemyList)
                 {
                     enemy.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);   // Can act again
                 }
@@ -416,8 +419,46 @@ public class BattleManager : MonoBehaviour {
                 break;
 
             case (phaseState.VICTORY):
-                Debug.Log("Battle won!");
                 // Award EXP and Rewards (items, catalysts) either here or in GameManager
+                Debug.Log("Battle won!");
+                // EXP
+                // -First find out how much EXP to award in total
+                int expToGain = 0;
+                foreach (Transform enemy in enemyList)
+                {
+                    expToGain += enemy.GetComponent<BaseCombatant>().rewardExperience();
+                    Debug.Log("EXP to gain: " + expToGain);
+                }
+                Debug.Log("Total EXP: " + expToGain);
+                // -Then award the same amount of EXP to all party members
+                // -NOTE: This approach may be revisited if EXP scaling needs to be implemented
+                foreach (Transform character in playerCharacterList)
+                {
+                    // Award EXP. If level ups and stuff ensue, give notices and stuff in the UI
+                    character.GetComponent<BaseCombatant>().gainEXP(expToGain);
+                }
+                Debug.Log(playerCharacterList[0].GetComponent<BaseCombatant>().currentEXP);
+                // Item Drops
+                List<ItemData> lootGained = new List<ItemData>();
+                foreach(Transform enemy in enemyList){
+                    lootGained.AddRange(enemy.GetComponent<BaseCombatant>().dropLootRewards());
+                }
+                GameManager.control.inventory.AddRange(lootGained);
+                // Update certain current party details in GameManager (hit points, EXP)
+                //foreach (PlayerCharacterData partyMember in GameManager.control.party)
+                foreach (Transform character in playerCharacterList)
+                {
+                    // Identify which character in playerCharacterList corresponds to this party member
+                    int pIndex = character.GetComponent<BaseCombatant>().partyIndex;
+                    // Update HP
+                    GameManager.control.party[pIndex].health = character.GetComponent<BaseCombatant>().currentHealth;
+                    // Update EXP
+                    GameManager.control.party[pIndex].exp = character.GetComponent<BaseCombatant>().currentEXP;
+                }
+
+                // Potentially update inventory to account for items used, if it's not already done elsewhere
+
+                // Return to map/cutscene
                 GameManager.control.mostRecentBattleWon = true;
                 SceneManager.LoadScene(GameManager.control.currentMapScene);
                 break;
@@ -444,7 +485,7 @@ public class BattleManager : MonoBehaviour {
     {
         // Determine if attack hits or is avoided
         bool attackHits = false;
-        float hitChance = 0.75f - (float)(defender.GetComponent<BasePlayer>().agilityStat - attacker.GetComponent<BasePlayer>().agilityStat) / 100;
+        float hitChance = 0.75f - (float)(defender.GetComponent<BaseCombatant>().agilityStat - attacker.GetComponent<BaseCombatant>().agilityStat) / 100;
         Debug.Log("Hit chance: " + hitChance);
         if (hitChance < 0.50f)
         {
@@ -464,13 +505,13 @@ public class BattleManager : MonoBehaviour {
         int damage;
 
         // Damage calculation
-        damage = attacker.GetComponent<BasePlayer>().attackStat; // DMG = Attack*power
+        damage = attacker.GetComponent<BaseCombatant>().attackStat; // DMG = Attack*power
 
         // This allows attacks to hit from 90% to 110% of intended damage for damage variation
         float damageVariation = Random.Range(0.9f, 1.1f);    
         damage = (int)(damage * damageVariation);
 
-        damage -= (int)(defender.GetComponent<BasePlayer>().defenseStat / 1.7935); // DMG reduction = Def*Armor/1.7935
+        damage -= (int)(defender.GetComponent<BaseCombatant>().defenseStat / 1.7935); // DMG reduction = Def*Armor/1.7935
         // Attacks always deal at least 1 damage
         if (damage < 1) 
         {
@@ -478,7 +519,7 @@ public class BattleManager : MonoBehaviour {
         }
         if (attackHits)
         {
-            defender.GetComponent<BasePlayer>().takeDamage(damage);
+            defender.GetComponent<BaseCombatant>().takeDamage(damage);
         }
 
         // TODO: Play animation of attacker and when it finishes, continue?
@@ -487,28 +528,29 @@ public class BattleManager : MonoBehaviour {
         string message;
         if (attackHits)
         {
-            message = attacker.GetComponent<BasePlayer>().characterName + " dealt " + damage + " damage to " + defender.GetComponent<BasePlayer>().characterName;
+            message = attacker.GetComponent<BaseCombatant>().characterName + " dealt " + damage + " damage to " + defender.GetComponent<BaseCombatant>().characterName;
             Debug.Log(attacker + " dealt " + damage + " to " + defender);
         }
         else
         {
-            message = attacker.GetComponent<BasePlayer>().characterName + " missed!";
+            message = attacker.GetComponent<BaseCombatant>().characterName + " missed!";
             Debug.Log(attacker + " missed!");
         }
 
         combatTextString = (message);
         combatText.text = combatTextString;
 
-        defender.GetComponent<BasePlayer>().updateHealthBar();
+        defender.GetComponent<BaseCombatant>().updateHealthBar();
 
-        if (defender.GetComponent<BasePlayer>().conscious == false)
+        if (defender.GetComponent<BaseCombatant>().conscious == false)
         {
-            if (defender.GetComponent<BasePlayer>().isPlayerCharacter == false)
+            if (defender.GetComponent<BaseCombatant>().isPlayerCharacter == false)
             {
-                enemyList.Remove(defender.transform);
+                aliveEnemyList.Remove(defender.transform);
                 // Remove defeated foe from the battle grid
-                enemyTiles[defender.GetComponent<BasePlayer>().gridPosition].GetComponent<GridTile>().isOccupied = false;
-                Destroy(defender);  // A defender has been slain!
+                enemyTiles[defender.GetComponent<BaseCombatant>().gridPosition].GetComponent<GridTile>().isOccupied = false;
+                defender.SetActive(false); // Abilities exist to resurrect enemies, so at least some ofthis data needs to be available
+                // Destroy(defender);  // A defender has been slain!
             }
             else
             {
@@ -531,13 +573,13 @@ public class BattleManager : MonoBehaviour {
 
     public void executeMove(GameObject selectedCharacter, GameObject tile)
     {
-        int pastID = selectedCharacter.GetComponent<BasePlayer>().gridPosition;
+        int pastID = selectedCharacter.GetComponent<BaseCombatant>().gridPosition;
         playerCharacterTiles[pastID].GetComponent<GridTile>().isOccupied = false;
-        selectedCharacter.GetComponent<BasePlayer>().gridPosition = tile.GetComponent<GridTile>().id;
+        selectedCharacter.GetComponent<BaseCombatant>().gridPosition = tile.GetComponent<GridTile>().id;
         tile.GetComponent<GridTile>().isOccupied = true;
 
         selectedCharacter.transform.position = new Vector3(tile.GetComponent<GridTile>().getX(), tile.GetComponent<GridTile>().getY(), 0);
-        selectedCharacter.GetComponent<BasePlayer>().canAct = false;
+        selectedCharacter.GetComponent<BaseCombatant>().canAct = false;
         selectedCharacter.GetComponent<SpriteRenderer>().color = new Color32(25, 25, 25, 100);  // Character now inactive coloured
 
         combatTextString = "Select a character";
@@ -576,14 +618,14 @@ public class BattleManager : MonoBehaviour {
 
     public void executePass(GameObject selectedCharacter)
     {
-        selectedCharacter.GetComponent<BasePlayer>().canAct = false;
+        selectedCharacter.GetComponent<BaseCombatant>().canAct = false;
         selectedCharacter.GetComponent<SpriteRenderer>().color = new Color32(25, 25, 25, 100);  // Character now inactive coloured
     }
 
     // C#
     static int SortByGridPos(Transform p1, Transform p2)
     {
-        return p1.gameObject.GetComponent<BasePlayer>().gridPosition.CompareTo(p2.gameObject.GetComponent<BasePlayer>().gridPosition);
+        return p1.gameObject.GetComponent<BaseCombatant>().gridPosition.CompareTo(p2.gameObject.GetComponent<BaseCombatant>().gridPosition);
     }
 
 }

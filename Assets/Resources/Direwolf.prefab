@@ -108,6 +108,32 @@ MonoBehaviour:
   agilityText: {fileID: 0}
   techText: {fileID: 0}
   ID: -1
+  dropChances:
+  - item:
+      name: Ice Heartbeat Stone
+      quantity: 1
+      isEquipment: 0
+      isCatalyst: 0
+    dropChance: 0.5
+  - item:
+      name: Enchantment Hearbeat Stone
+      quantity: 1
+      isEquipment: 0
+      isCatalyst: 0
+    dropChance: 0.5
+  - item:
+      name: Direwolf Fur
+      quantity: 2
+      isEquipment: 0
+      isCatalyst: 0
+    dropChance: 0.7
+  - item:
+      name: Focus
+      quantity: 1
+      isEquipment: 0
+      isCatalyst: 1
+    dropChance: 0
+  baseRewardEXP: 5
 --- !u!212 &212522885291245726
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -117,9 +143,11 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -132,6 +160,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -149,3 +178,4 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0

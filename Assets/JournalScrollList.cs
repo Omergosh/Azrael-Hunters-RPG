@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+﻿//using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +14,7 @@ public class JournalEntry
 
 public class JournalScrollList : MonoBehaviour {
 
-    public List journalEntryList;
+    public List<JournalEntry> journalEntryList;
     public Transform contentPanel;
     public Text journalTextView;
 

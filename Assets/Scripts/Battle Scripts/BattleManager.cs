@@ -21,6 +21,8 @@ public class BattleManager : MonoBehaviour {
     int playerTurnsRemaining;
 
     public GameObject UI_combatText;
+    public RectTransform UI_bgTop;
+    public RectTransform UI_bgBottom;
     public Text combatText; // Text component indicating what's happening
     public string combatTextString; // Text string itself
 
@@ -60,6 +62,9 @@ public class BattleManager : MonoBehaviour {
 
         playerInventory = GameManager.control.inventory;    // Loading inventory
 
+        // Set references to Background UI panels
+        UI_bgTop = GameObject.Find("Top Background UI").GetComponent<RectTransform>(); // Finding GameObject
+        UI_bgBottom = GameObject.Find("Bottom Background UI").GetComponent<RectTransform>(); // Finding GameObject
 
         // Generate ally grid positions
         for (int i = 0; i < 2; i++)
